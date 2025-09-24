@@ -1,0 +1,29 @@
+{
+  "collectionName": "components_eglise_adresses",
+  "info": {
+    "displayName": "Adresse",
+    "icon": "pinMap"
+  },
+  "options": {},
+  "attributes": {
+    "code_postal": {
+      "type": "string"
+    },
+    "ville": {
+      "type": "string"
+    },
+    "region": {
+      "type": "string"
+    },
+    "pays": {
+      "type": "string"
+    },
+    "latitude": {
+      "type": "decimal"
+    },
+    "longitude": {
+      "type": "decimal"
+    }
+  },
+  "config": {}
+}

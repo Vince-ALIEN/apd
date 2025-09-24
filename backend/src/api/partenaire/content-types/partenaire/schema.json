@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "partenaires",
+  "info": {
+    "singularName": "partenaire",
+    "pluralName": "partenaires",
+    "displayName": "Partenaire"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "logo": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "url": {
+      "type": "string"
+    }
+  }
+}

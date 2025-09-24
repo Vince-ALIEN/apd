@@ -1,0 +1,54 @@
+{
+  "kind": "singleType",
+  "collectionName": "parametres_sites",
+  "info": {
+    "singularName": "parametres-site",
+    "pluralName": "parametres-sites",
+    "displayName": "Parametres_site"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "titre": {
+      "type": "string"
+    },
+    "logo": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "logo_footer": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "mention_legales": {
+      "type": "blocks"
+    },
+    "reseaux_sociaux": {
+      "type": "json"
+    },
+    "background": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    }
+  }
+}

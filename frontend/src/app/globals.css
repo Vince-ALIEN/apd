@@ -1,0 +1,73 @@
+@import "tailwindcss";
+
+/* Thème clair/sombre */
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+/* Typographie et couleurs globales */
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Animations personnalisées */
+@keyframes slideFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes zoomFadeIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Classes d’animation */
+.animate-title {
+  animation: slideFadeIn 1s ease-out forwards;
+  animation-fill-mode: both;
+}
+
+.animate-paragraph {
+  animation: slideFadeIn 1s ease-out forwards;
+  animation-delay: 0.5s;
+  animation-fill-mode: both;
+}
+
+.animate-button {
+  animation: zoomFadeIn 0.8s ease-out forwards;
+  animation-delay: 1.2s;
+  animation-fill-mode: both;
+}

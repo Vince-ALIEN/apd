@@ -1,0 +1,18 @@
+{
+  "kind": "collectionType",
+  "collectionName": "facebook_embeds",
+  "info": {
+    "singularName": "facebook-embed",
+    "pluralName": "facebook-embeds",
+    "displayName": "FacebookEmbed"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "iframe": {
+      "type": "string"
+    }
+  }
+}
