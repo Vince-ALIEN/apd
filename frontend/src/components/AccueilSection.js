@@ -131,18 +131,29 @@ export default function AccueilSection({ API_URL, onVideoEnd }) {
       </div>
 
       {!videoEnded && (
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex gap-6">
+        <div className="absolute bottom-6 md:bottom-10 left-1/2 -translate-x-1/2 z-10 flex gap-4 md:gap-6">
           <button
             onClick={handleToggleMute}
-            className="px-6 py-2 bg-white/80 text-black font-semibold rounded-full shadow hover:bg-white transition"
+            className="px-4 py-2 bg-white/80 text-black font-semibold rounded-full shadow hover:bg-white transition text-sm md:text-base"
           >
-            {isMuted ? "Activer le son" : "Couper le son"}
+            {isMuted ? (
+              <>
+                <span className="md:hidden">Son</span>
+                <span className="hidden md:inline">Activer le son</span>
+              </>
+            ) : (
+              <>
+                <span className="md:hidden">Son</span>
+                <span className="hidden md:inline">Couper le son</span>
+              </>
+            )}
           </button>
           <button
             onClick={handleSkipVideo}
-            className="px-6 py-2 bg-black text-white font-semibold rounded-full shadow hover:bg-gray-800 transition"
+            className="px-4 py-2 bg-black text-white font-semibold rounded-full shadow hover:bg-gray-800 transition text-sm md:text-base"
           >
-            Passer la vidéo →
+            <span className="md:hidden">Stopper</span>
+            <span className="hidden md:inline">Passer la vidéo →</span>
           </button>
         </div>
       )}
