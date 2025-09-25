@@ -7,7 +7,7 @@ import DescriptionSection from "@components/DescriptionSection";
 import LocalisationSection from "@components/LocalisationSection";
 import ContactSection from "@components/ContactSection";
 import PartenairesSection from "@components/PartenairesSection";
-import FacebookIframeSection from "@components/FacebookIframeSection";
+import InterviewSection from "@components/InterviewSection";
 
 export default function Home() {
   const [eglise, setEglise] = useState(null);
@@ -129,7 +129,7 @@ export default function Home() {
       </section>
 
       <section id="actu" className="scroll-mt-[100px] py-10 px-6 bg-white">
-        <FacebookIframeSection API_URL={API_URL} />
+        <InterviewSection videoUrl="https://appetizing-balance-03c58ad391.media.strapiapp.com/Interview_1bfec49246.mp4" />
       </section>
 
       <section
