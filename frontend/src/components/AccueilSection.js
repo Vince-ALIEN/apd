@@ -1,5 +1,11 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faVolumeUp,
+  faVolumeMute,
+  faCircleStop,
+} from "@fortawesome/free-solid-svg-icons";
 
 export default function AccueilSection({ API_URL, onVideoEnd }) {
   const [videoEnded, setVideoEnded] = useState(false);
@@ -132,22 +138,28 @@ export default function AccueilSection({ API_URL, onVideoEnd }) {
 
       {!videoEnded && (
         <>
-          {/* Logo son en bas à gauche */}
+          {/* Icône son en bas à gauche */}
           <button
             onClick={handleToggleMute}
             className="absolute bottom-4 left-4 z-10 bg-white/80 text-black text-xl p-3 rounded-full shadow hover:bg-white transition"
             aria-label="Son"
           >
-            🎵
+            <FontAwesomeIcon
+              icon={isMuted ? faVolumeMute : faVolumeUp}
+              className="text-black text-2xl"
+            />
           </button>
 
-          {/* Logo stop en bas à droite */}
+          {/* Icône stop en bas à droite */}
           <button
             onClick={handleSkipVideo}
             className="absolute bottom-4 right-4 z-10 bg-black text-white text-xl p-3 rounded-full shadow hover:bg-gray-800 transition"
             aria-label="Stop"
           >
-            ⏹️
+            <FontAwesomeIcon
+              icon={faCircleStop}
+              className="text-white text-2xl"
+            />
           </button>
         </>
       )}

@@ -15,6 +15,9 @@
     "upgrade:dry": "npx @strapi/upgrade latest --dry"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^7.0.1",
+    "@fortawesome/free-solid-svg-icons": "^7.0.1",
+    "@fortawesome/react-fontawesome": "^3.0.2",
     "@strapi/plugin-cloud": "5.23.6",
     "@strapi/plugin-users-permissions": "5.23.6",
     "@strapi/strapi": "5.23.6",
