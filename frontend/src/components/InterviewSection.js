@@ -20,15 +20,20 @@ export default function InterviewSection({ videoUrl }) {
   }, [isMuted]);
 
   return (
-    <section
-      className="relative py-20 px-6 text-center text-black"
-      style={{
-        backgroundImage:
-          'url("https://appetizing-balance-03c58ad391.media.strapiapp.com/chaud_calcaire_texture_a6787039c7.jpg")',
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
-    >
+    <section className="relative min-h-screen py-20 px-6 text-center text-black">
+      {/* Fond pierre avec opacité */}
+      <div
+        className="absolute inset-0 z-0"
+        style={{
+          backgroundImage:
+            'url("https://appetizing-balance-03c58ad391.media.strapiapp.com/chaud_calcaire_texture_a6787039c7.jpg")',
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          opacity: 0.6,
+        }}
+      ></div>
+
+      {/* Contenu au-dessus du fond */}
       <div className="relative z-10 max-w-4xl mx-auto">
         <h2 className="text-4xl font-bold mb-6">Votre aide est précieuse</h2>
 
@@ -56,16 +61,19 @@ export default function InterviewSection({ videoUrl }) {
           </p>
         )}
 
-        <div className="prose prose-lg text-left mx-auto text-black mb-10">
-          <p>
-            “L’église Saint-Jean-Baptiste d’Aulès est un témoin précieux de
-            notre histoire locale. Elle a traversé les siècles, accueillant les
-            générations dans les moments forts de leur vie. Aujourd’hui, sa
-            structure est fragilisée, ses fresques s’effacent, et son clocher
-            menace de s’effondrer. Il est urgent d’agir pour préserver ce
-            patrimoine classé, afin qu’il continue de transmettre son âme aux
-            générations futures.”
-          </p>
+        {/* Bloc texte avec fond clair */}
+        <div className="bg-white/80 backdrop-blur-sm p-6 rounded-xl shadow-md mb-10">
+          <div className="prose prose-lg text-left mx-auto text-black">
+            <p>
+              “L’église Saint-Jean-Baptiste d’Aulès est un témoin précieux de
+              notre histoire locale. Elle a traversé les siècles, accueillant
+              les générations dans les moments forts de leur vie. Aujourd’hui,
+              sa structure est fragilisée, ses fresques s’effacent, et son
+              clocher menace de s’effondrer. Il est urgent d’agir pour préserver
+              ce patrimoine classé, afin qu’il continue de transmettre son âme
+              aux générations futures.”
+            </p>
+          </div>
         </div>
 
         <a
