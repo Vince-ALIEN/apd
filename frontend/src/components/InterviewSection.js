@@ -7,7 +7,7 @@ export default function InterviewSection({ videoUrl }) {
 
   useEffect(() => {
     if (videoRef.current) {
-      videoRef.current.muted = true;
+      videoRef.current.muted = false;
     }
   }, []);
 
