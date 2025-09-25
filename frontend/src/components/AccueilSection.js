@@ -63,7 +63,7 @@ export default function AccueilSection({ API_URL, onVideoEnd }) {
             <div className="mt-6 pointer-events-auto animate-button">
               <a
                 href="https://www.helloasso.com/associations/les-compagnons-de-l-art-et-du-patrimoine-de-doazit/formulaires/1"
-                className="inline-block px-6 py-3 bg-yellow-400 text-black font-bold rounded-full shadow hover:bg-yellow-500 transition"
+                className="inline-block px-6 py-3 bg-red-400 text-black font-bold rounded-full shadow hover:bg-yellow-500 transition"
               >
                 Faire un don
               </a>
@@ -115,7 +115,7 @@ export default function AccueilSection({ API_URL, onVideoEnd }) {
                 <button
                   onClick={() =>
                     document
-                      .getElementById("description")
+                      .getElementById("interview")
                       ?.scrollIntoView({ behavior: "smooth" })
                   }
                   className="mt-8 px-8 py-3 bg-white text-black font-semibold rounded-full shadow-lg hover:bg-gray-800 transition-all duration-300"

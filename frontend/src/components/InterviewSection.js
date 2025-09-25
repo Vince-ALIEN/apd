@@ -20,11 +20,21 @@ export default function InterviewSection({ videoUrl }) {
   }, [isMuted]);
 
   return (
-    <section className="relative py-20 px-6 bg-gray-100 text-center">
-      <div className="max-w-4xl mx-auto">
-        <h2 className="text-4xl font-bold mb-6 text-gray-800">
-          Votre aide est précieuse
-        </h2>
+    <section
+      className="relative py-20 px-6 text-center text-white"
+      style={{
+        backgroundImage:
+          'url("https://appetizing-balance-03c58ad391.media.strapiapp.com/chaud_calcaire_texture_a6787039c7.jpg")',
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
+      {/* Overlay pour lisibilité */}
+      <div className="absolute inset-0 bg-black/50 z-0"></div>
+
+      <div className="relative z-10 max-w-4xl mx-auto">
+        <h2 className="text-4xl font-bold mb-6">Votre aide est précieuse</h2>
+
         {videoUrl ? (
           <div className="relative w-full h-[300px] md:h-[500px] rounded-lg overflow-hidden shadow-lg mb-8">
             <video
@@ -44,12 +54,12 @@ export default function InterviewSection({ videoUrl }) {
             </button>
           </div>
         ) : (
-          <p className="text-red-600 mb-8">
+          <p className="text-red-300 mb-8">
             La vidéo n’est pas disponible pour le moment.
           </p>
         )}
 
-        <div className="prose prose-lg text-left mx-auto text-gray-800 mb-10">
+        <div className="prose prose-lg text-left mx-auto text-white mb-10">
           <p>
             “L’église Saint-Jean-Baptiste d’Aulès est un témoin précieux de
             notre histoire locale. Elle a traversé les siècles, accueillant les
@@ -65,7 +75,7 @@ export default function InterviewSection({ videoUrl }) {
           href="https://www.helloasso.com/associations/les-compagnons-de-l-art-et-du-patrimoine-de-doazit/formulaires/1"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-block px-6 py-3 bg-yellow-400 text-black font-bold rounded-full shadow hover:bg-yellow-500 transition"
+          className="inline-block px-6 py-3 bg-red-400 text-black font-bold rounded-full shadow hover:bg-yellow-500 transition"
         >
           Faire un don
         </a>

@@ -128,7 +128,7 @@ export default function Home() {
         <LocalisationSection eglise={eglise} />
       </section>
 
-      <section id="actu" className="scroll-mt-[100px] py-10 px-6 bg-white">
+      <section id="interview" className="scroll-mt-[100px] py-10 px-6 bg-white">
         <InterviewSection videoUrl="https://appetizing-balance-03c58ad391.media.strapiapp.com/Interview_498b4a158a.mp4" />
       </section>
 
