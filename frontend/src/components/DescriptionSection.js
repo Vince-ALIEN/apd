@@ -13,9 +13,10 @@ export default function DescriptionSection({ eglise, API_URL }) {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           {/* Texte */}
           <div className="space-y-6">
-            <h2 className="text-4xl font-bold text-white bg-red-900 mt-20 mb-0 ml-20 mr-0 p-0 ">
+            <h2 className="text-4xl font-bold text-gray-900 mb-8">
               {eglise.nom}
             </h2>
+
             <div className="text-lg leading-relaxed text-gray-700 space-y-4">
               {eglise.description?.map((block, index) => (
                 <p key={index}>
