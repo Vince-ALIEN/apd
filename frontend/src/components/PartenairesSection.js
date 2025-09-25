@@ -48,7 +48,7 @@ export default function PartenairesSection({ API_URL }) {
 
           if (!logoUrl || !lien) return null;
 
-          const imageUrl = { logoUrl };
+          const imageUrl = logoUrl;
 
           return (
             <a

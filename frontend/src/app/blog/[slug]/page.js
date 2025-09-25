@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import Header from "@components/Header";
 import Footer from "@components/Footer";
 
@@ -33,7 +34,7 @@ export default async function ArticlePage({ params }) {
   }
 
   const { titre, date_publication, contenu, image, auteur } = article;
-  const imageUrl = image?.url;
+  const imageUrl = image?.url || image?.data?.attributes?.url;
 
   return (
     <>
@@ -56,11 +57,13 @@ export default async function ArticlePage({ params }) {
           </p>
 
           {imageUrl && (
-            <div className="mb-8 rounded-lg overflow-hidden shadow-lg">
-              <img
-                src={`${process.env.NEXT_PUBLIC_API_URL}${imageUrl}`}
+            <div className="mb-8 rounded-lg overflow-hidden shadow-lg relative w-full h-80">
+              <Image
+                src={imageUrl}
                 alt={titre}
-                className="w-full h-80 object-cover"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 700px"
               />
             </div>
           )}

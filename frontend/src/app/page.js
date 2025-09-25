@@ -146,7 +146,7 @@ export default function Home() {
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
-            backgroundImage: `url('${API_URL}/uploads/background_59fc4ab421.webp')`,
+            backgroundImage: `url("https://appetizing-balance-03c58ad391.media.strapiapp.com/chaud_calcaire_texture_a6787039c7.jpg")`,
             opacity: 0.6,
           }}
         ></div>
@@ -161,7 +161,7 @@ export default function Home() {
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0"
           style={{
-            backgroundImage: `url('${API_URL}/uploads/background_59fc4ab421.webp')`,
+            backgroundImage: `url("https://appetizing-balance-03c58ad391.media.strapiapp.com/chaud_calcaire_texture_a6787039c7.jpg")`,
             opacity: 0.6,
           }}
         ></div>

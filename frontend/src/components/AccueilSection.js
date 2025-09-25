@@ -96,7 +96,7 @@ export default function AccueilSection({ API_URL, onVideoEnd }) {
             <div
               className="absolute inset-0 bg-cover bg-center bg-no-repeat"
               style={{
-                backgroundImage: `url("https://appetizing-balance-03c58ad391.media.strapiapp.com/chaud_calcaire_texture_a6787039c7.jpg")`,
+                backgroundImage: `url("https://appetizing-balance-03c58ad391.media.strapiapp.com/vlcsnap_2025_09_24_12h21m37s851_0be53d5ba3.png")`,
               }}
             ></div>
 
