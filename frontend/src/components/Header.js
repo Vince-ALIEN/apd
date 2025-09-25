@@ -6,9 +6,6 @@ import Link from "next/link";
 export default function Header({ site, API_URL, visible = true }) {
   const [menuOpen, setMenuOpen] = useState(false);
 
-  // Récupération de l’URL du logo depuis Strapi
-  const logoUrl = site?.attributes?.logo?.url;
-
   return (
     <header
       role="banner"
@@ -22,8 +19,14 @@ export default function Header({ site, API_URL, visible = true }) {
       <div className="max-w-7xl mx-auto flex items-center justify-between px-6 h-full">
         {/* Logo */}
         <div className="flex items-center gap-4">
-          {logoUrl && (
-            <Image src={logoUrl} alt="Logo" width={120} height={80} priority />
+          {site?.logo?.url && (
+            <Image
+              src={site.logo.url}
+              alt="Logo"
+              width={120}
+              height={80}
+              priority
+            />
           )}
         </div>
 
@@ -47,6 +50,7 @@ export default function Header({ site, API_URL, visible = true }) {
           >
             Partenaires
           </Link>
+
           <Link
             href="/#contact"
             className="hover:text-gray-300 transition-colors"

@@ -86,7 +86,7 @@ export default function AccueilSection({ API_URL, onVideoEnd }) {
             onError={handleSkipVideo}
           >
             <source
-              src={`${API_URL}/uploads/Video_sans_titre_Realisee_avec_Clipchamp_2_2d8c086120.mp4`}
+              src={`${API_URL}/Video_sans_titre_Realisee_avec_Clipchamp_2_d33691bb21.mp4`}
               type="video/mp4"
             />
             Votre navigateur ne supporte pas la vidéo.
@@ -96,7 +96,7 @@ export default function AccueilSection({ API_URL, onVideoEnd }) {
             <div
               className="absolute inset-0 bg-cover bg-center bg-no-repeat"
               style={{
-                backgroundImage: `url('${API_URL}/uploads/vlcsnap_2025_09_24_12h21m37s851_0f9e5f0169.png')`,
+                backgroundImage: `url('${API_URL}/chaud_calcaire_texture_a6787039c7.jpg')`,
               }}
             ></div>
 
