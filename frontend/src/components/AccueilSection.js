@@ -131,41 +131,25 @@ export default function AccueilSection({ API_URL, onVideoEnd }) {
       </div>
 
       {!videoEnded && (
-        <div className="absolute bottom-20 md:bottom-10 left-1/2 -translate-x-1/2 z-10 flex flex-wrap justify-center gap-4 px-4 w-full max-w-[90vw]">
+        <>
+          {/* Logo son en bas à gauche */}
           <button
             onClick={handleToggleMute}
-            className="px-4 py-2 bg-white/80 text-black font-semibold rounded-full shadow hover:bg-white transition text-sm md:text-base"
+            className="absolute bottom-4 left-4 z-10 bg-white/80 text-black text-xl p-3 rounded-full shadow hover:bg-white transition"
+            aria-label="Son"
           >
-            {isMuted ? (
-              <>
-                <span className="md:hidden">Son</span>
-                <span className="hidden md:inline">Activer le son</span>
-              </>
-            ) : (
-              <>
-                <span className="md:hidden">Son</span>
-                <span className="hidden md:inline">Couper le son</span>
-              </>
-            )}
+            🎵
           </button>
+
+          {/* Logo stop en bas à droite */}
           <button
             onClick={handleSkipVideo}
-            className="px-4 py-2 bg-black text-white font-semibold rounded-full shadow hover:bg-gray-800 transition text-sm md:text-base"
+            className="absolute bottom-4 right-4 z-10 bg-black text-white text-xl p-3 rounded-full shadow hover:bg-gray-800 transition"
+            aria-label="Stop"
           >
-            <span className="md:hidden">Stopper</span>
-            <span className="hidden md:inline">Passer la vidéo →</span>
+            ⏹️
           </button>
-          {showDonationButton && (
-            <a
-              href="https://www.helloasso.com/associations/les-compagnons-de-l-art-et-du-patrimoine-de-doazit/formulaires/1"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-4 py-2 bg-red-400 text-black font-bold rounded-full shadow hover:bg-red-500 transition text-sm md:text-base"
-            >
-              Faire un don
-            </a>
-          )}
-        </div>
+        </>
       )}
     </section>
   );
