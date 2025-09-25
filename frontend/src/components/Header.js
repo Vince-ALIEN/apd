@@ -81,20 +81,23 @@ export default function Header({ site, API_URL, visible = true }) {
       {menuOpen && (
         <div className="absolute top-[100px] left-0 right-0 bg-white/90 backdrop-blur-sm shadow-md z-40 md:hidden">
           <nav className="flex flex-col items-center py-4 gap-4 text-black font-semibold">
-            <a href="#accueil" onClick={() => setMenuOpen(false)}>
+            <Link href="/#accueil" onClick={() => setMenuOpen(false)}>
               Accueil
-            </a>
-            <a href="#description" onClick={() => setMenuOpen(false)}>
+            </Link>
+            <Link href="/#description" onClick={() => setMenuOpen(false)}>
               Notre église
-            </a>
-            <a href="#contact" onClick={() => setMenuOpen(false)}>
-              Contact
-            </a>
+            </Link>
             <Link href="/blog" onClick={() => setMenuOpen(false)}>
-              Blog
+              Actualités
+            </Link>
+            <Link href="/#partenaires" onClick={() => setMenuOpen(false)}>
+              Nos partenaires
+            </Link>
+            <Link href="/#contact" onClick={() => setMenuOpen(false)}>
+              Contact
             </Link>
             <Link
-              href="/don"
+              href="https://www.helloasso.com/associations/les-compagnons-de-l-art-et-du-patrimoine-de-doazit/formulaires/1"
               onClick={() => setMenuOpen(false)}
               className="bg-red-400 text-black font-bold px-4 py-2 rounded-full shadow hover:bg-red-500 transition"
             >
