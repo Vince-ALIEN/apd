@@ -13,7 +13,7 @@ export default function DescriptionSection({ eglise, API_URL }) {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           {/* Texte */}
           <div className="space-y-6">
-            <h2 className="text-4xl font-bold text-gray-900 bg-red-400 mt-8 mb-0 ml-6 mr-0 px-4 py-2 rounded">
+            <h2 className="text-4xl font-bold text-gray-900 bg-red-600 mt-8 mb-0 ml-6 mr-0 ">
               {eglise.nom}
             </h2>
             <div className="text-lg leading-relaxed text-gray-700 space-y-4">
