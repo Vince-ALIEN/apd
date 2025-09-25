@@ -10,7 +10,7 @@ export default function Footer({ site, API_URL }) {
         <div className="flex flex-col items-start">
           {site?.logo_footer?.url && (
             <Image
-              src={`${API_URL}${site.logo_footer.url}`}
+              src={site.logo_footer.url}
               alt="Logo footer"
               width={350}
               height={60}

@@ -38,8 +38,8 @@ export default function PartenairesSection({ API_URL }) {
           partenaires.length === 1
             ? "grid-cols-1"
             : partenaires.length === 2
-            ? "grid-cols-2"
-            : "grid-cols-2 sm:grid-cols-3 md:grid-cols-4"
+              ? "grid-cols-2"
+              : "grid-cols-2 sm:grid-cols-3 md:grid-cols-4"
         }`}
       >
         {partenaires.map((item) => {
@@ -48,7 +48,7 @@ export default function PartenairesSection({ API_URL }) {
 
           if (!logoUrl || !lien) return null;
 
-          const imageUrl = `${API_URL}${logoUrl}`;
+          const imageUrl = { logoUrl };
 
           return (
             <a

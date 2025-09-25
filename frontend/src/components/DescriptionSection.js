@@ -41,7 +41,7 @@ export default function DescriptionSection({ eglise, API_URL }) {
             {selectedImage ? (
               <div className="rounded-2xl overflow-hidden shadow-2xl flex items-center justify-center bg-white">
                 <Image
-                  src={`${API_URL}${selectedImage}`}
+                  src={selectedImage}
                   alt="Image principale"
                   width={600}
                   height={400}
@@ -69,9 +69,7 @@ export default function DescriptionSection({ eglise, API_URL }) {
                       }`}
                     >
                       <Image
-                        src={`${API_URL}${
-                          img.formats?.thumbnail?.url || img.url
-                        }`}
+                        src={img.formats?.thumbnail?.url || img.url}
                         alt={img.alternativeText || `Image ${index + 1}`}
                         width={100}
                         height={80}
