@@ -3,21 +3,13 @@ import React, { useRef, useState, useEffect } from "react";
 
 export default function InterviewSection({ videoUrl }) {
   const videoRef = useRef(null);
-  const [isMuted, setIsMuted] = useState(true);
   const [videoReady, setVideoReady] = useState(false);
-
-  const handleToggleMute = () => {
-    setIsMuted((prev) => !prev);
-    if (videoRef.current) {
-      videoRef.current.muted = !videoRef.current.muted;
-    }
-  };
 
   useEffect(() => {
     if (videoRef.current) {
-      videoRef.current.muted = isMuted;
+      videoRef.current.muted = true;
     }
-  }, [isMuted]);
+  }, []);
 
   return (
     <section className="relative min-h-screen py-10 px-6 text-center text-black">
@@ -36,12 +28,6 @@ export default function InterviewSection({ videoUrl }) {
               playsInline
               onCanPlay={() => setVideoReady(true)}
             />
-            <button
-              onClick={handleToggleMute}
-              className="absolute bottom-4 right-4 px-4 py-2 bg-white/80 text-black font-semibold rounded-full shadow hover:bg-white transition"
-            >
-              {isMuted ? "Activer le son" : "Couper le son"}
-            </button>
           </div>
         ) : (
           <p className="text-red-600 mb-8">
@@ -50,7 +36,7 @@ export default function InterviewSection({ videoUrl }) {
         )}
 
         {/* Bloc texte avec fond clair */}
-        <div className="bg-white/70 backdrop-blur-sm p-6 rounded-xl shadow-md mb-10">
+        <div className="bg-white/50 backdrop-blur-sm p-6 rounded-xl shadow-md mb-10">
           <div className="prose prose-lg text-left mx-auto text-black">
             <p>
               “L’église Saint-Jean-Baptiste d’Aulès est un témoin précieux de
