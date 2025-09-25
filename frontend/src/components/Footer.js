@@ -5,9 +5,9 @@ import Image from "next/image";
 export default function Footer({ site, API_URL }) {
   return (
     <footer className="relative z-10 bg-black text-white py-12 px-6 rounded-t-3xl">
-      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
+      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10">
         {/* Colonne gauche : Logo + Copyright */}
-        <div className="flex flex-col items-start">
+        <div className="flex flex-col items-center text-center md:items-start md:text-left w-full">
           {site?.logo_footer?.url && (
             <Image
               src={site.logo_footer.url}
@@ -23,7 +23,7 @@ export default function Footer({ site, API_URL }) {
         </div>
 
         {/* Colonne droite : Réseaux sociaux */}
-        <div className="flex flex-col items-end text-right">
+        <div className="flex flex-col items-center text-center md:items-end md:text-right w-full">
           <h3 className="text-xl font-semibold mb-6">Suivez-nous</h3>
           <div className="space-y-3">
             {site?.reseaux_sociaux?.length > 0 ? (
