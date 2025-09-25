@@ -131,7 +131,7 @@ export default function AccueilSection({ API_URL, onVideoEnd }) {
       </div>
 
       {!videoEnded && (
-        <div className="absolute bottom-6 md:bottom-10 left-1/2 -translate-x-1/2 z-10 flex gap-4 md:gap-6">
+        <div className="absolute bottom-20 md:bottom-10 left-1/2 -translate-x-1/2 z-10 flex flex-wrap justify-center gap-4 px-4 w-full max-w-[90vw]">
           <button
             onClick={handleToggleMute}
             className="px-4 py-2 bg-white/80 text-black font-semibold rounded-full shadow hover:bg-white transition text-sm md:text-base"
@@ -155,6 +155,16 @@ export default function AccueilSection({ API_URL, onVideoEnd }) {
             <span className="md:hidden">Stopper</span>
             <span className="hidden md:inline">Passer la vidéo →</span>
           </button>
+          {showDonationButton && (
+            <a
+              href="https://www.helloasso.com/associations/les-compagnons-de-l-art-et-du-patrimoine-de-doazit/formulaires/1"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-4 py-2 bg-red-400 text-black font-bold rounded-full shadow hover:bg-red-500 transition text-sm md:text-base"
+            >
+              Faire un don
+            </a>
+          )}
         </div>
       )}
     </section>
