@@ -128,8 +128,23 @@ export default function Home() {
         <LocalisationSection eglise={eglise} />
       </section>
 
-      <section id="interview" className="scroll-mt-[100px] py-10 px-6 bg-white">
-        <InterviewSection videoUrl="https://appetizing-balance-03c58ad391.media.strapiapp.com/Interview_498b4a158a.mp4" />
+      <section
+        id="interview"
+        className="scroll-mt-[100px] relative min-h-screen py-10 px-6 text-black"
+      >
+        {/* Fond pierre en arrière-plan */}
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0"
+          style={{
+            backgroundImage: `url("https://appetizing-balance-03c58ad391.media.strapiapp.com/chaud_calcaire_texture_a6787039c7.jpg")`,
+            opacity: 0.6,
+          }}
+        ></div>
+
+        {/* Contenu interview au-dessus du fond */}
+        <div className="relative z-10">
+          <InterviewSection videoUrl="https://appetizing-balance-03c58ad391.media.strapiapp.com/Interview_498b4a158a.mp4" />
+        </div>
       </section>
 
       <section

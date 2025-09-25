@@ -44,7 +44,7 @@ export default async function BlogIndexPage() {
                     {imageUrl && (
                       <div className="overflow-hidden rounded-xl shadow-lg">
                         <img
-                          src={`${process.env.NEXT_PUBLIC_API_URL}${imageUrl}`}
+                          src={imageUrl}
                           alt={titre}
                           className="w-full h-60 object-cover group-hover:scale-105 transition-transform"
                         />

@@ -59,7 +59,9 @@ export default function Header({ site, API_URL, visible = true }) {
           </Link>
           <Link
             href="https://www.helloasso.com/associations/les-compagnons-de-l-art-et-du-patrimoine-de-doazit/formulaires/1"
-            className="bg-red-400 text-black font-bold px-4 py-2 rounded-full shadow-lg hover:bg-yellow-500 transition-all duration-300"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-red-400 text-black font-bold px-4 py-2 rounded-full shadow-lg hover:bg-red-500 transition-all duration-300"
           >
             Soutenez-nous !
           </Link>

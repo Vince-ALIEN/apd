@@ -20,19 +20,7 @@ export default function InterviewSection({ videoUrl }) {
   }, [isMuted]);
 
   return (
-    <section className="relative min-h-screen py-20 px-6 text-center text-black">
-      {/* Fond pierre avec opacité */}
-      <div
-        className="absolute inset-0 z-0"
-        style={{
-          backgroundImage:
-            'url("https://appetizing-balance-03c58ad391.media.strapiapp.com/chaud_calcaire_texture_a6787039c7.jpg")',
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          opacity: 0.6,
-        }}
-      ></div>
-
+    <section className="relative min-h-screen py-10 px-6 text-center text-black">
       {/* Contenu au-dessus du fond */}
       <div className="relative z-10 max-w-4xl mx-auto">
         <h2 className="text-4xl font-bold mb-6">Votre aide est précieuse</h2>
@@ -62,7 +50,7 @@ export default function InterviewSection({ videoUrl }) {
         )}
 
         {/* Bloc texte avec fond clair */}
-        <div className="bg-white/80 backdrop-blur-sm p-6 rounded-xl shadow-md mb-10">
+        <div className="bg-white/70 backdrop-blur-sm p-6 rounded-xl shadow-md mb-10">
           <div className="prose prose-lg text-left mx-auto text-black">
             <p>
               “L’église Saint-Jean-Baptiste d’Aulès est un témoin précieux de
