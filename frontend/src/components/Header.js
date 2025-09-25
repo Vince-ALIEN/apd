@@ -94,7 +94,7 @@ export default function Header({ site, API_URL, visible = true }) {
             <Link
               href="/don"
               onClick={() => setMenuOpen(false)}
-              className="bg-yellow-400 text-black font-bold px-4 py-2 rounded-full shadow hover:bg-yellow-500 transition"
+              className="bg-yellow-400 text-black font-bold px-4 py-2 rounded-full shadow hover:bg-red-500 transition"
             >
               Soutenez-nous !
             </Link>

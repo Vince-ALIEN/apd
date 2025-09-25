@@ -63,7 +63,7 @@ export default function AccueilSection({ API_URL, onVideoEnd }) {
             <div className="mt-6 pointer-events-auto animate-button">
               <a
                 href="https://www.helloasso.com/associations/les-compagnons-de-l-art-et-du-patrimoine-de-doazit/formulaires/1"
-                className="inline-block px-6 py-3 bg-red-400 text-black font-bold rounded-full shadow hover:bg-yellow-500 transition"
+                className="inline-block px-6 py-3 bg-red-400 text-black font-bold rounded-full shadow hover:bg-red-500 transition"
               >
                 Faire un don
               </a>
