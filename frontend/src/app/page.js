@@ -129,7 +129,7 @@ export default function Home() {
       </section>
 
       <section id="actu" className="scroll-mt-[100px] py-10 px-6 bg-white">
-        <InterviewSection videoUrl="https://appetizing-balance-03c58ad391.media.strapiapp.com/Interview_1bfec49246.mp4" />
+        <InterviewSection videoUrl="https://appetizing-balance-03c58ad391.media.strapiapp.com/Interview_498b4a158a.mp4" />
       </section>
 
       <section

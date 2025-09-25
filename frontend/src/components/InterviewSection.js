@@ -23,14 +23,8 @@ export default function InterviewSection({ videoUrl }) {
     <section className="relative py-20 px-6 bg-gray-100 text-center">
       <div className="max-w-4xl mx-auto">
         <h2 className="text-4xl font-bold mb-6 text-gray-800">
-          Témoignage de Sandrine Chevalier
+          Votre aide est précieuse
         </h2>
-        <p className="text-lg text-gray-700 mb-10">
-          Découvrez l’histoire de l’église Saint-Jean-Baptiste d’Aulès et
-          l’importance de sa restauration à travers les mots de Sandrine
-          Chevalier.
-        </p>
-
         {videoUrl ? (
           <div className="relative w-full h-[300px] md:h-[500px] rounded-lg overflow-hidden shadow-lg mb-8">
             <video
