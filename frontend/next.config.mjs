@@ -3,14 +3,12 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: "http",
-        hostname: "localhost",
-        port: "1337",
-        pathname: "/uploads/**",
+        protocol: "https",
+        hostname: "appetizing-balance-03c58ad391.media.strapiapp.com",
+        pathname: "/**",
       },
     ],
   },
-  allowedDevOrigins: ["192.168.1.101"],
 };
 
 export default nextConfig;
