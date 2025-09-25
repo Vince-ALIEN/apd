@@ -86,7 +86,7 @@ export default function AccueilSection({ API_URL, onVideoEnd }) {
             onError={handleSkipVideo}
           >
             <source
-              src={`${API_URL}/Video_sans_titre_Realisee_avec_Clipchamp_2_d33691bb21.mp4`}
+              src="https://appetizing-balance-03c58ad391.media.strapiapp.com/Video_sans_titre_Realisee_avec_Clipchamp_2_d33691bb21.mp4"
               type="video/mp4"
             />
             Votre navigateur ne supporte pas la vidéo.
@@ -96,7 +96,7 @@ export default function AccueilSection({ API_URL, onVideoEnd }) {
             <div
               className="absolute inset-0 bg-cover bg-center bg-no-repeat"
               style={{
-                backgroundImage: `url('${API_URL}/chaud_calcaire_texture_a6787039c7.jpg')`,
+                backgroundImage: `url("https://appetizing-balance-03c58ad391.media.strapiapp.com/chaud_calcaire_texture_a6787039c7.jpg")`,
               }}
             ></div>
 
