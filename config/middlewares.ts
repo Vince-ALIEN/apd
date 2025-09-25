@@ -5,7 +5,11 @@ export default [
   {
     name: "strapi::cors",
     config: {
-      origin: ["http://localhost:3000", "http://192.168.1.101:3000"],
+      origin: [
+        "http://localhost:3000",
+        "http://192.168.1.101:3000",
+        "https://apd-three.vercel.app",
+      ],
       methods: ["GET", "POST", "PUT", "DELETE"],
       headers: ["Content-Type", "Authorization"],
     },
