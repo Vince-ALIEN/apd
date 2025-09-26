@@ -1,7 +1,12 @@
-export default () => ({
+export default ({ env }) => ({
   upload: {
     config: {
-      sizeLimit: 500 * 1024 * 1024, // 500MB
+      provider: "cloudinary",
+      providerOptions: {
+        cloud_name: env("CLOUDINARY_NAME"),
+        api_key: env("CLOUDINARY_KEY"),
+        api_secret: env("CLOUDINARY_SECRET"),
+      },
     },
   },
 });
