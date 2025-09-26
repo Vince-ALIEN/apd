@@ -39,7 +39,7 @@ export default function Header({ site, API_URL, visible = true }) {
             href="/#description"
             className="hover:text-gray-300 transition-colors"
           >
-            Notre église
+            L'église
           </Link>
           <Link href="/blog" className="hover:text-gray-300 transition-colors">
             Actualités
