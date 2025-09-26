@@ -7,7 +7,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "appetizing-balance-03c58ad391.media.strapiapp.com",
+        hostname: "apd-7ov8.onrender.com",
         pathname: "/**",
       },
     ],

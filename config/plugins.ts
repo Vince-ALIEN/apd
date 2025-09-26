@@ -7,6 +7,12 @@ export default ({ env }) => ({
         api_key: env("CLOUDINARY_KEY"),
         api_secret: env("CLOUDINARY_SECRET"),
       },
+      actionOptions: {
+        upload: {
+          resource_type: "auto", // ← nécessaire pour les vidéos
+        },
+        delete: {},
+      },
     },
   },
 });
