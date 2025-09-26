@@ -1,7 +1,9 @@
+import cloudinary from "strapi-provider-upload-cloudinary";
+
 export default ({ env }) => ({
   upload: {
     config: {
-      provider: "cloudinary",
+      provider: cloudinary,
       providerOptions: {
         cloud_name: env("CLOUDINARY_NAME"),
         api_key: env("CLOUDINARY_KEY"),
