@@ -28,9 +28,13 @@ export default function DescriptionSection({ eglise, API_URL }) {
             <div className="pt-4">
               <p className="text-lg">
                 <strong className="text-gray-900">Style architectural :</strong>
-                <span className="text-gray-700 ml-2">
-                  {eglise.style_architectural}
-                </span>
+                <div className="text-lg leading-relaxed text-gray-700 space-y-4 mt-2">
+                  {eglise.style_architectural?.map((block, index) => (
+                    <p key={index}>
+                      {block.children?.map((child) => child.text).join("")}
+                    </p>
+                  ))}
+                </div>
               </p>
             </div>
           </div>
