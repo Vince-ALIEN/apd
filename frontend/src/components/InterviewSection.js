@@ -13,13 +13,11 @@ export default function InterviewSection({ videoUrl }) {
 
   return (
     <section className="relative min-h-screen py-10 px-0 text-center text-black overflow-hidden">
-      <div className="relative z-10 w-full max-w-none">
-        <h2 className="text-4xl font-bold mb-6 px-6">
-          Votre aide est précieuse
-        </h2>
+      <div className="relative z-10 w-full max-w-4xl mx-auto px-6">
+        <h2 className="text-4xl font-bold mb-6">Votre aide est précieuse</h2>
 
         {videoUrl ? (
-          <div className="relative w-full h-[300px] md:h-[500px] overflow-hidden shadow-lg mb-8 rounded-none md:rounded-lg">
+          <div className="relative w-full h-[300px] md:h-[500px] overflow-hidden shadow-lg mb-8 rounded-lg">
             <video
               ref={videoRef}
               className={`w-full h-full object-cover ${videoReady ? "" : "opacity-0"}`}
@@ -31,13 +29,12 @@ export default function InterviewSection({ videoUrl }) {
             />
           </div>
         ) : (
-          <p className="text-red-600 mb-8 px-6">
+          <p className="text-red-600 mb-8">
             La vidéo n’est pas disponible pour le moment.
           </p>
         )}
 
-        {/* Texte et bouton */}
-        <div className="bg-white/50 backdrop-blur-sm p-6 rounded-xl shadow-md mb-10 mx-6">
+        <div className="bg-white/50 backdrop-blur-sm p-6 rounded-xl shadow-md mb-10">
           <div className="prose prose-lg text-left text-black">
             <p>
               “L’église Saint-Jean-Baptiste d’Aulès est un témoin précieux de
