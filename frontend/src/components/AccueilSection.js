@@ -48,9 +48,9 @@ export default function AccueilSection({
     }
   }, [videoEnded]);
 
-  const videoUrl = eglise?.videos?.data?.[0]?.attributes?.url || null;
+  const videoUrl = eglise?.videos?.[0]?.url || null;
   const backgroundUrl =
-    parametres_site?.background?.data?.attributes?.url || "/fallback.jpg";
+    parametres_site?.background?.[0]?.url || "/fallback.jpg";
 
   return (
     <section
