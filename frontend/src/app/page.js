@@ -18,7 +18,6 @@ export default function Home() {
 
   const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-  // Chargement des données depuis Strapi
   useEffect(() => {
     async function fetchData() {
       try {
@@ -48,7 +47,6 @@ export default function Home() {
     fetchData();
   }, [API_URL]);
 
-  // Scroll automatique vers l’ancre si présente dans l’URL
   useEffect(() => {
     const hash = window.location.hash?.substring(1);
     if (hash) {
@@ -57,11 +55,10 @@ export default function Home() {
         if (el) {
           el.scrollIntoView({ behavior: "smooth", block: "start" });
         }
-      }, 500); // délai augmenté pour laisser le DOM se charger
+      }, 500);
     }
   }, []);
 
-  // Affiche ou masque le header selon le scroll
   useEffect(() => {
     const handleScroll = () => {
       const y = window.scrollY;
@@ -76,12 +73,16 @@ export default function Home() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [videoStopped]);
 
-  // Affiche le header immédiatement si la vidéo est stoppée
   useEffect(() => {
     if (videoStopped) {
       setShowHeader(true);
     }
   }, [videoStopped]);
+
+  const backgroundUrl =
+    site?.background?.[0]?.url ??
+    site?.background?.data?.[0]?.attributes?.url ??
+    "/fallback.jpg";
 
   if (error) {
     return (
@@ -109,7 +110,9 @@ export default function Home() {
         className="relative h-screen overflow-hidden scroll-mt-[120px]"
       >
         <AccueilSection
-          API_URL={API_URL}
+          eglise={eglise}
+          parametres_site={site}
+          backgroundUrl={backgroundUrl}
           onVideoEnd={() => setVideoStopped(true)}
         />
       </section>
@@ -132,16 +135,10 @@ export default function Home() {
         id="interview"
         className="scroll-mt-[100px] relative min-h-screen py-10 px-6 text-black"
       >
-        {/* Fond pierre en arrière-plan */}
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0"
-          style={{
-            backgroundImage: `url("https://appetizing-balance-03c58ad391.media.strapiapp.com/chaud_calcaire_texture_a6787039c7.jpg")`,
-            opacity: 0.6,
-          }}
+          style={{ backgroundImage: `url("${backgroundUrl}")`, opacity: 0.6 }}
         ></div>
-
-        {/* Contenu interview au-dessus du fond */}
         <div className="relative z-10">
           <InterviewSection videoUrl="https://appetizing-balance-03c58ad391.media.strapiapp.com/Interview_498b4a158a.mp4" />
         </div>
@@ -160,12 +157,8 @@ export default function Home() {
       >
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{
-            backgroundImage: `url("https://appetizing-balance-03c58ad391.media.strapiapp.com/chaud_calcaire_texture_a6787039c7.jpg")`,
-            opacity: 0.6,
-          }}
+          style={{ backgroundImage: `url("${backgroundUrl}")`, opacity: 0.6 }}
         ></div>
-
         <div className="relative z-10 max-w-3xl mx-auto bg-white/80 p-8 rounded-lg shadow-lg">
           <h2 className="text-3xl font-bold mb-6">Contactez-nous</h2>
           <ContactSection />
@@ -175,12 +168,8 @@ export default function Home() {
       <div className="relative">
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0"
-          style={{
-            backgroundImage: `url("https://appetizing-balance-03c58ad391.media.strapiapp.com/chaud_calcaire_texture_a6787039c7.jpg")`,
-            opacity: 0.6,
-          }}
+          style={{ backgroundImage: `url("${backgroundUrl}")`, opacity: 0.6 }}
         ></div>
-
         <Footer site={site} API_URL={API_URL} />
       </div>
     </div>
