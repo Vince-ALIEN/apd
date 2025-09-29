@@ -7,11 +7,7 @@ import {
   faCircleStop,
 } from "@fortawesome/free-solid-svg-icons";
 
-export default function AccueilSection({
-  eglise,
-  parametres_site,
-  onVideoEnd,
-}) {
+export default function AccueilSection({ accueil, onVideoEnd }) {
   const [videoEnded, setVideoEnded] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
   const [videoReady, setVideoReady] = useState(false);
@@ -48,14 +44,8 @@ export default function AccueilSection({
     }
   }, [videoEnded]);
 
-  // ✅ Récupération des URLs Cloudinary
-  const videoUrl = eglise?.videos?.[0]?.url || null;
-  const backgroundUrl =
-    parametres_site?.background?.[0]?.url || "/fallback.jpg";
-
-  // ✅ Logs pour vérification
-  console.log("videoUrl", videoUrl);
-  console.log("backgroundUrl", backgroundUrl);
+  const videoUrl = accueil?.video?.url || null;
+  const backgroundUrl = accueil?.background?.url || "/fallback.jpg";
 
   return (
     <section

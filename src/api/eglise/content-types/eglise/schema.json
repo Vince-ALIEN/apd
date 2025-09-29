@@ -27,16 +27,6 @@
         "audios"
       ]
     },
-    "videos": {
-      "type": "media",
-      "multiple": true,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
-    },
     "style_architectural": {
       "type": "blocks"
     },

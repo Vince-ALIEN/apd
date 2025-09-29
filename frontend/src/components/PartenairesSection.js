@@ -9,15 +9,14 @@ export default function PartenairesSection({ API_URL }) {
   useEffect(() => {
     async function fetchPartenaires() {
       try {
-        const res = await fetch(`${API_URL}/api/partenaires?populate=logo`);
+        const res = await fetch(
+          `${API_URL}/api/partenaires?populate=logos.logo`
+        );
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const json = await res.json();
 
-        if (!json.data || !Array.isArray(json.data)) {
-          throw new Error("Structure inattendue");
-        }
-
-        setPartenaires(json.data);
+        const logos = json.data?.attributes?.logos ?? [];
+        setPartenaires(logos);
       } catch (err) {
         console.error("Erreur API partenaires :", err);
         setError("Erreur de chargement des partenaires.");
@@ -42,17 +41,15 @@ export default function PartenairesSection({ API_URL }) {
               : "grid-cols-2 sm:grid-cols-3 md:grid-cols-4"
         }`}
       >
-        {partenaires.map((item) => {
-          const logoUrl = item.logo?.formats?.medium?.url || item.logo?.url;
+        {partenaires.map((item, index) => {
+          const logoUrl = item.logo?.data?.attributes?.url;
           const lien = item.url;
 
           if (!logoUrl || !lien) return null;
 
-          const imageUrl = logoUrl;
-
           return (
             <a
-              key={item.id}
+              key={index}
               href={lien}
               target="_blank"
               rel="noopener noreferrer"
@@ -60,8 +57,8 @@ export default function PartenairesSection({ API_URL }) {
             >
               <div className="relative w-full h-[150px]">
                 <Image
-                  src={imageUrl}
-                  alt="Logo partenaire"
+                  src={logoUrl}
+                  alt={`Logo partenaire ${index + 1}`}
                   fill
                   className="object-contain"
                   sizes="(max-width: 768px) 100vw, 300px"

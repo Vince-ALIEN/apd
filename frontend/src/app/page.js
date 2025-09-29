@@ -11,7 +11,8 @@ import InterviewSection from "@components/InterviewSection";
 
 export default function Home() {
   const [eglise, setEglise] = useState(null);
-  const [site, setSite] = useState(null);
+  const [accueil, setAccueil] = useState(null);
+  const [parametres_site, setParametres_site] = useState(null);
   const [error, setError] = useState(null);
   const [showHeader, setShowHeader] = useState(false);
   const [videoStopped, setVideoStopped] = useState(false);
@@ -21,23 +22,31 @@ export default function Home() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const [egliseRes, siteRes] = await Promise.all([
+        const [egliseRes, accueilRes, siteRes] = await Promise.all([
           fetch(`${API_URL}/api/eglise?populate=*`),
-          fetch(`${API_URL}/api/parametres-site?populate=*`),
+          fetch(`${API_URL}/api/accueil?populate=*`),
+          fetch(`${API_URL}/api/parametres_site?populate=*`),
         ]);
 
         const egliseJson = await egliseRes.json();
+        const accueilJson = await accueilRes.json();
         const siteJson = await siteRes.json();
 
         const egliseData = egliseJson.data ?? null;
-        const siteData = siteJson.data ?? null;
+        const accueilData = accueilJson?.data ?? null;
+        const siteData = siteJson?.data?.attributes ?? null;
 
-        if (!egliseData || !siteData) {
+        if (
+          !egliseData ||
+          !accueilData?.video?.url ||
+          !accueilData?.background?.url
+        ) {
           throw new Error("Les données sont vides ou mal formatées.");
         }
 
         setEglise(egliseData);
-        setSite(siteData);
+        setAccueil(accueilData);
+        setParametres_site(siteData);
       } catch (err) {
         setError(`Erreur détaillée: ${err.message}`);
         console.error("Erreur de chargement :", err);
@@ -80,8 +89,8 @@ export default function Home() {
   }, [videoStopped]);
 
   const backgroundUrl =
-    site?.background?.[0]?.url ??
-    site?.background?.data?.[0]?.attributes?.url ??
+    accueil?.background?.url ??
+    accueil?.background?.formats?.large?.url ??
     "/fallback.jpg";
 
   if (error) {
@@ -93,7 +102,7 @@ export default function Home() {
     );
   }
 
-  if (!eglise || !site) {
+  if (!eglise || !accueil) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-black">
         <div className="w-12 h-12 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
@@ -103,16 +112,14 @@ export default function Home() {
 
   return (
     <div className="bg-white">
-      <Header site={site} API_URL={API_URL} visible={showHeader} />
+      <Header site={parametres_site} API_URL={API_URL} visible={showHeader} />
 
       <section
         id="accueil"
         className="relative h-screen overflow-hidden scroll-mt-[120px]"
       >
         <AccueilSection
-          eglise={eglise}
-          parametres_site={site}
-          backgroundUrl={backgroundUrl}
+          accueil={accueil}
           onVideoEnd={() => setVideoStopped(true)}
         />
       </section>
@@ -170,7 +177,7 @@ export default function Home() {
           className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0"
           style={{ backgroundImage: `url("${backgroundUrl}")`, opacity: 0.6 }}
         ></div>
-        <Footer site={site} API_URL={API_URL} />
+        <Footer site={parametres_site} API_URL={API_URL} />
       </div>
     </div>
   );

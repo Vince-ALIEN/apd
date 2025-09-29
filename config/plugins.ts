@@ -9,7 +9,7 @@ export default ({ env }) => ({
       },
       actionOptions: {
         upload: {
-          resource_type: "auto", // ← nécessaire pour les vidéos
+          resource_type: "auto",
         },
         delete: {},
       },
