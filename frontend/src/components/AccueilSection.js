@@ -7,7 +7,7 @@ import {
   faCircleStop,
 } from "@fortawesome/free-solid-svg-icons";
 
-export default function AccueilSection({ API_URL, onVideoEnd }) {
+export default function AccueilSection({ API_URL, eglise, onVideoEnd }) {
   const [videoEnded, setVideoEnded] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
   const [videoReady, setVideoReady] = useState(false);
@@ -35,20 +35,22 @@ export default function AccueilSection({ API_URL, onVideoEnd }) {
 
   useEffect(() => {
     if (!videoEnded) {
-      const textTimer = setTimeout(() => {
-        setShowDonationText(true);
-      }, 3000);
-
-      const buttonTimer = setTimeout(() => {
-        setShowDonationButton(true);
-      }, 4200);
-
+      const textTimer = setTimeout(() => setShowDonationText(true), 3000);
+      const buttonTimer = setTimeout(() => setShowDonationButton(true), 4200);
       return () => {
         clearTimeout(textTimer);
         clearTimeout(buttonTimer);
       };
     }
   }, [videoEnded]);
+
+  const videoUrl = eglise?.videos?.data?.[0]?.attributes?.url
+    ? `${API_URL}${eglise.videos.data[0].attributes.url}`
+    : null;
+
+  const backgroundUrl = eglise?.background_accueil?.data?.attributes?.url
+    ? `${API_URL}${eglise.background_accueil.data.attributes.url}`
+    : null;
 
   return (
     <section
@@ -64,7 +66,6 @@ export default function AccueilSection({ API_URL, onVideoEnd }) {
             Chaque don contribue à restaurer l’église Saint-Jean-Baptiste
             d’Aulès et à transmettre son histoire aux générations futures.
           </p>
-
           {showDonationButton && (
             <div className="mt-6 pointer-events-auto animate-button">
               <a
@@ -81,7 +82,7 @@ export default function AccueilSection({ API_URL, onVideoEnd }) {
       )}
 
       <div className={`absolute inset-0 z-0 ${videoReady ? "" : "opacity-0"}`}>
-        {!videoEnded ? (
+        {!videoEnded && videoUrl ? (
           <video
             ref={videoRef}
             className="w-full h-full object-cover"
@@ -93,10 +94,7 @@ export default function AccueilSection({ API_URL, onVideoEnd }) {
             onEnded={handleSkipVideo}
             onError={handleSkipVideo}
           >
-            <source
-              src="https://res.cloudinary.com/dkidpfpm1/video/upload/v1758887184/video_accueil_mi57ik.mp4"
-              type="video/mp4"
-            />
+            <source src={videoUrl} type="video/mp4" />
             Votre navigateur ne supporte pas la vidéo.
           </video>
         ) : (
@@ -104,7 +102,7 @@ export default function AccueilSection({ API_URL, onVideoEnd }) {
             <div
               className="absolute inset-0 bg-cover bg-center bg-no-repeat"
               style={{
-                backgroundImage: `url("https://res.cloudinary.com/dkidpfpm1/image/upload/v1758878672/chaud_calcaire_texture_59975c3671.jpg")`,
+                backgroundImage: `url("${backgroundUrl || "/fallback.jpg"}")`,
               }}
             ></div>
 
@@ -138,7 +136,6 @@ export default function AccueilSection({ API_URL, onVideoEnd }) {
 
       {!videoEnded && (
         <>
-          {/* Icône son en bas à gauche */}
           <button
             onClick={handleToggleMute}
             className="absolute bottom-4 left-4 z-10 bg-white/80 text-black text-xl p-3 rounded-full shadow hover:bg-white transition"
@@ -150,7 +147,6 @@ export default function AccueilSection({ API_URL, onVideoEnd }) {
             />
           </button>
 
-          {/* Icône stop en bas à droite */}
           <button
             onClick={handleSkipVideo}
             className="absolute bottom-4 right-4 z-10 bg-black text-white text-xl p-3 rounded-full shadow hover:bg-gray-800 transition"
