@@ -12,7 +12,7 @@ import InterviewSection from "@components/InterviewSection";
 export default function Home() {
   const [eglise, setEglise] = useState(null);
   const [accueil, setAccueil] = useState(null);
-  const [parametres_site, setParametres_site] = useState(null);
+  const [site, setSite] = useState(null);
   const [error, setError] = useState(null);
   const [showHeader, setShowHeader] = useState(false);
   const [videoStopped, setVideoStopped] = useState(false);
@@ -25,7 +25,7 @@ export default function Home() {
         const [egliseRes, accueilRes, siteRes] = await Promise.all([
           fetch(`${API_URL}/api/eglise?populate=*`),
           fetch(`${API_URL}/api/accueil?populate=*`),
-          fetch(`${API_URL}/api/parametres_site?populate=*`),
+          fetch(`${API_URL}/api/parametres-site?populate=*`),
         ]);
 
         const egliseJson = await egliseRes.json();
@@ -46,7 +46,7 @@ export default function Home() {
 
         setEglise(egliseData);
         setAccueil(accueilData);
-        setParametres_site(siteData);
+        setSite(siteData);
       } catch (err) {
         setError(`Erreur détaillée: ${err.message}`);
         console.error("Erreur de chargement :", err);
@@ -112,7 +112,7 @@ export default function Home() {
 
   return (
     <div className="bg-white">
-      <Header site={parametres_site} API_URL={API_URL} visible={showHeader} />
+      <Header site={site} API_URL={API_URL} visible={showHeader} />
 
       <section
         id="accueil"
@@ -177,7 +177,7 @@ export default function Home() {
           className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0"
           style={{ backgroundImage: `url("${backgroundUrl}")`, opacity: 0.6 }}
         ></div>
-        <Footer site={parametres_site} API_URL={API_URL} />
+        <Footer site={site} API_URL={API_URL} />
       </div>
     </div>
   );

@@ -30,7 +30,7 @@ export default function Header({ site, API_URL, visible = true }) {
               alt="Logo"
               width={120}
               height={80}
-              style={{ height: "auto" }} // ✅ évite le warning Next.js
+              style={{ height: "auto" }}
               priority
             />
           )}
