@@ -1,10 +1,10 @@
 {
-  "kind": "collectionType",
+  "kind": "singleType",
   "collectionName": "partenaires",
   "info": {
     "singularName": "partenaire",
     "pluralName": "partenaires",
-    "displayName": "Partenaire"
+    "displayName": "Partenaires"
   },
   "options": {
     "draftAndPublish": true

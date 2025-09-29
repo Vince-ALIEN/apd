@@ -373,10 +373,41 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
+export interface ApiAccueilAccueil extends Struct.SingleTypeSchema {
+  collectionName: 'accueils';
+  info: {
+    displayName: 'Accueil';
+    pluralName: 'accueils';
+    singularName: 'accueil';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    background: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::accueil.accueil'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    video: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+  };
+}
+
+export interface ApiArticleArticle extends Struct.SingleTypeSchema {
   collectionName: 'articles';
   info: {
-    displayName: 'Article';
+    displayName: 'Articles';
     pluralName: 'articles';
     singularName: 'article';
   };
@@ -406,7 +437,7 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiContactContact extends Struct.CollectionTypeSchema {
+export interface ApiContactContact extends Struct.SingleTypeSchema {
   collectionName: 'contacts';
   info: {
     displayName: 'Contact';
@@ -464,7 +495,7 @@ export interface ApiEgliseEglise extends Struct.SingleTypeSchema {
       Schema.Attribute.Private;
     nom: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
-    style_architectural: Schema.Attribute.String;
+    style_architectural: Schema.Attribute.Blocks;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -475,13 +506,12 @@ export interface ApiEgliseEglise extends Struct.SingleTypeSchema {
   };
 }
 
-export interface ApiFacebookEmbedFacebookEmbed
-  extends Struct.CollectionTypeSchema {
-  collectionName: 'facebook_embeds';
+export interface ApiInterviewInterview extends Struct.SingleTypeSchema {
+  collectionName: 'interviews';
   info: {
-    displayName: 'FacebookEmbed';
-    pluralName: 'facebook-embeds';
-    singularName: 'facebook-embed';
+    displayName: 'Interview';
+    pluralName: 'interviews';
+    singularName: 'interview';
   };
   options: {
     draftAndPublish: true;
@@ -490,17 +520,19 @@ export interface ApiFacebookEmbedFacebookEmbed
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    iframe: Schema.Attribute.String;
+    description: Schema.Attribute.Blocks;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
-      'api::facebook-embed.facebook-embed'
+      'api::interview.interview'
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
+    titre: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    video: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
   };
 }
 
@@ -517,8 +549,7 @@ export interface ApiParametresSiteParametresSite
   };
   attributes: {
     background: Schema.Attribute.Media<
-      'images' | 'files' | 'videos' | 'audios',
-      true
+      'images' | 'files' | 'videos' | 'audios'
     >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -536,17 +567,16 @@ export interface ApiParametresSiteParametresSite
     mention_legales: Schema.Attribute.Blocks;
     publishedAt: Schema.Attribute.DateTime;
     reseaux_sociaux: Schema.Attribute.JSON;
-    titre: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
   };
 }
 
-export interface ApiPartenairePartenaire extends Struct.CollectionTypeSchema {
+export interface ApiPartenairePartenaire extends Struct.SingleTypeSchema {
   collectionName: 'partenaires';
   info: {
-    displayName: 'Partenaire';
+    displayName: 'Partenaires';
     pluralName: 'partenaires';
     singularName: 'partenaire';
   };
@@ -1081,10 +1111,11 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::accueil.accueil': ApiAccueilAccueil;
       'api::article.article': ApiArticleArticle;
       'api::contact.contact': ApiContactContact;
       'api::eglise.eglise': ApiEgliseEglise;
-      'api::facebook-embed.facebook-embed': ApiFacebookEmbedFacebookEmbed;
+      'api::interview.interview': ApiInterviewInterview;
       'api::parametres-site.parametres-site': ApiParametresSiteParametresSite;
       'api::partenaire.partenaire': ApiPartenairePartenaire;
       'plugin::content-releases.release': PluginContentReleasesRelease;

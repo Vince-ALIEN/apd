@@ -1,17 +1,17 @@
 {
   "kind": "singleType",
-  "collectionName": "parametres_sites",
+  "collectionName": "accueils",
   "info": {
-    "singularName": "parametres-site",
-    "pluralName": "parametres-sites",
-    "displayName": "Parametres_site"
+    "singularName": "accueil",
+    "pluralName": "accueils",
+    "displayName": "Accueil"
   },
   "options": {
     "draftAndPublish": true
   },
   "pluginOptions": {},
   "attributes": {
-    "logo": {
+    "video": {
       "type": "media",
       "multiple": false,
       "allowedTypes": [
@@ -20,22 +20,6 @@
         "videos",
         "audios"
       ]
-    },
-    "logo_footer": {
-      "type": "media",
-      "multiple": false,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
-    },
-    "mention_legales": {
-      "type": "blocks"
-    },
-    "reseaux_sociaux": {
-      "type": "json"
     },
     "background": {
       "type": "media",

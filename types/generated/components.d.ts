@@ -3,7 +3,7 @@ import type { Schema, Struct } from '@strapi/strapi';
 export interface EgliseAdresse extends Struct.ComponentSchema {
   collectionName: 'components_eglise_adresses';
   info: {
-    displayName: 'Adresse';
+    displayName: 'Localisation';
     icon: 'pinMap';
   };
   attributes: {

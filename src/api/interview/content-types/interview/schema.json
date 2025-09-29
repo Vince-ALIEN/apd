@@ -1,10 +1,10 @@
 {
   "kind": "singleType",
-  "collectionName": "articles",
+  "collectionName": "interviews",
   "info": {
-    "singularName": "article",
-    "pluralName": "articles",
-    "displayName": "Articles"
+    "singularName": "interview",
+    "pluralName": "interviews",
+    "displayName": "Interview"
   },
   "options": {
     "draftAndPublish": true
@@ -14,10 +14,7 @@
     "titre": {
       "type": "string"
     },
-    "contenu": {
-      "type": "blocks"
-    },
-    "image": {
+    "video": {
       "type": "media",
       "multiple": false,
       "allowedTypes": [
@@ -27,15 +24,8 @@
         "audios"
       ]
     },
-    "auteur": {
-      "type": "string"
-    },
-    "date_publication": {
-      "type": "date"
-    },
-    "slug": {
-      "type": "string",
-      "unique": true
+    "description": {
+      "type": "blocks"
     }
   }
 }
