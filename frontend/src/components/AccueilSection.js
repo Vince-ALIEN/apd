@@ -7,7 +7,11 @@ import {
   faCircleStop,
 } from "@fortawesome/free-solid-svg-icons";
 
-export default function AccueilSection({ eglise, onVideoEnd }) {
+export default function AccueilSection({
+  eglise,
+  parametres_site,
+  onVideoEnd,
+}) {
   const [videoEnded, setVideoEnded] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
   const [videoReady, setVideoReady] = useState(false);
@@ -46,7 +50,7 @@ export default function AccueilSection({ eglise, onVideoEnd }) {
 
   const videoUrl = eglise?.videos?.data?.[0]?.attributes?.url || null;
   const backgroundUrl =
-    eglise?.background_accueil?.data?.attributes?.url || "/fallback.jpg";
+    parametres_site?.background?.data?.attributes?.url || "/fallback.jpg";
 
   return (
     <section
