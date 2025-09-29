@@ -48,9 +48,14 @@ export default function AccueilSection({
     }
   }, [videoEnded]);
 
-  const videoUrl = eglise?.videos?.[0]?.url || null;
+  // ✅ Récupération des URLs Cloudinary
+  const videoUrl = eglise?.videos?.data?.[0]?.attributes?.url || null;
   const backgroundUrl =
-    parametres_site?.background?.[0]?.url || "/fallback.jpg";
+    parametres_site?.background?.data?.[0]?.attributes?.url || "/fallback.jpg";
+
+  // ✅ Logs pour vérification
+  console.log("videoUrl", videoUrl);
+  console.log("backgroundUrl", backgroundUrl);
 
   return (
     <section
