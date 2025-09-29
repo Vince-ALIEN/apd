@@ -7,7 +7,7 @@ import {
   faCircleStop,
 } from "@fortawesome/free-solid-svg-icons";
 
-export default function AccueilSection({ API_URL, eglise, onVideoEnd }) {
+export default function AccueilSection({ eglise, onVideoEnd }) {
   const [videoEnded, setVideoEnded] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
   const [videoReady, setVideoReady] = useState(false);
@@ -44,13 +44,9 @@ export default function AccueilSection({ API_URL, eglise, onVideoEnd }) {
     }
   }, [videoEnded]);
 
-  const videoUrl = eglise?.videos?.data?.[0]?.attributes?.url
-    ? `${API_URL}${eglise.videos.data[0].attributes.url}`
-    : null;
-
-  const backgroundUrl = eglise?.background_accueil?.data?.attributes?.url
-    ? `${API_URL}${eglise.background_accueil.data.attributes.url}`
-    : null;
+  const videoUrl = eglise?.videos?.data?.[0]?.attributes?.url || null;
+  const backgroundUrl =
+    eglise?.background_accueil?.data?.attributes?.url || "/fallback.jpg";
 
   return (
     <section
@@ -101,9 +97,7 @@ export default function AccueilSection({ API_URL, eglise, onVideoEnd }) {
           <div className="w-full h-full relative transition-opacity duration-700 ease-in-out">
             <div
               className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-              style={{
-                backgroundImage: `url("${backgroundUrl || "/fallback.jpg"}")`,
-              }}
+              style={{ backgroundImage: `url("${backgroundUrl}")` }}
             ></div>
 
             <div className="absolute inset-0 flex items-center justify-center text-center text-white px-6 z-10">
