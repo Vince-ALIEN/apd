@@ -9,17 +9,13 @@ export default function PartenairesSection({ API_URL }) {
   useEffect(() => {
     async function fetchPartenaires() {
       try {
-        const res = await fetch(
-          `${API_URL}/api/partenaires?populate=logos.logo`
-        );
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const res = await fetch(`${API_URL}/api/partenaires?populate=*`);
         const json = await res.json();
 
-        const logos = json.data?.attributes?.logos ?? [];
+        const logos = json?.data ?? [];
         setPartenaires(logos);
       } catch (err) {
         console.error("Erreur API partenaires :", err);
-        setError("Erreur de chargement des partenaires.");
       }
     }
 

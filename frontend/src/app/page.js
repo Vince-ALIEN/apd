@@ -12,7 +12,7 @@ import InterviewSection from "@components/InterviewSection";
 export default function Home() {
   const [eglise, setEglise] = useState(null);
   const [accueil, setAccueil] = useState(null);
-  const [site, setSite] = useState(null);
+  const [parametres_site, setParametres_site] = useState(null);
   const [error, setError] = useState(null);
   const [showHeader, setShowHeader] = useState(false);
   const [videoStopped, setVideoStopped] = useState(false);
@@ -34,19 +34,15 @@ export default function Home() {
 
         const egliseData = egliseJson.data ?? null;
         const accueilData = accueilJson?.data ?? null;
-        const siteData = siteJson?.data?.attributes ?? null;
+        const siteData = siteJson?.data ?? null;
 
-        if (
-          !egliseData ||
-          !accueilData?.video?.url ||
-          !accueilData?.background?.url
-        ) {
-          throw new Error("Les données sont vides ou mal formatées.");
+        if (!egliseData?.id || !accueilData?.id || !siteData?.id) {
+          throw new Error("Les données sont incomplètes ou mal formatées.");
         }
 
         setEglise(egliseData);
         setAccueil(accueilData);
-        setSite(siteData);
+        setParametres_site(siteData);
       } catch (err) {
         setError(`Erreur détaillée: ${err.message}`);
         console.error("Erreur de chargement :", err);
@@ -112,7 +108,7 @@ export default function Home() {
 
   return (
     <div className="bg-white">
-      <Header site={site} API_URL={API_URL} visible={showHeader} />
+      <Header site={parametres_site} API_URL={API_URL} visible={showHeader} />
 
       <section
         id="accueil"
@@ -177,7 +173,7 @@ export default function Home() {
           className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0"
           style={{ backgroundImage: `url("${backgroundUrl}")`, opacity: 0.6 }}
         ></div>
-        <Footer site={site} API_URL={API_URL} />
+        <Footer site={parametres_site} API_URL={API_URL} />
       </div>
     </div>
   );
