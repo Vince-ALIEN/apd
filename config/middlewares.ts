@@ -9,6 +9,7 @@ export default [
         "http://localhost:3000",
         "http://192.168.1.101:3000",
         "https://apd-three.vercel.app",
+        "eglise-aules.vercel.app",
       ],
       methods: ["GET", "POST", "PUT", "DELETE"],
       headers: ["Content-Type", "Authorization", "Origin", "Accept"],
