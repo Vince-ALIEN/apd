@@ -401,7 +401,7 @@ export interface ApiAccueilAccueil extends Struct.SingleTypeSchema {
   };
 }
 
-export interface ApiArticleArticle extends Struct.SingleTypeSchema {
+export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
   collectionName: 'articles';
   info: {
     displayName: 'Articles';
@@ -499,10 +499,10 @@ export interface ApiEgliseEglise extends Struct.SingleTypeSchema {
   };
 }
 
-export interface ApiInterviewInterview extends Struct.SingleTypeSchema {
+export interface ApiInterviewInterview extends Struct.CollectionTypeSchema {
   collectionName: 'interviews';
   info: {
-    displayName: 'Interview';
+    displayName: 'Interviews';
     pluralName: 'interviews';
     singularName: 'interview';
   };
@@ -566,7 +566,7 @@ export interface ApiParametresSiteParametresSite
   };
 }
 
-export interface ApiPartenairePartenaire extends Struct.SingleTypeSchema {
+export interface ApiPartenairePartenaire extends Struct.CollectionTypeSchema {
   collectionName: 'partenaires';
   info: {
     displayName: 'Partenaires';

@@ -1,10 +1,10 @@
 {
-  "kind": "singleType",
+  "kind": "collectionType",
   "collectionName": "interviews",
   "info": {
     "singularName": "interview",
     "pluralName": "interviews",
-    "displayName": "Interview"
+    "displayName": "Interviews"
   },
   "options": {
     "draftAndPublish": true
