@@ -24,7 +24,7 @@ export default [
       jsonLimit: "512mb",
       textLimit: "512mb",
       formidable: {
-        maxFileSize: 500 * 1024 * 1024, // 500MB
+        maxFileSize: 1 * 1024 * 1024 * 1024, // 1 Go
       },
     },
   },

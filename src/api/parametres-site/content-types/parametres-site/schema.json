@@ -46,6 +46,9 @@
         "videos",
         "audios"
       ]
+    },
+    "url_don": {
+      "type": "string"
     }
   }
 }

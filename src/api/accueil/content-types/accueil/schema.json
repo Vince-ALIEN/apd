@@ -20,6 +20,12 @@
         "videos",
         "audios"
       ]
+    },
+    "titre": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
     }
   }
 }
