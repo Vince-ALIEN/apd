@@ -60,7 +60,7 @@ export default function Header({ site, scrollToSection }) {
   return (
     <>
       {/* Barre transparente */}
-      <header className="fixed top-15 left-15 right-15 z-50 px-4 md:px-6 flex items-center justify-between h-[60px] bg-transparent">
+      <header className="fixed top-8 md:top-12 left-4 right-4 md:left-16 md:right-16 z-50 px-4 md:px-6 flex items-center justify-between h-[60px] bg-transparent">
         {/* Logo à gauche */}
         <Image
           src={logoUrl}
@@ -117,12 +117,12 @@ export default function Header({ site, scrollToSection }) {
         <div className="absolute inset-0 bg-white/40 z-10 pointer-events-none" />
 
         {/* Contenu du menu */}
-        <nav className="relative z-20 flex flex-col items-start justify-center h-full px-8 md:px-20 gap-6 text-black font-bold text-left">
+        <nav className="relative z-20 flex flex-col items-center md:items-start justify-center h-full px-8 md:px-20 gap-6 text-black font-bold text-center md:text-left">
           {navLinks.map((link) => (
             <button
               key={link.label}
               onClick={() => handleNavigation(link.id)}
-              className="menu-first-letter text-2xl md:text-3xl px-2 py-1 hover:bg-white/30 transition w-full text-left"
+              className="menu-first-letter text-2xl md:text-3xl px-2 py-1 hover:bg-white/30 transition w-full md:w-auto"
             >
               {link.label}
             </button>

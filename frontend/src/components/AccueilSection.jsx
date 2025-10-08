@@ -24,11 +24,12 @@ export default function AccueilSection({ videoUrl, onSkip }) {
   }, [isMuted, videoUrl]);
 
   useEffect(() => {
-    const delay = 2; // secondes avant le début
+    const delay = 2;
     const timeline = gsap.timeline({ delay });
 
     animatedWords.forEach((word, i) => {
       const isLast = i === animatedWords.length - 1;
+      const isFun = i === animatedWords.length - 2; // avant-dernier mot
 
       timeline.to(wordRef.current, {
         opacity: 0,
@@ -38,30 +39,45 @@ export default function AccueilSection({ videoUrl, onSkip }) {
         onComplete: () => {
           if (wordRef.current) {
             wordRef.current.innerHTML = `<span class="text-red-600">${word.charAt(0)}</span>${word.slice(1)}`;
-            wordRef.current.className = `font-extrabold leading-tight text-center text-white ${
-              isLast ? "text-[8vw]" : "text-[4vw]"
-            } opacity-0 scale-50`;
+            wordRef.current.className =
+              "font-extrabold leading-tight text-center text-white text-6xl sm:text-7xl md:text-8xl lg:text-9xl opacity-0 scale-50";
           }
         },
       });
 
-      timeline.to(wordRef.current, {
-        opacity: 1,
-        scale: 1,
-        duration: 1,
-        ease: "power3.out",
-      });
-
-      // Si c’est le dernier mot, on le fait disparaître après un délai
-      if (isLast) {
+      if (isFun) {
+        // 🎉 Animation fun pour l’avant-dernier mot
         timeline.to(wordRef.current, {
-          opacity: 0,
-          scale: 0.5,
-          duration: 1,
-          ease: "power3.inOut",
-          delay: 2,
+          opacity: 1,
+          scale: 1.2,
+          rotate: 15,
+          duration: 0.7,
+          ease: "back.out(3)",
+        });
+        timeline.to(wordRef.current, {
+          scale: 1,
+          rotate: 0,
+          duration: 0.1,
+          ease: "power1.out",
+        });
+      } else {
+        // 🎬 Animation classique
+        timeline.to(wordRef.current, {
+          opacity: 1,
+          scale: 1,
+          duration: 0.5,
+          ease: "power3.inout",
         });
       }
+    });
+
+    // Disparition finale
+    timeline.to(wordRef.current, {
+      opacity: 0,
+      scale: 0.5,
+      duration: 1,
+      ease: "power3.inOut",
+      delay: 1.5,
     });
   }, []);
 
@@ -114,7 +130,7 @@ export default function AccueilSection({ videoUrl, onSkip }) {
       <div className="absolute inset-0 flex items-center justify-center z-50">
         <div
           ref={wordRef}
-          className="text-white text-[4vw] font-extrabold opacity-0 scale-50 leading-tight text-center"
+          className="text-white text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-extrabold opacity-0 scale-50 leading-tight text-center"
         >
           <span className="text-red-600">{animatedWords[0].charAt(0)}</span>
           {animatedWords[0].slice(1)}
@@ -142,7 +158,7 @@ export default function AccueilSection({ videoUrl, onSkip }) {
               d="M11 5L6 9H2v6h4l5 4V5z"
             />
           </svg>
-          {isMuted ? "Activer le son" : "Couper le son"}
+          {isMuted ? "Activer" : "Couper"}
         </button>
 
         {/* ⏭️ Bouton Passer */}
