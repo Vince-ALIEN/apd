@@ -1,176 +1,229 @@
 "use client";
-import { useState, useEffect, useRef, forwardRef } from "react";
+
+import { useLayoutEffect, useRef, useState } from "react";
 import Image from "next/image";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-const DescriptionSection = forwardRef(({ eglise }, ref) => {
-  const images = eglise?.images ?? [];
-  const [selectedImage, setSelectedImage] = useState(images[0]?.url || null);
-  const scrollRef = useRef(null);
-  const containerRef = useRef(null);
-  const [canScrollUp, setCanScrollUp] = useState(false);
-  const [canScrollDown, setCanScrollDown] = useState(false);
+gsap.registerPlugin(ScrollTrigger);
 
-  useEffect(() => {
-    const el = scrollRef.current;
+export default function DescriptionSection({ eglise }) {
+  const sectionRef = useRef(null);
+  const contentRef = useRef(null);
+  const imageRef = useRef(null);
+  const galleryRef = useRef(null);
+  const leftBtnRef = useRef(null);
+  const rightBtnRef = useRef(null);
+  const scrollBtnWrapperRef = useRef(null);
+
+  const [selectedImage, setSelectedImage] = useState(
+    eglise?.images?.[0] ?? null
+  );
+
+  const scrollText = (direction) => {
+    const el = contentRef.current;
     if (!el) return;
+    el.scrollBy({
+      top: direction === "up" ? -100 : 100,
+      behavior: "smooth",
+    });
+  };
 
-    const updateScrollButtons = () => {
-      setCanScrollUp(el.scrollTop > 0);
-      setCanScrollDown(el.scrollTop + el.clientHeight < el.scrollHeight);
+  useLayoutEffect(() => {
+    const section = sectionRef.current;
+    const content = contentRef.current;
+    const image = imageRef.current;
+    const gallery = galleryRef.current;
+    const leftBtn = leftBtnRef.current;
+    const rightBtn = rightBtnRef.current;
+    const scrollBtnWrapper = scrollBtnWrapperRef.current;
+
+    if (
+      !section ||
+      !content ||
+      !image ||
+      !gallery ||
+      !leftBtn ||
+      !rightBtn ||
+      !scrollBtnWrapper
+    )
+      return;
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: section,
+        start: "top top",
+        end: "100% top",
+        scrub: true,
+        pin: true,
+        anticipatePin: 1,
+      },
+    });
+
+    tl.fromTo(
+      [content, scrollBtnWrapper],
+      { x: 100, opacity: 1 },
+      { x: 0, opacity: 1, duration: 2 }
+    );
+
+    tl.fromTo(
+      [image, gallery, rightBtn, leftBtn],
+      { x: -100, opacity: 1 },
+      { x: 0, opacity: 1, duration: 2 },
+      "-=0.2"
+    );
+
+    return () => {
+      tl.scrollTrigger?.kill();
     };
-
-    updateScrollButtons();
-    el.addEventListener("scroll", updateScrollButtons);
-    return () => el.removeEventListener("scroll", updateScrollButtons);
   }, []);
 
-  const scrollByAmount = (amount) => {
-    scrollRef.current?.scrollBy({ top: amount, behavior: "smooth" });
+  const getImageUrl = (img) =>
+    img?.formats?.large?.url ?? img?.formats?.medium?.url ?? img?.url;
+
+  const galleryImages = eglise?.images ?? [];
+
+  const scrollGallery = (direction) => {
+    const container = galleryRef.current;
+    if (!container) return;
+    container.scrollBy({
+      left: direction === "left" ? -300 : 300,
+      behavior: "smooth",
+    });
   };
 
   return (
-    <div className="scrollable-content h-full relative" ref={containerRef}>
-      <div
-        ref={scrollRef}
-        className="h-full overflow-y-auto pt-[140px] px-4 md:px-8"
-      >
-        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-start pb-20">
-          <TextBlock eglise={eglise} />
-          <GalleryBlock
-            images={images}
-            selectedImage={selectedImage}
-            setSelectedImage={setSelectedImage}
-          />
-        </div>
-      </div>
+    <section ref={sectionRef} className="relative h-[120vh]">
+      <div className="sticky top-0 h-screen flex items-center justify-center px-6 md:px-32">
+        <div className="w-full h-full flex flex-col md:flex-row items-center justify-center gap-12">
+          {/* Texte à gauche */}
+          <div className="md:w-1/2 relative flex flex-col items-center">
+            <div
+              ref={contentRef}
+              className="bg-black/60 backdrop-blur-md text-white rounded-xl p-6 md:p-8 shadow-xl space-y-6 max-h-[600px] overflow-y-auto w-full"
+            >
+              {eglise?.nom && (
+                <h2 className="text-3xl md:text-4xl font-extrabold drop-shadow-lg">
+                  {eglise.nom}
+                </h2>
+              )}
+              {eglise?.description?.length > 0 && (
+                <div className="text-base md:text-lg font-medium space-y-4 drop-shadow-sm">
+                  {eglise.description.map((para, index) => (
+                    <p key={index}>{para.children?.[0]?.text}</p>
+                  ))}
+                </div>
+              )}
+            </div>
 
-      {(canScrollUp || canScrollDown) && (
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-[99999] flex gap-4">
-          {canScrollUp && (
-            <ScrollButton direction="up" onClick={() => scrollByAmount(-300)} />
-          )}
-          {canScrollDown && (
-            <ScrollButton
-              direction="down"
-              onClick={() => scrollByAmount(300)}
-            />
-          )}
-        </div>
-      )}
-    </div>
-  );
-});
-
-export default DescriptionSection;
-
-function TextBlock({ eglise }) {
-  return (
-    <div className="space-y-6">
-      <h2 className="text-4xl font-bold text-white drop-shadow-lg mb-8">
-        {eglise?.nom}
-      </h2>
-
-      <div className="text-lg leading-relaxed text-white/90 space-y-4 drop-shadow">
-        {eglise?.description?.map((block, index) => (
-          <p key={index}>
-            {block.children?.map((child) => child.text).join("")}
-          </p>
-        ))}
-      </div>
-
-      {eglise?.style_architectural?.length > 0 && (
-        <div className="pt-4 space-y-4">
-          <h3 className="text-lg text-white font-semibold drop-shadow">
-            Style architectural :
-          </h3>
-          <div className="text-lg leading-relaxed text-white/90 drop-shadow space-y-2">
-            {eglise.style_architectural.map((block, index) => (
-              <p key={index}>
-                {block.children?.map((child) => child.text).join("")}
-              </p>
-            ))}
-          </div>
-        </div>
-      )}
-    </div>
-  );
-}
-
-function GalleryBlock({ images, selectedImage, setSelectedImage }) {
-  return (
-    <div className="space-y-6">
-      {selectedImage ? (
-        <div className="rounded-2xl overflow-hidden shadow-2xl flex items-center justify-center bg-white/30 backdrop-blur-sm">
-          <Image
-            src={selectedImage}
-            alt="Image principale"
-            width={600}
-            height={400}
-            className="max-w-full max-h-[500px] object-contain"
-          />
-        </div>
-      ) : (
-        <div className="bg-white/20 backdrop-blur-sm rounded-2xl h-[500px] flex items-center justify-center">
-          <p className="text-white/80">Image à venir</p>
-        </div>
-      )}
-
-      {images.length > 1 && (
-        <div className="overflow-x-auto">
-          <div className="flex gap-4 flex-nowrap pb-2 scroll-smooth w-max">
-            {images.map((img, index) => {
-              const thumb = img.formats?.thumbnail?.url || img.url;
-              return (
-                <button
-                  key={index}
-                  onClick={() => setSelectedImage(img.url)}
-                  className={`border-2 rounded-xl overflow-hidden ${
-                    selectedImage === img.url
-                      ? "border-blue-400"
-                      : "border-transparent"
-                  }`}
+            {/* Boutons de scroll animés en dessous */}
+            <div
+              ref={scrollBtnWrapperRef}
+              className="flex gap-4 mt-4 opacity-0"
+            >
+              <button
+                onClick={() => scrollText("up")}
+                className="p-2 bg-white/80 hover:bg-white rounded-full shadow-md"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                  className="w-6 h-6 text-black"
                 >
-                  <Image
-                    src={thumb}
-                    alt={img.alternativeText || `Image ${index + 1}`}
-                    width={100}
-                    height={80}
-                    className="object-cover w-[100px] h-[80px]"
-                  />
+                  <path d="M7.41 15.41 12 10.83l4.59 4.58L18 14l-6-6-6 6z" />
+                </svg>
+              </button>
+              <button
+                onClick={() => scrollText("down")}
+                className="p-2 bg-white/80 hover:bg-white rounded-full shadow-md"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                  className="w-6 h-6 text-black"
+                >
+                  <path d="M7.41 8.59 12 13.17l4.59-4.58L18 10l-6 6-6-6z" />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          {/* Image principale + galerie */}
+          <div className="md:w-1/3 w-full flex flex-col items-center gap-6">
+            {selectedImage && (
+              <div
+                ref={imageRef}
+                className="w-full h-[200px] md:h-[360px] rounded-lg overflow-hidden shadow-xl relative bg-black"
+              >
+                <Image
+                  src={getImageUrl(selectedImage)}
+                  alt={selectedImage.name || "Image principale"}
+                  fill
+                  className="object-cover"
+                />
+              </div>
+            )}
+
+            {galleryImages.length > 1 && (
+              <div className="w-full flex items-center gap-2">
+                <button
+                  ref={leftBtnRef}
+                  onClick={() => scrollGallery("left")}
+                  className="p-2 rounded-full bg-white/80 hover:bg-white shadow-md"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    className="w-6 h-6 text-black"
+                  >
+                    <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
+                  </svg>
                 </button>
-              );
-            })}
+
+                <div
+                  ref={galleryRef}
+                  className="overflow-x-auto whitespace-nowrap no-scrollbar scroll-touch w-full"
+                >
+                  <div className="inline-flex gap-4 px-2 py-2">
+                    {galleryImages.map((img, index) => (
+                      <button
+                        key={index}
+                        onClick={() => setSelectedImage(img)}
+                        className="w-[80px] h-[60px] md:w-[120px] md:h-[100px] rounded-md overflow-hidden shadow-md flex-shrink-0 relative focus:outline-none focus:ring-2 focus:ring-white"
+                      >
+                        <Image
+                          src={getImageUrl(img)}
+                          alt={img.name || `Image ${index + 1}`}
+                          fill
+                          className="object-cover"
+                        />
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                <button
+                  ref={rightBtnRef}
+                  onClick={() => scrollGallery("right")}
+                  className="p-2 rounded-full bg-white/80 hover:bg-white shadow-md"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    className="w-6 h-6 text-black"
+                  >
+                    <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z" />
+                  </svg>
+                </button>
+              </div>
+            )}
           </div>
         </div>
-      )}
-    </div>
-  );
-}
-
-function ScrollButton({ direction, onClick }) {
-  const icon =
-    direction === "up" ? (
-      <path strokeLinecap="round" strokeLinejoin="round" d="M5 15l7-7 7 7" />
-    ) : (
-      <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-    );
-
-  return (
-    <button
-      onClick={onClick}
-      className="bg-white/20 hover:bg-white/30 text-white p-3 rounded-full backdrop-blur-md shadow-md"
-      aria-label={`Scroll ${direction}`}
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        className="h-6 w-6"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-        strokeWidth={2}
-      >
-        {icon}
-      </svg>
-    </button>
+      </div>
+    </section>
   );
 }

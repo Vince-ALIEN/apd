@@ -7,7 +7,12 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import DonationButton from "../components/DonationButton";
 import gsap from "gsap";
 
-export default function Header({ site, scrollToSection }) {
+export default function Header({
+  site,
+  scrollToSection,
+  hideLogo,
+  hideBurger,
+}) {
   const [menuOpen, setMenuOpen] = useState(false);
   const router = useRouter();
 
@@ -31,7 +36,7 @@ export default function Header({ site, scrollToSection }) {
   const handleNavigation = (label) => {
     const isOnHome = window.location.pathname === "/";
     if (isOnHome) {
-      scrollToSection(label);
+      scrollToSection?.(label);
     } else {
       sessionStorage.setItem("scrollFromNavigation", "true");
       router.push(`/#${label}`);
@@ -39,7 +44,6 @@ export default function Header({ site, scrollToSection }) {
     setMenuOpen(false);
   };
 
-  // ✨ Animation d’entrée du menu avec mouvement vertical amplifié
   useEffect(() => {
     if (menuOpen) {
       gsap.fromTo(
@@ -57,24 +61,63 @@ export default function Header({ site, scrollToSection }) {
     }
   }, [menuOpen]);
 
+  useEffect(() => {
+    if (!hideLogo) {
+      gsap.fromTo(
+        ".header-logo",
+        { opacity: 0, scale: 0.8 },
+        {
+          opacity: 1,
+          scale: 1,
+          duration: 0.8,
+          ease: "power2.out",
+        }
+      );
+    }
+  }, [hideLogo]);
+
+  useEffect(() => {
+    if (!hideBurger) {
+      gsap.fromTo(
+        ".burger-button",
+        { opacity: 0, scale: 0.8 },
+        {
+          opacity: 1,
+          scale: 1,
+          duration: 0.8,
+          ease: "power2.out",
+        }
+      );
+    }
+  }, [hideBurger]);
+
   return (
     <>
       {/* Barre transparente */}
       <header className="fixed top-8 md:top-12 left-4 right-4 md:left-16 md:right-16 z-50 px-4 md:px-6 flex items-center justify-between h-[60px] bg-transparent">
         {/* Logo à gauche */}
-        <Image
-          src={logoUrl}
-          alt="Logo"
-          width={140}
-          height={80}
-          style={{ height: "auto" }}
-          priority
-          className="rounded-md header-logo"
-        />
+        <div
+          className={`transition-all duration-500 ${
+            hideLogo
+              ? "opacity-0 scale-90 pointer-events-none"
+              : "opacity-100 scale-100"
+          }`}
+        >
+          <Image
+            src={logoUrl}
+            alt="Logo"
+            width={140}
+            height={80}
+            priority
+            className="rounded-md header-logo"
+          />
+        </div>
+      </header>
 
-        {/* Burger à droite */}
+      {/* Bouton burger (masqué au début, visible après rideau) */}
+      {!hideBurger && (
         <button
-          className="p-3 rounded-full bg-white/80 hover:bg-white shadow-md hover:shadow-lg transition-all duration-300 text-black"
+          className="burger-button fixed top-8 right-4 md:top-12 md:right-16 z-[70] p-3 rounded-full bg-white/80 hover:bg-white shadow-md hover:shadow-lg transition-all duration-300 text-black"
           onClick={() => setMenuOpen((prev) => !prev)}
           aria-label="Menu"
         >
@@ -84,7 +127,7 @@ export default function Header({ site, scrollToSection }) {
             <Bars3Icon className="h-8 w-8" />
           )}
         </button>
-      </header>
+      )}
 
       {/* Overlay sombre sur tout le fond */}
       {menuOpen && (
@@ -101,23 +144,13 @@ export default function Header({ site, scrollToSection }) {
         }`}
       >
         {/* Image de fond */}
-        <div
-          className="absolute inset-0 w-full h-full z-0"
-          style={{
-            backgroundImage: backgroundUrl
-              ? `url(${backgroundUrl})`
-              : undefined,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-          }}
-        />
+        <div className="absolute bg-red-600 inset-0 w-full h-full z-0" />
 
-        {/* Voile blanc semi-transparent */}
-        <div className="absolute inset-0 bg-white/40 z-10 pointer-events-none" />
+        {/* Voile noir semi-transparent */}
+        <div className="absolute inset-0 bg-black/40 z-10 pointer-events-none" />
 
         {/* Contenu du menu */}
-        <nav className="relative z-20 flex flex-col items-center md:items-start justify-center h-full px-8 md:px-20 gap-6 text-black font-bold text-center md:text-left">
+        <nav className="relative z-20 flex flex-col items-center md:items-start justify-center h-full px-8 md:px-20 gap-6 text-white font-bold text-center md:text-left">
           {navLinks.map((link) => (
             <button
               key={link.label}

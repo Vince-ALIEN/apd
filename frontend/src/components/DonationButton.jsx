@@ -12,7 +12,7 @@ export default function DonationButton({
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className={`px-6 py-2 rounded-full bg-red-600 text-white font-semibold shadow-md hover:bg-red-700 transition-all duration-300 animate-pulse-cta w-fit ${className}`}
+      className={`px-6 py-2 rounded-full bg-red-600 text-white font-semibold shadow-md hover:bg-red-700 transition-all duration-300 animate-pulse-cta w-fit flex items-center justify-center ${className}`}
     >
       {label}
     </a>
