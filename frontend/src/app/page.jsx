@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useRef, useEffect, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -26,6 +26,8 @@ export default function Home() {
   const [showIntroExit, setShowIntroExit] = useState(false);
   const [showContent, setShowContent] = useState(false);
   const [showHeader, setShowHeader] = useState(false);
+
+  const wrapperRef = useRef(null); // ✅ trigger global
 
   useEffect(() => {
     ScrollTrigger.refresh();
@@ -58,7 +60,7 @@ export default function Home() {
   }, [showContent]);
 
   return (
-    <div className="relative overflow-x-hidden">
+    <main ref={wrapperRef} className="relative overflow-x-hidden">
       {videoUrl && <VideoBackground videoUrl={videoUrl} />}
 
       <Header
@@ -84,16 +86,21 @@ export default function Home() {
 
       {showContent && (
         <>
-          {eglise && <DescriptionSection eglise={eglise} />}
+          {eglise && (
+            <DescriptionSection eglise={eglise} triggerRef={wrapperRef} />
+          )}
 
-          {interviewBlock && <InterviewSection block={interviewBlock} />}
+          {interviewBlock && (
+            <InterviewSection block={interviewBlock} triggerRef={wrapperRef} />
+          )}
+
           {parametres_site?.url_don && (
-            <div className="fixed bottom-10 left-1/2 -translate-x-1/2 z-50  pointer-events-auto">
+            <div className="fixed bottom-10 left-1/2 -translate-x-1/2 z-50 pointer-events-auto">
               <DonationButton href={parametres_site.url_don} />
             </div>
           )}
         </>
       )}
-    </div>
+    </main>
   );
 }

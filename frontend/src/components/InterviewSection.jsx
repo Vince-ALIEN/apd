@@ -30,7 +30,7 @@ export default function InterviewSection({ block }) {
       scrollTrigger: {
         trigger: section,
         start: "top top",
-        end: "+=60%",
+        end: "bottom top",
         scrub: 1,
         pin: pinWrapper,
         anticipatePin: 1,

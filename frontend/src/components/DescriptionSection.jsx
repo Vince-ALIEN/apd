@@ -7,14 +7,11 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function DescriptionSection({ eglise }) {
+export default function DescriptionSection({ eglise, triggerRef }) {
   const sectionRef = useRef(null);
   const contentRef = useRef(null);
   const imageRef = useRef(null);
   const galleryRef = useRef(null);
-  const leftBtnRef = useRef(null);
-  const rightBtnRef = useRef(null);
-  const scrollBtnWrapperRef = useRef(null);
 
   const [selectedImage, setSelectedImage] = useState(
     eglise?.images?.[0] ?? null
@@ -33,50 +30,38 @@ export default function DescriptionSection({ eglise }) {
     const section = sectionRef.current;
     const content = contentRef.current;
     const image = imageRef.current;
-    const gallery = galleryRef.current;
-    const leftBtn = leftBtnRef.current;
-    const rightBtn = rightBtnRef.current;
-    const scrollBtnWrapper = scrollBtnWrapperRef.current;
+    const trigger = triggerRef?.current;
 
-    if (
-      !section ||
-      !content ||
-      !image ||
-      !gallery ||
-      !leftBtn ||
-      !rightBtn ||
-      !scrollBtnWrapper
-    )
-      return;
+    if (!section || !content || !image || !trigger) return;
 
     const tl = gsap.timeline({
       scrollTrigger: {
-        trigger: section,
+        trigger: trigger,
         start: "top top",
-        end: "100% top",
+        end: "bottom top",
         scrub: true,
-        pin: true,
+        pin: section,
         anticipatePin: 1,
       },
     });
 
     tl.fromTo(
-      [content, scrollBtnWrapper],
-      { x: 100, opacity: 1 },
-      { x: 0, opacity: 1, duration: 2 }
+      content,
+      { xPercent: -100, opacity: 0 },
+      { xPercent: 0, opacity: 1, duration: 1.6, ease: "power3.out" }
     );
 
     tl.fromTo(
-      [image, gallery, rightBtn, leftBtn],
-      { x: -100, opacity: 1 },
-      { x: 0, opacity: 1, duration: 2 },
-      "-=0.2"
+      image,
+      { xPercent: 100, opacity: 0 },
+      { xPercent: 0, opacity: 1, duration: 1.6, ease: "power3.out" },
+      "-=1.4"
     );
 
     return () => {
       tl.scrollTrigger?.kill();
     };
-  }, []);
+  }, [triggerRef]);
 
   const getImageUrl = (img) =>
     img?.formats?.large?.url ?? img?.formats?.medium?.url ?? img?.url;
@@ -93,15 +78,15 @@ export default function DescriptionSection({ eglise }) {
   };
 
   return (
-    <section ref={sectionRef} className="relative h-[200vh]">
-      <div className="sticky top-0 h-screen flex items-center justify-center px-6 md:px-32">
-        <div className="w-full h-full flex flex-col md:flex-row items-center justify-center gap-12">
+    <section ref={sectionRef} className="relative h-[150vh]">
+      <div className="sticky top-0 min-h-screen px-6 md:px-32 pt-[10vh] md:pt-0">
+        <div className="flex flex-col md:flex-row items-center justify-center gap-12 h-full">
           {/* Texte à gauche */}
-          <div className="md:w-1/2 relative flex flex-col items-center">
-            <div
-              ref={contentRef}
-              className="bg-black/60 backdrop-blur-md text-white rounded-xl p-6 md:p-8 shadow-xl space-y-6 max-h-[600px] overflow-y-auto w-full"
-            >
+          <div
+            ref={contentRef}
+            className="md:w-1/2 relative flex flex-col items-center"
+          >
+            <div className="bg-black/60 backdrop-blur-md text-white rounded-xl p-6 md:p-8 shadow-xl space-y-6 max-h-[600px] overflow-y-auto w-full">
               {eglise?.nom && (
                 <h2 className="text-3xl md:text-4xl font-extrabold drop-shadow-lg">
                   {eglise.nom}
@@ -116,11 +101,8 @@ export default function DescriptionSection({ eglise }) {
               )}
             </div>
 
-            {/* Boutons de scroll animés en dessous */}
-            <div
-              ref={scrollBtnWrapperRef}
-              className="flex gap-4 mt-4 opacity-0"
-            >
+            {/* Boutons de scroll */}
+            <div className="flex gap-4 mt-4">
               <button
                 onClick={() => scrollText("up")}
                 className="p-2 bg-white/80 hover:bg-white rounded-full shadow-md"
@@ -151,12 +133,12 @@ export default function DescriptionSection({ eglise }) {
           </div>
 
           {/* Image principale + galerie */}
-          <div className="md:w-1/3 w-full flex flex-col items-center gap-6">
+          <div
+            ref={imageRef}
+            className="md:w-1/3 w-full flex flex-col items-center gap-6"
+          >
             {selectedImage && (
-              <div
-                ref={imageRef}
-                className="w-full h-[200px] md:h-[360px] rounded-lg overflow-hidden shadow-xl relative bg-black"
-              >
+              <div className="w-full h-[200px] md:h-[360px] rounded-lg overflow-hidden shadow-xl relative bg-black">
                 <Image
                   src={getImageUrl(selectedImage)}
                   alt={selectedImage.name || "Image principale"}
@@ -169,7 +151,6 @@ export default function DescriptionSection({ eglise }) {
             {galleryImages.length > 1 && (
               <div className="w-full flex items-center gap-2">
                 <button
-                  ref={leftBtnRef}
                   onClick={() => scrollGallery("left")}
                   className="p-2 rounded-full bg-white/80 hover:bg-white shadow-md"
                 >
@@ -206,7 +187,6 @@ export default function DescriptionSection({ eglise }) {
                 </div>
 
                 <button
-                  ref={rightBtnRef}
                   onClick={() => scrollGallery("right")}
                   className="p-2 rounded-full bg-white/80 hover:bg-white shadow-md"
                 >

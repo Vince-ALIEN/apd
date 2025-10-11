@@ -1,8 +1,9 @@
 "use client";
 
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import gsap from "gsap";
 import DonationButton from "@components/DonationButton";
+import ScrollIndicator from "./ScrollIndicator";
 
 export default function IntroOverlay({
   urlDon,
@@ -15,6 +16,8 @@ export default function IntroOverlay({
   const titleRef = useRef(null);
   const descRef = useRef(null);
   const buttonWrapperRef = useRef(null);
+  const scrollIndicatorRef = useRef(null);
+  const [showScrollIndicator, setShowScrollIndicator] = useState(false);
 
   useEffect(() => {
     if (!start) return;
@@ -39,7 +42,7 @@ export default function IntroOverlay({
       onComplete: () => {
         setTimeout(() => {
           if (onHeaderReady) onHeaderReady();
-        }, 800); // ⏱️ délai ajustable (en ms)
+        }, 800);
       },
     });
 
@@ -71,6 +74,21 @@ export default function IntroOverlay({
       );
     }
 
+    tl.call(
+      () => {
+        setShowScrollIndicator(true);
+      },
+      null,
+      "+=0.2"
+    );
+
+    tl.fromTo(
+      scrollIndicatorRef.current,
+      { opacity: 0, y: 20 },
+      { opacity: 1, y: 0, duration: 0.8 },
+      "-=0.2"
+    );
+
     tl.call(() => {
       document.body.style.overflow = "auto";
     });
@@ -97,7 +115,17 @@ export default function IntroOverlay({
       "-=0.8"
     );
 
-    gsap.set(maskRef.current, { y: 0 }); // ✅ point de départ
+    tl.to(
+      scrollIndicatorRef.current,
+      {
+        opacity: 0,
+        y: -50,
+        duration: 0.6,
+      },
+      "-=0.8"
+    );
+
+    gsap.set(maskRef.current, { x: 0 });
 
     tl.to(maskRef.current, {
       x: window.innerWidth,
@@ -112,12 +140,14 @@ export default function IntroOverlay({
 
   return (
     <>
+      {/* Rideau blanc */}
       <div
         ref={maskRef}
         className="fixed inset-0 z-0 bg-white"
         style={{ clipPath: "inset(100% 0% 0% 0%)" }}
       />
 
+      {/* Contenu */}
       <div className="fixed inset-0 z-10 flex flex-col items-center justify-center text-center px-6 curtain-content">
         <h1
           ref={titleRef}
@@ -147,6 +177,16 @@ export default function IntroOverlay({
             className="mt-8 opacity-0 pointer-events-auto"
           >
             <DonationButton href={urlDon} />
+          </div>
+        )}
+
+        {/* ScrollIndicator fixé en bas */}
+        {showScrollIndicator && (
+          <div
+            ref={scrollIndicatorRef}
+            className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 pointer-events-none"
+          >
+            <ScrollIndicator />
           </div>
         )}
       </div>
