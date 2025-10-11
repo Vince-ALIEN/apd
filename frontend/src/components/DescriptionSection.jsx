@@ -93,7 +93,7 @@ export default function DescriptionSection({ eglise }) {
   };
 
   return (
-    <section ref={sectionRef} className="relative h-[120vh]">
+    <section ref={sectionRef} className="relative h-[200vh]">
       <div className="sticky top-0 h-screen flex items-center justify-center px-6 md:px-32">
         <div className="w-full h-full flex flex-col md:flex-row items-center justify-center gap-12">
           {/* Texte à gauche */}
