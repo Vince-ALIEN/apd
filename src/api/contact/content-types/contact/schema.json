@@ -1,5 +1,4 @@
 {
-  "kind": "collectionType",
   "collectionName": "contacts",
   "info": {
     "singularName": "contact",
@@ -14,6 +13,11 @@
     "email": { "type": "email", "required": true },
     "phone": { "type": "string" },
     "subject": { "type": "string" },
-    "message": { "type": "text", "required": true }
+    "message": { "type": "text", "required": true },
+    "isRead": { "type": "boolean", "default": false },
+    "submittedAt": {
+      "type": "datetime",
+      "default": { "currentTimestamp": true }
+    }
   }
 }

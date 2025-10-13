@@ -8,27 +8,13 @@ export default {
       if (!name || !email || !message) {
         return ctx.badRequest({
           success: false,
-          message: "Le nom, l'email et le message sont requis",
+          message: "Nom, email et message requis.",
         });
       }
 
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailRegex.test(email)) {
-        return ctx.badRequest({ success: false, message: "Email invalide" });
-      }
-
-      if (name.length > 100 || email.length > 100) {
-        return ctx.badRequest({
-          success: false,
-          message: "Les champs nom et email sont trop longs",
-        });
-      }
-
-      if (message.length > 5000) {
-        return ctx.badRequest({
-          success: false,
-          message: "Le message est trop long (maximum 5000 caractères)",
-        });
+        return ctx.badRequest({ success: false, message: "Email invalide." });
       }
 
       const emailSubject = subject
@@ -69,7 +55,7 @@ Date : ${new Date().toLocaleString("fr-FR", { timeZone: "Europe/Paris" })}
       });
 
       const entry = await strapi.entityService.create("api::contact.contact", {
-        data: { name, email, phone, subject, message },
+        data: { name, email, phone, subject, message, isRead: false },
       });
 
       return ctx.send({
@@ -79,7 +65,6 @@ Date : ${new Date().toLocaleString("fr-FR", { timeZone: "Europe/Paris" })}
       });
     } catch (error) {
       strapi.log.error("❌ Erreur lors de la création du contact :", error);
-
       return ctx.internalServerError({
         success: false,
         message: "Une erreur est survenue lors de l'envoi du message.",
