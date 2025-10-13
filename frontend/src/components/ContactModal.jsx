@@ -61,7 +61,7 @@ export default function ContactModal({ isOpen, onClose }) {
 
     try {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/contact`,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/contacts`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -69,8 +69,17 @@ export default function ContactModal({ isOpen, onClose }) {
         }
       );
 
-      const data = await res.json();
-      if (data.success) {
+      let data;
+      try {
+        data = await res.json();
+      } catch {
+        const text = await res.text();
+        console.error("Réponse brute :", text);
+        alert("Erreur serveur : " + text);
+        return;
+      }
+
+      if (res.ok && data.success) {
         setSuccess(true);
         setForm({
           name: "",
@@ -83,8 +92,8 @@ export default function ContactModal({ isOpen, onClose }) {
         alert(data.message || "Erreur lors de l'envoi.");
       }
     } catch (err) {
-      console.error(err);
-      alert("Erreur réseau.");
+      console.error("Erreur réseau :", err);
+      alert("Impossible de contacter le serveur. Vérifiez votre connexion.");
     } finally {
       setLoading(false);
     }
