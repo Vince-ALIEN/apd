@@ -12,7 +12,7 @@ export default [
         "https://eglise-aules.vercel.app",
         "https://apd-7ov8.onrender.com",
       ],
-      methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+      methods: ["GET", "POST", "PUT", "DELETE"],
       headers: ["Content-Type", "Authorization", "Origin", "Accept"],
       credentials: true,
     },
