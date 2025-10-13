@@ -71,7 +71,7 @@ export default function ContactModal({ isOpen, onClose }) {
 
       let data;
       try {
-        data = await res.json(); // ✅ lecture unique
+        data = await res.json();
       } catch (jsonError) {
         console.error("Réponse non-JSON :", jsonError);
         alert("Le serveur a répondu avec un format inattendu.");
