@@ -13,6 +13,7 @@ export default [
       ],
       methods: ["GET", "POST", "PUT", "DELETE"],
       headers: ["Content-Type", "Authorization", "Origin", "Accept"],
+      credentials: true,
     },
   },
   "strapi::poweredBy",
