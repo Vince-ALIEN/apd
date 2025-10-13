@@ -1,22 +1,20 @@
-import nodemailer from "nodemailer";
-
-const transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com",
-  port: 465,
-  secure: true,
-  auth: {
-    user: process.env.GMAIL_USER,
-    pass: process.env.GMAIL_APP_PASSWORD,
+export default ({ env }) => ({
+  email: {
+    config: {
+      provider: "nodemailer",
+      providerOptions: {
+        host: "smtp.gmail.com",
+        port: 465,
+        secure: true,
+        auth: {
+          user: env("GMAIL_USER"),
+          pass: env("GMAIL_APP_PASSWORD"),
+        },
+      },
+      settings: {
+        defaultFrom: `"Église Aules" <${env("GMAIL_USER")}>`,
+        defaultReplyTo: env("GMAIL_USER"),
+      },
+    },
   },
 });
-
-export const sendEmail = async ({ to, subject, text, html, replyTo }) => {
-  return transporter.sendMail({
-    from: `"Église Aules" <${process.env.GMAIL_USER}>`,
-    to,
-    subject,
-    text,
-    html,
-    replyTo,
-  });
-};
