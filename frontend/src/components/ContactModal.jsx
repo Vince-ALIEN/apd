@@ -71,11 +71,10 @@ export default function ContactModal({ isOpen, onClose }) {
 
       let data;
       try {
-        data = await res.json();
-      } catch {
-        const text = await res.text();
-        console.error("Réponse brute :", text);
-        alert("Erreur serveur : " + text);
+        data = await res.json(); // ✅ lecture unique
+      } catch (jsonError) {
+        console.error("Réponse non-JSON :", jsonError);
+        alert("Le serveur a répondu avec un format inattendu.");
         return;
       }
 
