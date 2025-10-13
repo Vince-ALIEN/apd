@@ -63,7 +63,7 @@ export default function ContactModal({ isOpen, onClose }) {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/api/contacts`,
         {
-          method: "OPTIONS",
+          method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(form),
         }
