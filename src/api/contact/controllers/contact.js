@@ -2,34 +2,48 @@ import { sendEmail } from "../../../utils/email.js";
 
 export default {
   async send(ctx) {
-    const { name, email, message } = ctx.request.body;
+    const { name, email, phone, subject, message } = ctx.request.body;
 
     if (!name || !email || !message) {
-      return ctx.badRequest("Tous les champs sont requis.");
+      return ctx.badRequest("Les champs nom, email et message sont requis.");
     }
 
-    // Validation simple
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       return ctx.badRequest("Email invalide.");
     }
 
     try {
-      // Enregistrement dans le singleton
-      await strapi.entityService.update("api::contact.contact", 1, {
-        data: { name, email, message },
-      });
+      const existing = await strapi.entityService.findOne(
+        "api::contact.contact",
+        1
+      );
+      const data = { name, email, phone, subject, message };
 
-      // Envoi de l'email
+      if (!existing) {
+        await strapi.entityService.create("api::contact.contact", { data });
+      } else {
+        await strapi.entityService.update("api::contact.contact", 1, { data });
+      }
+
       await sendEmail({
         to: "eglise.aules@gmail.com",
-        subject: "Nouveau message de contact",
-        text: `Nom: ${name}\nEmail: ${email}\nMessage:\n${message}`,
+        subject: subject || "Nouveau message de contact",
+        text: `
+Nom : ${name}
+Email : ${email}
+Téléphone : ${phone || "—"}
+Sujet : ${subject || "—"}
+
+Message :
+${message}
+        `.trim(),
       });
 
       ctx.send({ success: true });
     } catch (err) {
-      ctx.internalServerError("Erreur lors de l'envoi", err);
+      console.error("Erreur dans contact.send :", err);
+      ctx.internalServerError("Erreur lors de l'envoi.");
     }
   },
 };

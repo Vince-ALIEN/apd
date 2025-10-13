@@ -5,7 +5,13 @@ import gsap from "gsap";
 
 export default function ContactModal({ isOpen, onClose }) {
   const modalRef = useRef(null);
-  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    subject: "",
+    message: "",
+  });
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
 
@@ -53,7 +59,13 @@ export default function ContactModal({ isOpen, onClose }) {
       const data = await res.json();
       if (data.success) {
         setSuccess(true);
-        setForm({ name: "", email: "", message: "" });
+        setForm({
+          name: "",
+          email: "",
+          phone: "",
+          subject: "",
+          message: "",
+        });
       } else {
         alert("Erreur lors de l'envoi.");
       }
@@ -102,6 +114,22 @@ export default function ContactModal({ isOpen, onClose }) {
             placeholder="Votre email"
             className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-black"
             required
+          />
+          <input
+            name="phone"
+            value={form.phone}
+            onChange={handleChange}
+            type="tel"
+            placeholder="Téléphone (facultatif)"
+            className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-black"
+          />
+          <input
+            name="subject"
+            value={form.subject}
+            onChange={handleChange}
+            type="text"
+            placeholder="Sujet (facultatif)"
+            className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-black"
           />
           <textarea
             name="message"
