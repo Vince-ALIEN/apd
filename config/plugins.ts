@@ -15,4 +15,23 @@ export default ({ env }) => ({
       },
     },
   },
+
+  email: {
+    config: {
+      provider: "strapi-provider-email-nodemailer", // ✅ nom du provider correct
+      providerOptions: {
+        host: "smtp.gmail.com",
+        port: 465,
+        secure: true,
+        auth: {
+          user: env("GMAIL_USER"),
+          pass: env("GMAIL_APP_PASSWORD"),
+        },
+      },
+      settings: {
+        defaultFrom: env("GMAIL_USER"),
+        defaultReplyTo: env("GMAIL_USER"),
+      },
+    },
+  },
 });

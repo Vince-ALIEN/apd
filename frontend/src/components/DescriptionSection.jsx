@@ -7,7 +7,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function DescriptionSection({ eglise, triggerRef }) {
+export default function DescriptionSection({ eglise }) {
   const sectionRef = useRef(null);
   const contentRef = useRef(null);
   const imageRef = useRef(null);
@@ -30,38 +30,38 @@ export default function DescriptionSection({ eglise, triggerRef }) {
     const section = sectionRef.current;
     const content = contentRef.current;
     const image = imageRef.current;
-    const trigger = triggerRef?.current;
 
-    if (!section || !content || !image || !trigger) return;
+    if (!section || !content || !image) return;
 
     const tl = gsap.timeline({
       scrollTrigger: {
-        trigger: trigger,
+        trigger: section, // ✅ local trigger
         start: "top top",
-        end: "bottom top",
+        end: "bottom bottom",
         scrub: true,
-        pin: section,
-        anticipatePin: 1,
+        pin: true,
+
+        markers: true, // ← active pour debug si besoin
       },
     });
 
     tl.fromTo(
       content,
       { xPercent: -100, opacity: 0 },
-      { xPercent: 0, opacity: 1, duration: 1.6, ease: "power3.out" }
+      { xPercent: 0, opacity: 1, duration: 1.2 }
     );
 
     tl.fromTo(
       image,
       { xPercent: 100, opacity: 0 },
-      { xPercent: 0, opacity: 1, duration: 1.6, ease: "power3.out" },
-      "-=1.4"
+      { xPercent: 0, opacity: 1, duration: 1.2 },
+      "-=1.0"
     );
 
     return () => {
       tl.scrollTrigger?.kill();
     };
-  }, [triggerRef]);
+  }, []);
 
   const getImageUrl = (img) =>
     img?.formats?.large?.url ?? img?.formats?.medium?.url ?? img?.url;

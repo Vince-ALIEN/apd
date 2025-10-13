@@ -103,6 +103,10 @@ export default function IntroOverlay({
       opacity: 0,
       y: -100,
       duration: 1,
+      onComplete: () => {
+        const curtain = document.querySelector(".curtain-content");
+        if (curtain) curtain.style.display = "none";
+      },
     });
 
     tl.to(
@@ -133,6 +137,9 @@ export default function IntroOverlay({
       duration: 1.2,
       ease: "power2.inOut",
       onComplete: () => {
+        if (maskRef.current) {
+          maskRef.current.style.display = "none";
+        }
         if (onComplete) onComplete();
       },
     });
@@ -140,14 +147,14 @@ export default function IntroOverlay({
 
   return (
     <>
-      {/* Rideau blanc */}
+      {/* 🟤 Rideau blanc */}
       <div
         ref={maskRef}
         className="fixed inset-0 z-0 bg-white"
         style={{ clipPath: "inset(100% 0% 0% 0%)" }}
       />
 
-      {/* Contenu */}
+      {/* ⚪️ Contenu animé */}
       <div className="fixed inset-0 z-10 flex flex-col items-center justify-center text-center px-6 curtain-content">
         <h1
           ref={titleRef}
@@ -180,7 +187,6 @@ export default function IntroOverlay({
           </div>
         )}
 
-        {/* ScrollIndicator fixé en bas */}
         {showScrollIndicator && (
           <div
             ref={scrollIndicatorRef}
