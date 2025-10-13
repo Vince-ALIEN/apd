@@ -1,5 +1,5 @@
 {
-  "kind": "singleType",
+  "kind": "collectionType",
   "collectionName": "contacts",
   "info": {
     "singularName": "contact",
@@ -7,24 +7,14 @@
     "displayName": "Contact"
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
-  "pluginOptions": {},
   "attributes": {
-    "name": {
-      "type": "string"
-    },
-    "email": {
-      "type": "email"
-    },
-    "phone": {
-      "type": "string"
-    },
-    "subject": {
-      "type": "string"
-    },
-    "message": {
-      "type": "text"
-    }
+    "name": { "type": "string", "required": true },
+    "email": { "type": "email", "required": true },
+    "phone": { "type": "string" },
+    "subject": { "type": "string" },
+    "message": { "type": "text", "required": true },
+    "submittedAt": { "type": "datetime" }
   }
 }

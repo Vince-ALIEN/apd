@@ -3,7 +3,7 @@ export default {
     {
       method: "POST",
       path: "/contact/send",
-      handler: "contact.send",
+      handler: "api::contact.contact.send",
       config: {
         auth: false,
         policies: [],
