@@ -10,6 +10,7 @@ export default [
         "http://192.168.1.101:3000",
         "https://apd-three.vercel.app",
         "https://eglise-aules.vercel.app",
+        "https://apd-7ov8.onrender.com",
       ],
       methods: ["GET", "POST", "PUT", "DELETE"],
       headers: ["Content-Type", "Authorization", "Origin", "Accept"],
