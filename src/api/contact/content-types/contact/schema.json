@@ -14,7 +14,6 @@
     "email": { "type": "email", "required": true },
     "phone": { "type": "string" },
     "subject": { "type": "string" },
-    "message": { "type": "text", "required": true },
-    "submittedAt": { "type": "datetime" }
+    "message": { "type": "text", "required": true }
   }
 }

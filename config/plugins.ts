@@ -1,4 +1,24 @@
 export default ({ env }) => ({
+  email: {
+    config: {
+      provider: "strapi-provider-email-nodemailer",
+      providerOptions: {
+        host: "smtp.gmail.com",
+        port: 465,
+        secure: true,
+        auth: {
+          user: env("GMAIL_USER"),
+          pass: env("GMAIL_APP_PASSWORD"),
+        },
+        debug: true, // pour voir les logs SMTP
+      },
+      settings: {
+        defaultFrom: env("GMAIL_USER"),
+        defaultReplyTo: env("GMAIL_USER"),
+      },
+    },
+  },
+
   upload: {
     config: {
       provider: "cloudinary",
@@ -8,29 +28,8 @@ export default ({ env }) => ({
         api_secret: env("CLOUDINARY_SECRET"),
       },
       actionOptions: {
-        upload: {
-          resource_type: "auto",
-        },
+        upload: { resource_type: "auto" },
         delete: {},
-      },
-    },
-  },
-
-  email: {
-    config: {
-      provider: "strapi-provider-email-nodemailer", // ✅ nom du provider correct
-      providerOptions: {
-        host: "smtp.gmail.com",
-        port: 465,
-        secure: true,
-        auth: {
-          user: env("GMAIL_USER"),
-          pass: env("GMAIL_APP_PASSWORD"),
-        },
-      },
-      settings: {
-        defaultFrom: env("GMAIL_USER"),
-        defaultReplyTo: env("GMAIL_USER"),
       },
     },
   },

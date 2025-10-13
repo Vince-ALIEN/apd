@@ -5,6 +5,8 @@ import gsap from "gsap";
 
 export default function ContactModal({ isOpen, onClose }) {
   const modalRef = useRef(null);
+  const successRef = useRef(null);
+
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -12,6 +14,7 @@ export default function ContactModal({ isOpen, onClose }) {
     subject: "",
     message: "",
   });
+
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
 
@@ -37,6 +40,16 @@ export default function ContactModal({ isOpen, onClose }) {
     };
   }, [isOpen]);
 
+  useEffect(() => {
+    if (success && successRef.current) {
+      gsap.fromTo(
+        successRef.current,
+        { opacity: 0, y: 10 },
+        { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }
+      );
+    }
+  }, [success]);
+
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -48,7 +61,7 @@ export default function ContactModal({ isOpen, onClose }) {
 
     try {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/contact/send`,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/contacts`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -67,7 +80,7 @@ export default function ContactModal({ isOpen, onClose }) {
           message: "",
         });
       } else {
-        alert("Erreur lors de l'envoi.");
+        alert(data.message || "Erreur lors de l'envoi.");
       }
     } catch (err) {
       console.error(err);
@@ -148,7 +161,10 @@ export default function ContactModal({ isOpen, onClose }) {
             {loading ? "Envoi en cours..." : "Envoyer le message"}
           </button>
           {success && (
-            <p className="text-green-600 text-center text-sm mt-2">
+            <p
+              ref={successRef}
+              className="text-green-600 text-center text-sm mt-2"
+            >
               ✅ Message envoyé avec succès !
             </p>
           )}

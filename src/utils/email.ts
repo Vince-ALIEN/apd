@@ -10,20 +10,13 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-/**
- * Envoie un email via Gmail SMTP
- * @param {Object} options
- * @param {string} options.to - Destinataire
- * @param {string} options.subject - Sujet de l'email
- * @param {string} options.text - Contenu brut
- * @param {string} [options.html] - Contenu HTML (optionnel)
- */
-export const sendEmail = async ({ to, subject, text, html }) => {
+export const sendEmail = async ({ to, subject, text, html, replyTo }) => {
   return transporter.sendMail({
     from: `"Église Aules" <${process.env.GMAIL_USER}>`,
     to,
     subject,
     text,
     html,
+    replyTo,
   });
 };
