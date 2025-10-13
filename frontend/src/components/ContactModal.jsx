@@ -41,11 +41,14 @@ export default function ContactModal({ isOpen, onClose }) {
     setSuccess(false);
 
     try {
-      const res = await fetch("http://localhost:1337/api/contact/send", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
-      });
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/contact/send`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(form),
+        }
+      );
 
       const data = await res.json();
       if (data.success) {
