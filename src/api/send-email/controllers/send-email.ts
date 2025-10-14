@@ -7,6 +7,13 @@ export default {
     }
 
     try {
+      strapi.log.info("Tentative d'envoi d'email avec :", {
+        to: "eglise.aules@gmail.com",
+        from: email,
+        replyTo: email,
+        subject: subject || "Message de contact",
+      });
+
       await strapi.plugins["email"].services.email.send({
         to: "eglise.aules@gmail.com",
         from: email,
@@ -21,10 +28,16 @@ ${message}
         `,
       });
 
+      strapi.log.info("Email envoyé avec succès");
       ctx.send({ success: true });
-    } catch (err) {
-      strapi.log.error("Erreur d’envoi d’email :", err);
-      ctx.internalServerError("Échec de l’envoi.");
+    } catch (err: any) {
+      strapi.log.error("Erreur d'envoi d'email :", err);
+      strapi.log.error("Détails erreur :", {
+        message: err.message,
+        code: err.code,
+        response: err.response,
+      });
+      ctx.internalServerError("Échec de l'envoi.");
     }
   },
 };
