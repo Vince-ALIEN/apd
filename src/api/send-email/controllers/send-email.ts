@@ -1,5 +1,3 @@
-import { Strapi } from "@strapi/strapi";
-
 export default {
   async send(ctx: any) {
     const { name, email, phone, subject, message } = ctx.request.body;
