@@ -1,8 +1,5 @@
 "use client";
 
-export default function AddressSection({ eglise }) {}
-"use client";
-
 import { useEffect, useRef } from "react";
 import Image from "next/image";
 

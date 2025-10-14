@@ -78,7 +78,7 @@ export default function ContactModal({ isOpen, onClose }) {
         return;
       }
 
-      if (res.ok && data.success) {
+      if (res.ok && data?.data?.id) {
         setSuccess(true);
         setForm({
           name: "",

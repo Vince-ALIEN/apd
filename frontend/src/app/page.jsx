@@ -15,6 +15,7 @@ import DonationButton from "@components/DonationButton";
 import PartnerSection from "@components/PartnerSection";
 import ContactModal from "@components/ContactModal";
 import Footer from "@components/Footer";
+import BlogSection from "@components/BlogSection";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -101,6 +102,10 @@ export default function Home() {
           {partenaires && partenaires.length > 0 && (
             <PartnerSection partners={partenaires} />
           )}
+          <div className="flex-grow">
+            <BlogSection API_URL={process.env.NEXT_PUBLIC_API_URL} limit={4} />
+          </div>
+
           {parametres_site?.url_don && (
             <div className="fixed bottom-10 left-1/2 -translate-x-1/2 z-50 pointer-events-auto">
               <DonationButton href={parametres_site.url_don} />

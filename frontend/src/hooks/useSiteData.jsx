@@ -4,7 +4,7 @@ export function useSiteData(API_URL) {
   const [eglise, setEglise] = useState(null);
   const [accueil, setAccueil] = useState(null);
   const [parametres_site, setParametres_site] = useState(null);
-  const [articles, setArticles] = useState(null);
+  const [articles, setArticles] = useState([]);
   const [interviews, setInterviews] = useState(null);
   const [partenaires, setPartenaires] = useState(null);
   const [error, setError] = useState(null);
@@ -24,7 +24,7 @@ export function useSiteData(API_URL) {
           fetch(`${API_URL}/api/eglise?populate=*`),
           fetch(`${API_URL}/api/accueil?populate=*`),
           fetch(`${API_URL}/api/parametres-site?populate=*`),
-          fetch(`${API_URL}/api/articles?populate=*`),
+          fetch(`${API_URL}/api/articles?populate=image`),
           fetch(`${API_URL}/api/interviews?populate=*`),
           fetch(`${API_URL}/api/partenaires?populate=*`),
         ]);
@@ -45,10 +45,18 @@ export function useSiteData(API_URL) {
           partenairesRes.json(),
         ]);
 
+        const publishedSortedArticles = (articlesJson?.data ?? [])
+          .filter((a) => a?.publishedAt)
+          .sort((a, b) => {
+            const dateA = new Date(a.date_publication);
+            const dateB = new Date(b.date_publication);
+            return dateB - dateA;
+          });
+
         setEglise(egliseJson?.data ?? null);
         setAccueil(accueilJson?.data ?? null);
         setParametres_site(siteJson?.data ?? null);
-        setArticles(articlesJson?.data ?? null);
+        setArticles(publishedSortedArticles);
         setInterviews(interviewsJson?.data ?? null);
         setPartenaires(partenairesJson?.data ?? null);
       } catch (err) {
