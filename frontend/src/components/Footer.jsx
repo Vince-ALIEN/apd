@@ -7,10 +7,12 @@ export default function Footer({ site }) {
   const reseaux = site?.reseaux_sociaux ?? [];
 
   return (
-    <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 px-4">
-      <LogoBlock logoUrl={logoUrl} />
-      <SocialBlock reseaux={reseaux} />
-    </div>
+    <footer className="bg-black text-white px-6 py-16 min-h-[150px]">
+      <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center md:items-start justify-between gap-10">
+        <LogoBlock logoUrl={logoUrl} />
+        <SocialBlock reseaux={reseaux} />
+      </div>
+    </footer>
   );
 }
 
@@ -21,8 +23,8 @@ function LogoBlock({ logoUrl }) {
         <Image
           src={logoUrl}
           alt="Logo footer"
-          width={200}
-          height={40}
+          width={300}
+          height={100}
           className="mb-4"
         />
       )}
@@ -37,7 +39,7 @@ function SocialBlock({ reseaux }) {
   return (
     <div className="flex flex-col items-center md:items-end text-center md:text-right">
       <h3 className="text-lg font-semibold mb-4">Suivez-nous</h3>
-      <div className="space-y-2">
+      <div className="flex flex-col space-y-2">
         {reseaux.length > 0 ? (
           reseaux.map((reseau, index) => (
             <a

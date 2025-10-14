@@ -31,7 +31,10 @@ export default function PartnerSection({ partners }) {
   }, []);
 
   return (
-    <section ref={sectionRef} className="py-16 px-6 md:px-12 bg-white">
+    <section
+      ref={sectionRef}
+      className="min-h-screen py-16 px-6 md:px-12 bg-white flex items-center"
+    >
       <div className="max-w-6xl mx-auto text-center">
         <h2 className="text-3xl md:text-4xl font-extrabold mb-12 text-gray-800">
           Nos partenaires
@@ -55,13 +58,14 @@ export default function PartnerSection({ partners }) {
                 className="block transition-transform hover:scale-105"
                 ref={(el) => (logosRef.current[index] = el)}
               >
-                <div className="relative w-full h-24 sm:h-32 md:h-36 bg-gray-100 rounded-lg overflow-hidden shadow-md">
+                <div className="flex items-center justify-center bg-gray-100 rounded-lg shadow-md aspect-[4/3] overflow-hidden">
                   {imageUrl && (
                     <Image
                       src={imageUrl}
                       alt={logo?.name || "Logo partenaire"}
-                      fill
-                      className="object-contain p-4"
+                      width={200}
+                      height={150}
+                      className="object-contain max-h-full max-w-full p-4"
                     />
                   )}
                 </div>

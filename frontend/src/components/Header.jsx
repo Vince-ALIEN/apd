@@ -32,12 +32,16 @@ export default function Header({
   ];
 
   const handleNavigation = (label) => {
-    const isOnHome = window.location.pathname === "/";
-    if (isOnHome) {
-      scrollToSection?.(label);
+    if (label === "blog") {
+      router.push("/blog"); // ✅ redirection vers la page blog
     } else {
-      sessionStorage.setItem("scrollFromNavigation", "true");
-      router.push(`/#${label}`);
+      const isOnHome = window.location.pathname === "/";
+      if (isOnHome) {
+        scrollToSection?.(label);
+      } else {
+        sessionStorage.setItem("scrollFromNavigation", "true");
+        router.push(`/#${label}`);
+      }
     }
     setMenuOpen(false);
   };

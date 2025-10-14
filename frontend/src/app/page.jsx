@@ -14,6 +14,7 @@ import InterviewSection from "@components/InterviewSection";
 import DonationButton from "@components/DonationButton";
 import PartnerSection from "@components/PartnerSection";
 import ContactModal from "@components/ContactModal";
+import Footer from "@components/Footer";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -105,6 +106,7 @@ export default function Home() {
               <DonationButton href={parametres_site.url_don} />
             </div>
           )}
+          <Footer site={parametres_site} />
         </>
       )}
 

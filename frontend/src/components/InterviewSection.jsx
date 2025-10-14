@@ -1,7 +1,6 @@
 "use client";
 
 import { useLayoutEffect, useRef } from "react";
-import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -29,25 +28,25 @@ export default function InterviewSection({ block }) {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: section,
-        start: "top top ",
-        end: "bottom bottom",
-        scrub: true,
+        start: "top top",
+        end: "bottom+=100% bottom", // ⏳ durée plus courte pour libérer le scroll
+        scrub: 1.5,
         pin: pinWrapper,
         anticipatePin: 1,
-        markers: true,
+        markers: false,
       },
     });
 
     tl.fromTo(
       curtain,
       { y: "100%" },
-      { y: "0%", duration: 1.2, ease: "power2.out" }
+      { y: "0%", duration: 2.5, ease: "power2.out" }
     );
 
     tl.fromTo(
       content,
       { x: "300%", opacity: 0 },
-      { x: "0%", opacity: 1, duration: 2, ease: "power4.out" }
+      { x: "0%", opacity: 1, duration: 3, ease: "power4.out" }
     );
 
     tl.to(content, {
@@ -59,14 +58,14 @@ export default function InterviewSection({ block }) {
     tl.to(content, {
       x: "-300%",
       opacity: 0,
-      duration: 2,
+      duration: 3,
       ease: "power2.inOut",
     });
 
     tl.to(curtain, {
       y: "100%",
       opacity: 0,
-      duration: 1.2,
+      duration: 2.5,
       ease: "power2.inOut",
     });
 
