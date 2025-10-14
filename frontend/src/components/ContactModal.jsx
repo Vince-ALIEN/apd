@@ -20,7 +20,6 @@ export default function ContactModal({ isOpen, onClose }) {
 
   useEffect(() => {
     document.body.style.overflow = isOpen ? "hidden" : "";
-
     if (isOpen && modalRef.current) {
       gsap.fromTo(
         modalRef.current,
@@ -34,7 +33,6 @@ export default function ContactModal({ isOpen, onClose }) {
         }
       );
     }
-
     return () => {
       document.body.style.overflow = "";
     };
@@ -61,24 +59,18 @@ export default function ContactModal({ isOpen, onClose }) {
 
     try {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/contacts`,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/send-email`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ data: form }),
+          body: JSON.stringify(form),
         }
       );
 
-      let data;
-      try {
-        data = await res.json();
-      } catch (jsonError) {
-        console.error("Réponse non-JSON :", jsonError);
-        alert("Le serveur a répondu avec un format inattendu.");
-        return;
-      }
+      const data = await res.json();
+      console.log("Réponse Strapi :", data);
 
-      if (res.ok && data?.data?.id) {
+      if (res.ok && data.success) {
         setSuccess(true);
         setForm({
           name: "",
@@ -88,11 +80,11 @@ export default function ContactModal({ isOpen, onClose }) {
           message: "",
         });
       } else {
-        alert(data.message || "Erreur lors de l'envoi.");
+        alert("Erreur lors de l'envoi.");
       }
     } catch (err) {
       console.error("Erreur réseau :", err);
-      alert("Impossible de contacter le serveur. Vérifiez votre connexion.");
+      alert("Impossible de contacter le serveur.");
     } finally {
       setLoading(false);
     }
@@ -124,8 +116,8 @@ export default function ContactModal({ isOpen, onClose }) {
             onChange={handleChange}
             type="text"
             placeholder="Votre nom"
-            className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-black"
             required
+            className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-black"
           />
           <input
             name="email"
@@ -133,8 +125,8 @@ export default function ContactModal({ isOpen, onClose }) {
             onChange={handleChange}
             type="email"
             placeholder="Votre email"
-            className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-black"
             required
+            className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-black"
           />
           <input
             name="phone"
@@ -158,8 +150,8 @@ export default function ContactModal({ isOpen, onClose }) {
             onChange={handleChange}
             placeholder="Votre message"
             rows={5}
-            className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-black resize-none"
             required
+            className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-black resize-none"
           />
           <button
             type="submit"

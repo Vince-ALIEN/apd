@@ -436,38 +436,6 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiContactContact extends Struct.CollectionTypeSchema {
-  collectionName: 'contacts';
-  info: {
-    displayName: 'Contacts';
-    pluralName: 'contacts';
-    singularName: 'contact';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    email: Schema.Attribute.Email & Schema.Attribute.Required;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::contact.contact'
-    > &
-      Schema.Attribute.Private;
-    message: Schema.Attribute.Text & Schema.Attribute.Required;
-    name: Schema.Attribute.String & Schema.Attribute.Required;
-    phone: Schema.Attribute.String;
-    publishedAt: Schema.Attribute.DateTime;
-    subject: Schema.Attribute.String;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
 export interface ApiEgliseEglise extends Struct.SingleTypeSchema {
   collectionName: 'eglises';
   info: {
@@ -1114,7 +1082,6 @@ declare module '@strapi/strapi' {
       'admin::user': AdminUser;
       'api::accueil.accueil': ApiAccueilAccueil;
       'api::article.article': ApiArticleArticle;
-      'api::contact.contact': ApiContactContact;
       'api::eglise.eglise': ApiEgliseEglise;
       'api::interview.interview': ApiInterviewInterview;
       'api::parametres-site.parametres-site': ApiParametresSiteParametresSite;
