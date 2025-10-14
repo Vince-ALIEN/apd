@@ -4,8 +4,8 @@ export default ({ env }) => ({
       provider: "nodemailer",
       providerOptions: {
         host: env("SMTP_HOST", "smtp.gmail.com"),
-        port: env.int("SMTP_PORT", 587),
-        secure: false,
+        port: env.int("SMTP_PORT", 465),
+        secure: true,
         auth: {
           user: env("GMAIL_USER"),
           pass: env("GMAIL_APP_PASSWORD"),
