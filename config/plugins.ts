@@ -1,20 +1,10 @@
 export default ({ env }) => ({
   email: {
     config: {
-      provider: "strapi-provider-email-nodemailer",
+      provider: "sendmail",
       providerOptions: {
-        host: "smtp.gmail.com",
-        port: 465,
-        secure: true,
-        auth: {
-          user: env("GMAIL_USER"),
-          pass: env("GMAIL_APP_PASSWORD"),
-        },
-        debug: true, // pour voir les logs SMTP
-      },
-      settings: {
-        defaultFrom: env("GMAIL_USER"),
-        defaultReplyTo: env("GMAIL_USER"),
+        from: env("GMAIL_USER"),
+        response_email: env("GMAIL_USER"),
       },
     },
   },
