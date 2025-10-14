@@ -1,10 +1,19 @@
 export default ({ env }) => ({
   email: {
     config: {
-      provider: "sendmail",
+      provider: "nodemailer",
       providerOptions: {
-        from: env("GMAIL_USER"),
-        response_email: env("GMAIL_USER"),
+        host: env("SMTP_HOST", "smtp.gmail.com"),
+        port: env.int("SMTP_PORT", 587),
+        secure: false,
+        auth: {
+          user: env("GMAIL_USER"),
+          pass: env("GMAIL_APP_PASSWORD"),
+        },
+      },
+      settings: {
+        defaultFrom: env("GMAIL_USER"),
+        defaultReplyTo: env("GMAIL_USER"),
       },
     },
   },
