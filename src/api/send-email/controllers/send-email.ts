@@ -10,7 +10,7 @@ export default {
 
     try {
       await strapi.plugins["email"].services.email.send({
-        to: "destinataire@example.com", // ✅ remplace par ton adresse de réception
+        to: "eglise.aules@gmail.com",
         from: email,
         replyTo: email,
         subject: subject || "Message de contact",
