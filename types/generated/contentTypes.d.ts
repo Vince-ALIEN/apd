@@ -450,7 +450,11 @@ export interface ApiEgliseEglise extends Struct.SingleTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    description: Schema.Attribute.Blocks;
+    description: Schema.Attribute.Blocks & Schema.Attribute.Required;
+    image_principale: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    > &
+      Schema.Attribute.Required;
     images: Schema.Attribute.Media<
       'images' | 'files' | 'videos' | 'audios',
       true
@@ -462,7 +466,7 @@ export interface ApiEgliseEglise extends Struct.SingleTypeSchema {
       'api::eglise.eglise'
     > &
       Schema.Attribute.Private;
-    nom: Schema.Attribute.String;
+    nom: Schema.Attribute.String & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
     style_architectural: Schema.Attribute.Blocks;
     updatedAt: Schema.Attribute.DateTime;

@@ -12,10 +12,23 @@
   "pluginOptions": {},
   "attributes": {
     "nom": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "description": {
-      "type": "blocks"
+      "type": "blocks",
+      "required": true
+    },
+    "image_principale": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
     },
     "images": {
       "type": "media",
