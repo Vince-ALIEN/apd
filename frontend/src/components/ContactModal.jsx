@@ -48,6 +48,16 @@ export default function ContactModal({ isOpen, onClose }) {
     }
   }, [success]);
 
+  useEffect(() => {
+    if (success) {
+      const timer = setTimeout(() => {
+        onClose();
+        setSuccess(false);
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [success]);
+
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -80,7 +90,7 @@ export default function ContactModal({ isOpen, onClose }) {
           message: "",
         });
       } else {
-        alert("Erreur lors de l'envoi.");
+        alert(data.error || "Erreur lors de l'envoi.");
       }
     } catch (err) {
       console.error("Erreur réseau :", err);
