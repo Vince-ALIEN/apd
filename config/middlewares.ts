@@ -1,6 +1,5 @@
 export default [
   "strapi::logger",
-  "strapi::errors",
   "strapi::security",
   {
     name: "strapi::cors",
@@ -12,13 +11,19 @@ export default [
         "https://eglise-aules.vercel.app",
         "https://apd-7ov8.onrender.com",
       ],
-      methods: ["GET", "POST", "PUT", "DELETE"],
-      headers: ["Content-Type", "Authorization", "Origin", "Accept"],
+      methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+      headers: [
+        "Content-Type",
+        "Authorization",
+        "Origin",
+        "Accept",
+        "X-Requested-With",
+        "Access-Control-Allow-Credentials",
+      ],
       credentials: true,
+      maxAge: 86400, // 24h
     },
   },
-  "strapi::poweredBy",
-  "strapi::query",
   {
     name: "strapi::body",
     config: {
@@ -30,6 +35,9 @@ export default [
       },
     },
   },
+  "strapi::errors",
+  "strapi::poweredBy",
+  "strapi::query",
   "strapi::session",
   "strapi::favicon",
   "strapi::public",
