@@ -13,29 +13,37 @@ export default function PartnerSection({ partners }) {
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.from(logosRef.current, {
-        opacity: 0,
-        y: 50,
-        stagger: 0.1,
-        duration: 1,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 80%",
-          toggleActions: "play none none reverse",
-        },
+      logosRef.current.forEach((el, i) => {
+        gsap.fromTo(
+          el,
+          { opacity: 0, y: 50 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: "power2.out",
+            delay: i * 0.15,
+            scrollTrigger: {
+              trigger: el,
+              start: "top 90%",
+              toggleActions: "play none none reverse",
+            },
+          }
+        );
       });
     }, sectionRef);
 
     return () => ctx.revert();
   }, []);
 
+  if (!partners || partners.length === 0) return null;
+
   return (
     <section
       ref={sectionRef}
-      className="min-h-screen py-16 px-6 md:px-12 bg-white flex items-center"
+      className="py-16 px-6 md:px-12 bg-white flex items-center justify-center"
     >
-      <div className="max-w-6xl mx-auto text-center">
+      <div className="max-w-6xl w-full mx-auto text-center">
         <h2 className="text-3xl md:text-4xl font-extrabold mb-12 text-gray-800">
           Nos partenaires
         </h2>

@@ -9,9 +9,7 @@ gsap.registerPlugin(ScrollTrigger);
 export default function InterviewSection({ block }) {
   const sectionRef = useRef(null);
   const pinWrapperRef = useRef(null);
-  const contentRef = useRef(null);
-  const videoRef = useRef(null);
-  const curtainRef = useRef(null);
+  const animatedWrapperRef = useRef(null);
 
   const titre = block?.titre;
   const description = block?.description?.[0]?.children?.[0]?.text;
@@ -20,16 +18,15 @@ export default function InterviewSection({ block }) {
   useLayoutEffect(() => {
     const section = sectionRef.current;
     const pinWrapper = pinWrapperRef.current;
-    const content = contentRef.current;
-    const curtain = curtainRef.current;
+    const animatedWrapper = animatedWrapperRef.current;
 
-    if (!section || !pinWrapper || !content || !curtain) return;
+    if (!section || !pinWrapper || !animatedWrapper) return;
 
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: section,
         start: "top top",
-        end: "bottom+=100% bottom", // ⏳ durée plus courte pour libérer le scroll
+        end: "bottom bottom",
         scrub: 1.5,
         pin: pinWrapper,
         anticipatePin: 1,
@@ -38,70 +35,39 @@ export default function InterviewSection({ block }) {
     });
 
     tl.fromTo(
-      curtain,
-      { y: "100%" },
-      { y: "0%", duration: 2.5, ease: "power2.out" }
-    );
-
-    tl.fromTo(
-      content,
+      animatedWrapper,
       { x: "300%", opacity: 0 },
-      { x: "0%", opacity: 1, duration: 3, ease: "power4.out" }
+      { x: "0%", opacity: 1, duration: 10, ease: "power4.out" }
     );
-
-    tl.to(content, {
-      x: "0%",
-      opacity: 1,
-      duration: 10,
-    });
-
-    tl.to(content, {
-      x: "-300%",
-      opacity: 0,
-      duration: 3,
-      ease: "power2.inOut",
-    });
-
-    tl.to(curtain, {
-      y: "100%",
-      opacity: 0,
-      duration: 2.5,
-      ease: "power2.inOut",
-    });
 
     return () => {
       tl.scrollTrigger?.kill();
     };
   }, []);
 
+  const hasContent = titre || videoUrl || description;
+  if (!hasContent) return null;
+
   return (
-    <section ref={sectionRef} className="relative h-[120vh]">
+    <section ref={sectionRef} className="relative">
       <div
         ref={pinWrapperRef}
-        className="sticky top-0 h-screen flex items-center justify-center text-white px-6 py-24 relative overflow-hidden"
+        className="sticky top-0 min-h-screen flex items-center justify-center px-6 py-24 relative overflow-hidden"
       >
-        {/* 🟤 Rideau noir en arrière-plan */}
+        {/* 🟤 Bloc animé avec fond noir */}
         <div
-          ref={curtainRef}
-          className="absolute inset-0 bg-black z-10 pointer-events-none"
-          style={{ transform: "translateY(100%)" }}
-        />
-
-        {/* ⚪️ Contenu animé au-dessus */}
-        <div
-          ref={contentRef}
-          className="text-center flex flex-col items-center justify-center w-full max-w-4xl z-20 relative"
+          ref={animatedWrapperRef}
+          className="text-white bg-black text-center flex flex-col items-center justify-center w-full max-w-4xl z-10 relative space-y-8 px-6 py-12 rounded-xl shadow-2xl"
         >
           {titre && (
-            <h2 className="text-3xl md:text-4xl font-extrabold mb-8 drop-shadow-lg">
+            <h2 className="text-3xl md:text-4xl font-extrabold drop-shadow-lg">
               {titre}
             </h2>
           )}
 
           {videoUrl && (
-            <div className="w-full aspect-video mb-8 rounded-xl overflow-hidden shadow-xl">
+            <div className="w-full aspect-video rounded-xl overflow-hidden shadow-xl">
               <video
-                ref={videoRef}
                 src={videoUrl}
                 controls
                 playsInline

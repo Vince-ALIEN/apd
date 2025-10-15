@@ -1,63 +1,28 @@
 "use client";
 
-export default function AddressSection({ eglise }) {}
-"use client";
+export default function AddressSection({ eglise }) {
+  const localisation = eglise?.localisation?.[0];
+  const adresse = localisation
+    ? `${localisation.ville}, ${localisation.region}, ${localisation.pays}`
+    : null;
 
-import { useEffect, useRef } from "react";
-import Image from "next/image";
+  if (!adresse) return null;
 
-export default function GallerySection({ eglise }) {
-  const images = eglise?.images ?? [];
-  const galleryRef = useRef(null);
-
-  const getImageUrl = (img) =>
-    img?.formats?.large?.url ?? img?.formats?.medium?.url ?? img?.url;
-
-  useEffect(() => {
-    const container = galleryRef.current;
-    if (!container || images.length <= 1) return;
-
-    let scrollAmount = 0;
-    const maxScroll = container.scrollWidth - container.clientWidth;
-
-    const interval = setInterval(() => {
-      scrollAmount += 1;
-      if (scrollAmount >= maxScroll) scrollAmount = 0;
-      container.scrollTo({ left: scrollAmount, behavior: "smooth" });
-    }, 30); // ← vitesse du scroll
-
-    return () => clearInterval(interval);
-  }, [images]);
-
-  if (images.length === 0) return null;
+  const mapUrl = `https://www.google.com/maps?q=${encodeURIComponent(adresse)}&output=embed`;
 
   return (
-    <section className="bg-gray-100 py-20 px-6 md:px-32">
-      <div className="max-w-6xl mx-auto">
-        <h2 className="text-3xl md:text-4xl font-extrabold text-gray-800 mb-12 text-center">
-          Galerie
-        </h2>
-
-        <div
-          ref={galleryRef}
-          className="overflow-x-auto whitespace-nowrap no-scrollbar scroll-smooth"
-        >
-          <div className="inline-flex gap-6 px-2 py-2">
-            {images.map((img, index) => (
-              <div
-                key={index}
-                className="relative w-[160px] h-[120px] md:w-[240px] md:h-[180px] rounded-lg overflow-hidden shadow-md flex-shrink-0 group"
-              >
-                <Image
-                  src={getImageUrl(img)}
-                  alt={img.name || `Image ${index + 1}`}
-                  fill
-                  className="object-cover transition-transform duration-300 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              </div>
-            ))}
-          </div>
+    <section className="py-12 px-6 md:px-32 bg-white">
+      <div className="max-w-4xl mx-auto text-center">
+        <h2 className="text-2xl font-bold text-gray-800 mb-4">Localisation</h2>
+        <p className="text-lg text-gray-600 mb-6">{adresse}</p>
+        <div className="w-full h-[400px] rounded-lg overflow-hidden shadow-md">
+          <iframe
+            title="Carte Google"
+            src={mapUrl}
+            style={{ border: "none", width: "100%", height: "100%" }}
+            allowFullScreen
+            loading="lazy"
+          />
         </div>
       </div>
     </section>

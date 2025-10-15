@@ -16,6 +16,8 @@ import PartnerSection from "@components/PartnerSection";
 import ContactModal from "@components/ContactModal";
 import Footer from "@components/Footer";
 import BlogSection from "@components/BlogSection";
+import AddressSection from "@components/AddressSection";
+import GallerySection from "@components/GallerySection";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -97,11 +99,19 @@ export default function Home() {
 
       {showContent && (
         <>
-          {eglise && <DescriptionSection eglise={eglise} />}
+          {eglise && (
+            <>
+              <DescriptionSection eglise={eglise} />
+              <GallerySection eglise={eglise} />
+              <AddressSection eglise={eglise} />
+            </>
+          )}
+
           {interviewBlock && <InterviewSection block={interviewBlock} />}
           {partenaires && partenaires.length > 0 && (
             <PartnerSection partners={partenaires} />
           )}
+
           <div className="flex-grow">
             <BlogSection API_URL={process.env.NEXT_PUBLIC_API_URL} limit={4} />
           </div>
@@ -111,6 +121,7 @@ export default function Home() {
               <DonationButton href={parametres_site.url_don} />
             </div>
           )}
+
           <Footer site={parametres_site} />
         </>
       )}
