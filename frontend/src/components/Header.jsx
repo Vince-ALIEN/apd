@@ -24,10 +24,9 @@ export default function Header({
 
   const navLinks = [
     { label: "Accueil", id: "accueil" },
-    { label: "L'église", id: "eglise" },
-    { label: "Vos dons", id: "interview" },
+
     { label: "Blog", id: "blog" },
-    { label: "Partenaires", id: "partenaires" },
+
     { label: "Contact", id: "contact" },
   ];
 

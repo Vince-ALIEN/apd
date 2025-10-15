@@ -23,18 +23,14 @@ async function getEgliseData() {
 
 export default async function BlogIndexPage() {
   const site = await getSiteData();
-  const eglise = await getEgliseData();
 
   return (
     <main className="flex flex-col min-h-screen bg-white">
       <Header site={site} API_URL={process.env.NEXT_PUBLIC_API_URL} />
 
-      <div className="flex-grow min-h-screen bg-white">
+      {/* Marge pour éviter que le logo coupe le contenu */}
+      <div className="flex-grow min-h-screen bg-white pt-10">
         <BlogSection API_URL={process.env.NEXT_PUBLIC_API_URL} />
-      </div>
-
-      <div className="min-h-screen bg-white">
-        <GallerySection eglise={eglise} />
       </div>
 
       <Footer site={site} API_URL={process.env.NEXT_PUBLIC_API_URL} />

@@ -5,7 +5,7 @@ import Image from "next/image";
 
 export default function DescriptionSection({ eglise }) {
   const [selectedImage, setSelectedImage] = useState(
-    eglise?.images?.[0] ?? null
+    eglise?.image_principale ?? null
   );
 
   const getImageUrl = (img) =>
@@ -36,7 +36,7 @@ export default function DescriptionSection({ eglise }) {
           </div>
         </div>
 
-        {/* Image à droite */}
+        {/* Image principale à droite */}
         {selectedImage && (
           <div className="md:w-1/2 w-full flex justify-center">
             <div className="relative w-full aspect-[4/3] rounded-lg overflow-hidden shadow-xl bg-black">
