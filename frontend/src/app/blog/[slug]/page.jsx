@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import Header from "@components/Header";
+import FloatingHeader from "@components/FloatingHeader";
 import Footer from "@components/Footer";
 
 async function getArticle(slug) {
@@ -38,7 +38,7 @@ export default async function ArticlePage({ params }) {
 
   return (
     <>
-      <Header site={site} API_URL={process.env.NEXT_PUBLIC_API_URL} />
+      <FloatingHeader site={site} API_URL={process.env.NEXT_PUBLIC_API_URL} />
 
       <main className="min-h-screen pt-[150px] pb-20 px-6 bg-white">
         <div className="max-w-3xl mx-auto">

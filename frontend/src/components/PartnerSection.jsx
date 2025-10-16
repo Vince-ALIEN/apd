@@ -14,22 +14,26 @@ export default function PartnerSection({ partners }) {
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
       logosRef.current.forEach((el, i) => {
-        gsap.fromTo(
-          el,
-          { opacity: 0, y: 50 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.8,
-            ease: "power2.out",
-            delay: i * 0.15,
-            scrollTrigger: {
-              trigger: el,
-              start: "top 90%",
-              toggleActions: "play none none reverse",
-            },
-          }
-        );
+        if (!el) return;
+
+        // État initial hors écran à gauche
+        gsap.set(el, { x: -200, y: 30, opacity: 0, scale: 0.9 });
+
+        // Animation avec effet de saut
+        gsap.to(el, {
+          x: 0,
+          y: 0,
+          opacity: 1,
+          scale: 1,
+          ease: "bounce.out", // 🟰 effet de saut
+          duration: 1,
+          delay: i * 0.15, // ⏱ cascade
+          scrollTrigger: {
+            trigger: el,
+            start: "top 90%",
+            toggleActions: "play none none reverse",
+          },
+        });
       });
     }, sectionRef);
 

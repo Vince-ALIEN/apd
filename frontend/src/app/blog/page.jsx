@@ -1,4 +1,4 @@
-import Header from "@components/Header";
+import FloatingHeader from "@components/FloatingHeader";
 import Footer from "@components/Footer";
 import BlogSection from "@components/BlogSection";
 import GallerySection from "@components/GallerySection";
@@ -23,14 +23,19 @@ async function getEgliseData() {
 
 export default async function BlogIndexPage() {
   const site = await getSiteData();
+  const eglise = await getEgliseData();
 
   return (
     <main className="flex flex-col min-h-screen bg-white">
-      <Header site={site} API_URL={process.env.NEXT_PUBLIC_API_URL} />
+      <FloatingHeader site={site} API_URL={process.env.NEXT_PUBLIC_API_URL} />
 
       {/* Marge pour éviter que le logo coupe le contenu */}
-      <div className="flex-grow min-h-screen bg-white pt-10">
+      <div className="flex-grow min-h-screen bg-white pt-32">
         <BlogSection API_URL={process.env.NEXT_PUBLIC_API_URL} />
+      </div>
+
+      <div className="min-h-screen bg-white">
+        <GallerySection eglise={eglise} />
       </div>
 
       <Footer site={site} API_URL={process.env.NEXT_PUBLIC_API_URL} />

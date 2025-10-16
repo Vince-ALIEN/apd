@@ -5,10 +5,10 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useSiteData } from "@hooks/useSiteData";
 
-import Header from "@components/Header";
 import VideoBackground from "@components/VideoBackground";
 import HomeSection from "@components/HomeSection";
 import IntroOverlay from "@components/IntroOverlay";
+import FloatingHeader from "@components/FloatingHeader";
 import DescriptionSection from "@components/DescriptionSection";
 import InterviewSection from "@components/InterviewSection";
 import DonationButton from "@components/DonationButton";
@@ -66,13 +66,7 @@ export default function Home() {
     <main className="relative overflow-x-hidden">
       {videoUrl && <VideoBackground videoUrl={videoUrl} />}
 
-      <Header
-        site={parametres_site}
-        scrollToSection={() => {}}
-        hideLogo={!showHeader || showIntroExit}
-        hideBurger={!showHeader}
-        onContactClick={() => setShowContactModal(true)}
-      />
+      {showHeader && <FloatingHeader site={parametres_site} />}
 
       {showHomeSection && (
         <HomeSection
@@ -87,6 +81,7 @@ export default function Home() {
       {startIntro && !showContent && (
         <IntroOverlay
           urlDon={parametres_site?.url_don}
+          videoUrl={videoUrl}
           start={startIntro}
           exit={showIntroExit}
           onHeaderReady={() => setShowHeader(true)}
@@ -108,19 +103,11 @@ export default function Home() {
           )}
 
           {interviewBlock && <InterviewSection block={interviewBlock} />}
-          {partenaires && partenaires.length > 0 && (
-            <PartnerSection partners={partenaires} />
-          )}
+          {partenaires?.length > 0 && <PartnerSection partners={partenaires} />}
 
           <div className="flex-grow">
-            <BlogSection API_URL={process.env.NEXT_PUBLIC_API_URL} limit={4} />
+            <BlogSection API_URL={API_URL} limit={4} />
           </div>
-
-          {parametres_site?.url_don && (
-            <div className="fixed bottom-10 left-1/2 -translate-x-1/2 z-50 pointer-events-auto">
-              <DonationButton href={parametres_site.url_don} />
-            </div>
-          )}
 
           <Footer site={parametres_site} />
         </>

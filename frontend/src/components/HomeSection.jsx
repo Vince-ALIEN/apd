@@ -51,6 +51,13 @@ export default function HomeSection({ onSkip }) {
   };
 
   const skipVideo = () => {
+    const video = document.querySelector("video");
+    if (video) {
+      video.pause(); // ⏸️ Stoppe la lecture
+      video.currentTime = 0; // ⏮️ Reviens au début (optionnel)
+      video.muted = true; // 🔇 Coupe le son (optionnel)
+    }
+
     if (onSkip) onSkip();
     if (uiRef.current) {
       uiRef.current.style.display = "none";

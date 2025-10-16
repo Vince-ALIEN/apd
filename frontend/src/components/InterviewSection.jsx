@@ -26,8 +26,8 @@ export default function InterviewSection({ block }) {
       scrollTrigger: {
         trigger: section,
         start: "top top",
-        end: "bottom bottom",
-        scrub: 1.5,
+        end: "+=100%", // ⏳ durée du scroll = durée du pin
+        scrub: 1.2,
         pin: pinWrapper,
         anticipatePin: 1,
         markers: false,
@@ -37,7 +37,7 @@ export default function InterviewSection({ block }) {
     tl.fromTo(
       animatedWrapper,
       { x: "300%", opacity: 0 },
-      { x: "0%", opacity: 1, duration: 10, ease: "power4.out" }
+      { x: "0%", opacity: 1, duration: 2, ease: "power2.out" }
     );
 
     return () => {
@@ -57,7 +57,7 @@ export default function InterviewSection({ block }) {
         {/* 🟤 Bloc animé avec fond noir */}
         <div
           ref={animatedWrapperRef}
-          className="text-white bg-black text-center flex flex-col items-center justify-center w-full max-w-4xl z-10 relative space-y-8 px-6 py-12 rounded-xl shadow-2xl"
+          className="mt-5 text-white bg-blue-900 text-center flex flex-col items-center justify-center w-full max-w-4xl z-10 relative space-y-8 px-6 py-8 rounded-xl shadow-2xl"
         >
           {titre && (
             <h2 className="text-3xl md:text-4xl font-extrabold drop-shadow-lg">
@@ -94,6 +94,9 @@ export default function InterviewSection({ block }) {
           )}
         </div>
       </div>
+
+      {/* ⏳ Spacer pour définir la durée du scroll */}
+      <div className="h-[100vh]" />
     </section>
   );
 }

@@ -16,7 +16,7 @@ export default function DescriptionSection({ eglise }) {
 
   return (
     <section className="relative w-full overflow-hidden px-6 md:px-32 py-24">
-      <div className="relative z-10 max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-center gap-12 bg-white/90 backdrop-blur-md rounded-xl shadow-2xl px-6 py-12">
+      <div className="relative z-10 max-w-6xl mt-10 mx-auto flex flex-col md:flex-row items-center justify-center gap-12 bg-white/90 backdrop-blur-md rounded-xl shadow-2xl px-6 py-12">
         {/* Texte à gauche */}
         <div className="md:w-1/2 w-full">
           <div className="text-gray-800 space-y-6">
