@@ -11,7 +11,6 @@ import IntroOverlay from "@components/IntroOverlay";
 import FloatingHeader from "@components/FloatingHeader";
 import DescriptionSection from "@components/DescriptionSection";
 import InterviewSection from "@components/InterviewSection";
-import DonationButton from "@components/DonationButton";
 import PartnerSection from "@components/PartnerSection";
 import ContactModal from "@components/ContactModal";
 import Footer from "@components/Footer";
@@ -35,7 +34,9 @@ export default function Home() {
   const [showContent, setShowContent] = useState(false);
   const [showHeader, setShowHeader] = useState(false);
   const [showContactModal, setShowContactModal] = useState(false);
+  const [showFond, setShowFond] = useState(false);
 
+  // ✅ Déclenche la sortie de l’intro au premier scroll
   useEffect(() => {
     if (!startIntro) return;
 
@@ -54,6 +55,7 @@ export default function Home() {
     };
   }, [startIntro]);
 
+  // ✅ Rafraîchit ScrollTrigger après apparition du contenu
   useEffect(() => {
     if (showContent) {
       setTimeout(() => {
@@ -64,20 +66,39 @@ export default function Home() {
 
   return (
     <main className="relative overflow-x-hidden">
+      {/* 🎥 Vidéo de fond */}
       {videoUrl && <VideoBackground videoUrl={videoUrl} />}
 
+      {/* 🧭 Header flottant */}
       {showHeader && <FloatingHeader site={parametres_site} />}
 
+      {/* 🟥 Fond fixe après skip */}
+      {showFond && (
+        <div
+          className="fixed inset-0 z-0 pointer-events-none"
+          style={{
+            backgroundImage: "url('/fond_bleu.jpg')",
+            backgroundSize: "cover",
+            backgroundPosition: "top",
+            backgroundRepeat: "no-repeat",
+            backgroundColor: "#fff",
+          }}
+        />
+      )}
+
+      {/* 🎬 Section d’intro */}
       {showHomeSection && (
         <HomeSection
           videoUrl={videoUrl}
           onSkip={() => {
+            setShowFond(true);
             setStartIntro(true);
             setShowHomeSection(false);
           }}
         />
       )}
 
+      {/* 🎭 Overlay animé */}
       {startIntro && !showContent && (
         <IntroOverlay
           urlDon={parametres_site?.url_don}
@@ -92,8 +113,9 @@ export default function Home() {
         />
       )}
 
+      {/* 📦 Contenu principal */}
       {showContent && (
-        <>
+        <div className="relative z-10">
           {eglise && (
             <>
               <DescriptionSection eglise={eglise} />
@@ -110,9 +132,10 @@ export default function Home() {
           </div>
 
           <Footer site={parametres_site} />
-        </>
+        </div>
       )}
 
+      {/* 📬 Modal contact */}
       <ContactModal
         isOpen={showContactModal}
         onClose={() => setShowContactModal(false)}

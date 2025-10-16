@@ -26,7 +26,7 @@ export default function InterviewSection({ block }) {
       scrollTrigger: {
         trigger: section,
         start: "top top",
-        end: "+=100%", // ⏳ durée du scroll = durée du pin
+        end: "+=100%",
         scrub: 1.2,
         pin: pinWrapper,
         anticipatePin: 1,
@@ -49,15 +49,15 @@ export default function InterviewSection({ block }) {
   if (!hasContent) return null;
 
   return (
-    <section ref={sectionRef} className="relative">
+    <section ref={sectionRef} className="relative ">
       <div
         ref={pinWrapperRef}
-        className="sticky top-0 min-h-screen flex items-center justify-center px-6 py-24 relative overflow-hidden"
+        className="sticky top-0 flex items-center justify-center px-6 py-24 relative overflow-hidden"
       >
-        {/* 🟤 Bloc animé avec fond noir */}
+        {/* 🟤 Bloc animé */}
         <div
           ref={animatedWrapperRef}
-          className="mt-5 text-white bg-black text-center flex flex-col items-center justify-center w-full max-w-4xl z-10 relative space-y-8 px-6 py-8 rounded-xl shadow-2xl"
+          className="mt-5 text-white bg-black/50  text-center flex flex-col items-center justify-center w-full max-w-4xl z-10 relative space-y-8 px-6 py-8 rounded-xl shadow-2xl"
         >
           {titre && (
             <h2 className="text-3xl md:text-4xl font-extrabold drop-shadow-lg">
@@ -78,9 +78,9 @@ export default function InterviewSection({ block }) {
                   if (videoElement.requestFullscreen) {
                     videoElement.requestFullscreen();
                   } else if (videoElement.webkitRequestFullscreen) {
-                    videoElement.webkitRequestFullscreen(); // Safari
+                    videoElement.webkitRequestFullscreen();
                   } else if (videoElement.msRequestFullscreen) {
-                    videoElement.msRequestFullscreen(); // IE11
+                    videoElement.msRequestFullscreen();
                   }
                 }}
               />
@@ -95,8 +95,8 @@ export default function InterviewSection({ block }) {
         </div>
       </div>
 
-      {/* ⏳ Spacer pour définir la durée du scroll */}
-      <div className="h-[100vh]" />
+      {/* ⏳ Spacer */}
+      <div className="h-[0vh]" />
     </section>
   );
 }

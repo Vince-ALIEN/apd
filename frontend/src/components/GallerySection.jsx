@@ -11,7 +11,7 @@ export default function GallerySection({ eglise }) {
   const getImageUrl = (img) =>
     img?.formats?.large?.url ?? img?.formats?.medium?.url ?? img?.url;
 
-  // Auto-scroll
+  // ✅ Auto-scroll horizontal fluide
   useEffect(() => {
     const container = galleryRef.current;
     if (!container || images.length <= 1) return;
@@ -22,13 +22,13 @@ export default function GallerySection({ eglise }) {
     const interval = setInterval(() => {
       scrollAmount += 1;
       if (scrollAmount >= maxScroll) scrollAmount = 0;
-      container.scrollTo({ left: scrollAmount, behavior: "smooth" });
+      container.scrollTo({ left: scrollAmount, behavior: "auto" });
     }, 30);
 
     return () => clearInterval(interval);
   }, [images]);
 
-  // Escape key to close modal
+  // ✅ Escape key to close modal
   useEffect(() => {
     const handleKey = (e) => {
       if (e.key === "Escape") setSelectedImage(null);
@@ -40,22 +40,22 @@ export default function GallerySection({ eglise }) {
   if (images.length === 0) return null;
 
   return (
-    <section className="bg-gray-100 py-20 px-6 md:px-32">
+    <section className="relative px-6 md:px-32 py-12">
       <div className="max-w-6xl mx-auto">
-        <h2 className="text-3xl md:text-4xl font-extrabold text-gray-800 mb-12 text-center">
+        <h2 className="text-2xl md:text-3xl font-bold text-center text-white mb-8 drop-shadow-sm">
           Galerie
         </h2>
 
         <div
           ref={galleryRef}
-          className="overflow-x-auto whitespace-nowrap no-scrollbar scroll-smooth"
+          className="overflow-x-auto whitespace-nowrap no-scrollbar"
         >
-          <div className="inline-flex gap-6 px-2 py-2">
+          <div className="inline-flex gap-4 px-2 py-2">
             {images.map((img, index) => (
               <button
                 key={index}
                 onClick={() => setSelectedImage(img)}
-                className="relative w-[160px] h-[120px] md:w-[240px] md:h-[180px] rounded-lg overflow-hidden shadow-md flex-shrink-0 group focus:outline-none"
+                className="relative w-[160px] h-[120px] md:w-[220px] md:h-[160px] rounded-lg overflow-hidden shadow-md flex-shrink-0 group focus:outline-none"
               >
                 <Image
                   src={getImageUrl(img)}

@@ -40,9 +40,9 @@ export default function BlogSection({ API_URL, limit = null }) {
   }
 
   return (
-    <section className="bg-white py-20 px-6 md:px-12">
+    <section className="py-20 px-6 md:px-12">
       <div className="max-w-5xl mx-auto">
-        <h2 className="text-3xl md:text-4xl font-extrabold mb-12 text-gray-800 text-center">
+        <h2 className="text-3xl md:text-4xl font-extrabold mb-12 text-white text-center">
           {limit ? "Les derniers articles" : "Tous les articles"}
         </h2>
 
