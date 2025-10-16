@@ -57,7 +57,7 @@ export default function InterviewSection({ block }) {
         {/* 🟤 Bloc animé avec fond noir */}
         <div
           ref={animatedWrapperRef}
-          className="mt-5 text-white bg-blue-900 text-center flex flex-col items-center justify-center w-full max-w-4xl z-10 relative space-y-8 px-6 py-8 rounded-xl shadow-2xl"
+          className="mt-5 text-white bg-black text-center flex flex-col items-center justify-center w-full max-w-4xl z-10 relative space-y-8 px-6 py-8 rounded-xl shadow-2xl"
         >
           {titre && (
             <h2 className="text-3xl md:text-4xl font-extrabold drop-shadow-lg">
