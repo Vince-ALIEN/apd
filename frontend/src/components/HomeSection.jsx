@@ -74,7 +74,7 @@ export default function HomeSection({ onSkip }) {
             onClick={toggleMute}
             className="px-5 py-2 rounded-full bg-white/10 text-white text-sm backdrop-blur-md shadow-md hover:bg-white/20 transition"
           >
-            {isMuted ? "activer" : "couper"} le son
+            {isMuted ? "activer" : "couper"}
           </button>
 
           <button
