@@ -91,7 +91,6 @@ export default function Home() {
         <HomeSection
           videoUrl={videoUrl}
           onSkip={() => {
-            setShowFond(true);
             setStartIntro(true);
             setShowHomeSection(false);
           }}
@@ -105,7 +104,10 @@ export default function Home() {
           videoUrl={videoUrl}
           start={startIntro}
           exit={showIntroExit}
-          onHeaderReady={() => setShowHeader(true)}
+          onHeaderReady={() => {
+            setShowHeader(true);
+            setShowFond(true);
+          }}
           onComplete={() => {
             setShowContent(true);
             setStartIntro(false);
