@@ -3,8 +3,8 @@ import nodemailer from "nodemailer";
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: process.env.GMAIL_USER, // ex: eglise.aules@gmail.com
-    pass: process.env.GMAIL_APP_PASSWORD, // mot de passe d'application
+    user: process.env.SMTP_USERNAME, // ex: eglise.aules@gmail.com
+    pass: process.env.SMTP_PASSWORD, // mot de passe d'application
   },
 });
 
@@ -17,7 +17,7 @@ export async function send({
   subject: string;
   html: string;
 }) {
-  return await transporter.sendMail({
+  return await transporter.send({
     from: process.env.GMAIL_USER,
     to,
     subject,

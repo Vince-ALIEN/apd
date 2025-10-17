@@ -4,16 +4,16 @@ export default ({ env }) => ({
     config: {
       provider: "nodemailer",
       providerOptions: {
-        host: "smtp.resend.com",
-        port: 587,
+        host: env("SMTP_HOST", "smtp.gmail.com"),
+        port: env("SMTP_PORT", 465), //465 OR 587
         auth: {
-          user: env("SMTP_USER"),
-          pass: env("SMTP_PASS"),
+          user: env("SMTP_USERNAME"), // YOUR_EMAIL@gmail.com, prefer .env file
+          pass: env("SMTP_PASSWORD"), // search "Google App Password", create password phrase and add to .env file
         },
       },
       settings: {
-        defaultFrom: env("SMTP_FROM"),
-        defaultReplyTo: env("SMTP_FROM"),
+        defaultFrom: env("SMTP_USERNAME"), // in .env file
+        defaultReplyTo: env("SMTP_USERNAME"), // in .env file, could be SMTP_REPLY_USERNAME
       },
     },
   },
