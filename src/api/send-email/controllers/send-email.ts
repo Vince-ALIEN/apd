@@ -12,7 +12,7 @@ export default {
     try {
       await resend.emails.send({
         from: process.env.SMTP_FROM || "eglise.aules@gmail.com",
-        to: process.env.CONTACT_RECEIVER || "contact@tondomaine.com",
+        to: process.env.CONTACT_RECEIVER || "eglise.aules@gmail.com",
         subject: subject || `Message de ${name}`,
         html: `
           <p><strong>Nom :</strong> ${name}</p>
