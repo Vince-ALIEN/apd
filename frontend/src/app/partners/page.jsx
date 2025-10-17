@@ -64,7 +64,7 @@ export default function PartnersPage() {
         </section>
 
         {/* ✅ Réutilisation du composant fonctionnel */}
-        <PartnerSection partners={partenaires} />
+        <PartnerSection partners={partenaires} titleClass="text-black" />
       </main>
 
       <Footer site={parametres_site} API_URL={API_URL} />

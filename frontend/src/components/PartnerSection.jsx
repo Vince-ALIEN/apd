@@ -7,7 +7,10 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function PartnerSection({ partners }) {
+export default function PartnerSection({
+  partners,
+  titleClass = "text-white",
+}) {
   const sectionRef = useRef(null);
   const logosRef = useRef([]);
 
@@ -46,7 +49,9 @@ export default function PartnerSection({ partners }) {
       className="py-16 px-6 md:px-32 flex items-center justify-center"
     >
       <div className="max-w-6xl w-full mx-auto text-center">
-        <h2 className="text-2xl md:text-3xl font-bold drop-shadow-lg leading-snug text-white mb-12">
+        <h2
+          className={`text-2xl md:text-3xl font-bold drop-shadow-lg leading-snug mb-12 ${titleClass}`}
+        >
           Nos partenaires
         </h2>
 
