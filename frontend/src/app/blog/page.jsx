@@ -1,44 +1,57 @@
+"use client";
+
+import React, { useState } from "react";
+import { useSiteData } from "@hooks/useSiteData";
 import FloatingHeader from "@components/FloatingHeader";
 import Footer from "@components/Footer";
 import BlogSection from "@components/BlogSection";
 import GallerySection from "@components/GallerySection";
+import ContactModal from "@components/ContactModal";
 
-async function getSiteData() {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/parametres-site?populate[logo][populate]=*&populate[logo_footer][populate]=*`,
-    { next: { revalidate: 60 } }
-  );
-  const data = await res.json();
-  return data.data ?? null;
-}
+export default function BlogIndexPage() {
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
+  const { eglise, parametres_site, isLoading, error } = useSiteData(API_URL);
+  const [showContactModal, setShowContactModal] = useState(false);
 
-async function getEgliseData() {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/eglise?populate=images`,
-    { next: { revalidate: 60 } }
-  );
-  const data = await res.json();
-  return data.data?.attributes ?? null;
-}
+  if (isLoading) {
+    return (
+      <main className="flex flex-col min-h-screen bg-white items-center justify-center">
+        <p className="text-gray-500 text-lg">Chargement en cours…</p>
+      </main>
+    );
+  }
 
-export default async function BlogIndexPage() {
-  const site = await getSiteData();
-  const eglise = await getEgliseData();
+  if (error) {
+    return (
+      <main className="flex flex-col min-h-screen bg-white items-center justify-center">
+        <p className="text-red-600 text-lg">Erreur : {error}</p>
+      </main>
+    );
+  }
 
   return (
     <main className="flex flex-col min-h-screen bg-white">
-      <FloatingHeader site={site} API_URL={process.env.NEXT_PUBLIC_API_URL} />
+      <FloatingHeader
+        site={parametres_site}
+        API_URL={API_URL}
+        onContactClick={() => setShowContactModal(true)}
+      />
 
       {/* Marge pour éviter que le logo coupe le contenu */}
-      <div className="flex-grow min-h-screen bg-white pt-32">
-        <BlogSection API_URL={process.env.NEXT_PUBLIC_API_URL} />
+      <div className="flex-grow min-h-screen mt-16 bg-white">
+        <BlogSection API_URL={API_URL} />
       </div>
 
       <div className="min-h-screen bg-white">
-        <GallerySection eglise={eglise} />
+        <GallerySection eglise={eglise?.attributes} />
       </div>
 
-      <Footer site={site} API_URL={process.env.NEXT_PUBLIC_API_URL} />
+      <Footer site={parametres_site} API_URL={API_URL} />
+      {/* 📬 Modale contact */}
+      <ContactModal
+        isOpen={showContactModal}
+        onClose={() => setShowContactModal(false)}
+      />
     </main>
   );
 }

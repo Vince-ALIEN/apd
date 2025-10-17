@@ -59,16 +59,66 @@ export default function HomeSection({ onSkip }) {
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-4 z-50">
         <button
           onClick={toggleMute}
-          className="px-5 py-2 rounded-full bg-white/10 text-white text-sm backdrop-blur-md shadow-md hover:bg-white/20 transition"
+          className="px-5 py-2 rounded-full bg-white/10 text-white text-sm backdrop-blur-md shadow-md hover:bg-white/20 transition flex items-center gap-2"
         >
-          {isMuted ? "activer" : "couper"}
+          {isMuted ? (
+            <>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 5v14l-5-5H4a1 1 0 01-1-1V9a1 1 0 011-1h1l5-5zM19 9l-2 2m0 0l-2 2m2-2l2 2m-2-2l-2-2"
+                />
+              </svg>
+              désactivé
+            </>
+          ) : (
+            <>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 5v14l-5-5H4a1 1 0 01-1-1V9a1 1 0 011-1h1l5-5zM15 9a3 3 0 010 6"
+                />
+              </svg>
+              activé
+            </>
+          )}
         </button>
 
         <button
           onClick={skipVideo}
-          className="px-5 py-2 rounded-full bg-white/10 text-white text-sm backdrop-blur-md shadow-md hover:bg-white/20 transition"
+          className="px-5 py-2 rounded-full bg-white/10 text-white text-sm backdrop-blur-md shadow-md hover:bg-white/20 transition flex items-center gap-2"
         >
-          passer
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-5 w-5"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M13 5l7 7-7 7M5 5v14"
+            />
+          </svg>
+          Passer
         </button>
       </div>
     </div>

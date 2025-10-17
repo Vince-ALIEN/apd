@@ -36,8 +36,8 @@ export default function InterviewSection({ block }) {
 
     tl.fromTo(
       animatedWrapper,
-      { x: "300%", opacity: 0 },
-      { x: "0%", opacity: 1, duration: 2, ease: "power2.out" }
+      { x: "200%", opacity: 0 },
+      { x: "0%", opacity: 1, duration: 0.8, ease: "expo.out" }
     );
 
     return () => {
@@ -49,18 +49,18 @@ export default function InterviewSection({ block }) {
   if (!hasContent) return null;
 
   return (
-    <section ref={sectionRef} className="relative ">
+    <section ref={sectionRef} className="relative">
       <div
         ref={pinWrapperRef}
-        className="sticky top-0 flex items-center justify-center px-6 py-24 relative overflow-hidden"
+        className="sticky top-0 flex items-start justify-center px-6 py-24 relative overflow-hidden"
       >
         {/* 🟤 Bloc animé */}
         <div
           ref={animatedWrapperRef}
-          className="mt-5 text-white bg-black/50  text-center flex flex-col items-center justify-center w-full max-w-4xl z-10 relative space-y-8 px-6 py-8 rounded-xl shadow-2xl"
+          className="mt-0 bg-black/50 text-center flex flex-col items-center justify-center w-full max-w-4xl z-10 relative space-y-8 px-6 py-12 rounded-xl shadow-2xl"
         >
           {titre && (
-            <h2 className="text-3xl md:text-4xl font-extrabold drop-shadow-lg">
+            <h2 className="text-2xl md:text-3xl font-bold drop-shadow-lg leading-snug text-white">
               {titre}
             </h2>
           )}
@@ -88,15 +88,12 @@ export default function InterviewSection({ block }) {
           )}
 
           {description && (
-            <p className="text-lg md:text-xl font-medium max-w-3xl drop-shadow-sm">
+            <p className="text-sm md:text-base font-normal drop-shadow-sm leading-relaxed text-white max-w-3xl">
               {description}
             </p>
           )}
         </div>
       </div>
-
-      {/* ⏳ Spacer */}
-      <div className="h-[0vh]" />
     </section>
   );
 }

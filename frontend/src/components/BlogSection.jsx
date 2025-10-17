@@ -9,16 +9,20 @@ export default function BlogSection({ API_URL, limit = null }) {
 
   if (isLoading) {
     return (
-      <section className="py-20 px-6 md:px-12 text-center">
-        <p className="text-gray-500">Chargement des articles...</p>
+      <section className="py-20 px-6 md:px-32 text-center">
+        <p className="text-sm md:text-base font-normal drop-shadow-sm leading-relaxed text-gray-500">
+          Chargement des articles...
+        </p>
       </section>
     );
   }
 
   if (error) {
     return (
-      <section className="py-20 px-6 md:px-12 text-center">
-        <p className="text-red-500">Erreur : {error}</p>
+      <section className="py-20 px-6 md:px-32 text-center">
+        <p className="text-sm md:text-base font-normal drop-shadow-sm leading-relaxed text-red-500">
+          Erreur : {error}
+        </p>
       </section>
     );
   }
@@ -31,8 +35,8 @@ export default function BlogSection({ API_URL, limit = null }) {
 
   if (displayed.length === 0) {
     return (
-      <section className="py-20 px-6 md:px-12 text-center">
-        <p className="text-gray-500">
+      <section className="py-20 px-6 md:px-32 text-center">
+        <p className="text-sm md:text-base font-normal drop-shadow-sm leading-relaxed text-gray-500">
           Aucun article disponible pour le moment.
         </p>
       </section>
@@ -40,9 +44,9 @@ export default function BlogSection({ API_URL, limit = null }) {
   }
 
   return (
-    <section className="py-20 px-6 md:px-12">
-      <div className="max-w-5xl mx-auto">
-        <h2 className="text-3xl md:text-4xl font-extrabold mb-12 text-white text-center">
+    <section className="py-20 px-6 md:px-32 bg-white">
+      <div className="max-w-6xl mx-auto">
+        <h2 className="text-2xl md:text-3xl font-bold drop-shadow-lg leading-snug text-gray-800 text-center mb-12">
           {limit ? "Les derniers articles" : "Tous les articles"}
         </h2>
 
@@ -80,14 +84,16 @@ export default function BlogSection({ API_URL, limit = null }) {
                   />
                 </div>
                 <div className="p-6">
-                  <h3 className="text-lg font-semibold text-gray-800 mb-2 group-hover:text-red-700 transition">
+                  <h3 className="text-sm md:text-base font-normal drop-shadow-sm leading-relaxed text-gray-800 mb-2 group-hover:text-red-700 transition">
                     {titre}
                   </h3>
                   <p className="text-sm text-gray-500 mb-1">
                     {new Date(date_publication).toLocaleDateString("fr-FR")} ·{" "}
                     {auteur}
                   </p>
-                  <p className="text-sm text-gray-700 italic">{extrait}</p>
+                  <p className="text-sm md:text-base font-normal italic drop-shadow-sm leading-relaxed text-gray-700">
+                    {extrait}
+                  </p>
                 </div>
               </Link>
             );

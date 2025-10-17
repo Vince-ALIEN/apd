@@ -70,7 +70,12 @@ export default function Home() {
       {videoUrl && <VideoBackground videoUrl={videoUrl} />}
 
       {/* 🧭 Header flottant */}
-      {showHeader && <FloatingHeader site={parametres_site} />}
+      {showHeader && (
+        <FloatingHeader
+          site={parametres_site}
+          onContactClick={() => setShowContactModal(true)}
+        />
+      )}
 
       {/* 🟥 Fond fixe après skip */}
       {showFond && (
@@ -120,13 +125,13 @@ export default function Home() {
         <div className="relative z-10">
           {eglise && (
             <>
-              <DescriptionSection eglise={eglise} />
               <GallerySection eglise={eglise} />
+              <DescriptionSection eglise={eglise} />
+              {interviewBlock && <InterviewSection block={interviewBlock} />}
               <AddressSection eglise={eglise} />
             </>
           )}
 
-          {interviewBlock && <InterviewSection block={interviewBlock} />}
           {partenaires?.length > 0 && <PartnerSection partners={partenaires} />}
 
           <div className="flex-grow">

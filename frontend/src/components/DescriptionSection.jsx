@@ -1,21 +1,37 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useLayoutEffect, useRef } from "react";
 import Image from "next/image";
+import gsap from "gsap";
 
 export default function DescriptionSection({ eglise }) {
   const [selectedImage, setSelectedImage] = useState(
     eglise?.image_principale ?? null
   );
+  const sectionRef = useRef(null);
 
   const getImageUrl = (img) =>
     img?.formats?.large?.url ?? img?.formats?.medium?.url ?? img?.url;
+
+  useLayoutEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+
+    gsap.fromTo(
+      section,
+      { scale: 0.2, opacity: 0 },
+      { scale: 1, opacity: 1, duration: 0.6, ease: "power2.out" }
+    );
+  }, []);
 
   if (!eglise?.nom && !eglise?.description?.length && !selectedImage)
     return null;
 
   return (
-    <section className="relative mt-30 w-full bg-white overflow-hidden px-6 md:px-32 py-12">
+    <section
+      ref={sectionRef}
+      className="relative mt-0 w-full bg-white overflow-hidden px-6 md:px-32 py-12"
+    >
       <div className="relative z-10 max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-center gap-10">
         {/* Texte à gauche */}
         <div className="md:w-1/2 w-full">

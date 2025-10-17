@@ -16,18 +16,16 @@ export default function PartnerSection({ partners }) {
       logosRef.current.forEach((el, i) => {
         if (!el) return;
 
-        // État initial hors écran à gauche
         gsap.set(el, { x: -200, y: 30, opacity: 0, scale: 0.9 });
 
-        // Animation avec effet de saut
         gsap.to(el, {
           x: 0,
           y: 0,
           opacity: 1,
           scale: 1,
-          ease: "bounce.out", // 🟰 effet de saut
+          ease: "bounce.out",
           duration: 1,
-          delay: i * 0.15, // ⏱ cascade
+          delay: i * 0.15,
           scrollTrigger: {
             trigger: el,
             start: "top 90%",
@@ -45,10 +43,10 @@ export default function PartnerSection({ partners }) {
   return (
     <section
       ref={sectionRef}
-      className="py-16 px-6 md:px-12 bg-white flex items-center justify-center"
+      className="py-16 px-6 md:px-32 flex items-center justify-center"
     >
       <div className="max-w-6xl w-full mx-auto text-center">
-        <h2 className="text-3xl md:text-4xl font-extrabold mb-12 text-gray-800">
+        <h2 className="text-2xl md:text-3xl font-bold drop-shadow-lg leading-snug text-white mb-12">
           Nos partenaires
         </h2>
 

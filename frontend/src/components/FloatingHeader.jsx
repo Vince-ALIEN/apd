@@ -6,7 +6,7 @@ import Image from "next/image";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import DonationButton from "@components/DonationButton";
 
-export default function FloatingHeader({ site }) {
+export default function FloatingHeader({ site, onContactClick }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
 
@@ -18,9 +18,9 @@ export default function FloatingHeader({ site }) {
   const navLinks = [
     { label: "Accueil", href: "/" },
     { label: "Notre action", href: "/action" },
-    { label: "Devenez partenaire", href: "/partenaire" },
+    { label: "Devenez partenaire", href: "/partners" },
     { label: "Blog", href: "/blog" },
-    { label: "Contact", href: "/#contact" },
+    { label: "Contact", action: onContactClick },
   ];
 
   useEffect(() => {
@@ -46,7 +46,7 @@ export default function FloatingHeader({ site }) {
           <nav className="flex items-center gap-4 sm:gap-6 lg:gap-8 text-gray-800 font-medium flex-wrap justify-end w-full">
             {navLinks.map((link) => {
               const isActive = pathname === link.href;
-              return (
+              return link.href ? (
                 <a
                   key={link.label}
                   href={link.href}
@@ -56,6 +56,14 @@ export default function FloatingHeader({ site }) {
                 >
                   {link.label}
                 </a>
+              ) : (
+                <button
+                  key={link.label}
+                  onClick={link.action}
+                  className="transition hover:text-red-600 text-gray-800 font-medium"
+                >
+                  {link.label}
+                </button>
               );
             })}
             <DonationButton href={site?.url_don} className="ml-2" />
@@ -64,9 +72,7 @@ export default function FloatingHeader({ site }) {
       </header>
 
       {/* 🧭 Floating header mobile */}
-      {/* 🧭 Floating header mobile */}
       <header className="fixed top-3 left-0 right-0 z-50 flex items-center justify-between px-4 py-2 bg-white/90 backdrop-blur-md shadow-md rounded-full md:hidden">
-        {/* Logo à gauche */}
         <Image
           src={logoUrl}
           alt="Logo"
@@ -75,10 +81,7 @@ export default function FloatingHeader({ site }) {
           className="rounded-md flex-shrink-0"
           priority
         />
-
-        {/* Icônes à droite */}
         <div className="flex items-center gap-3">
-          {/* ❤️ Icône cœur visible en mobile */}
           <a
             href={site?.url_don}
             target="_blank"
@@ -95,8 +98,6 @@ export default function FloatingHeader({ site }) {
               <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41 0.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
             </svg>
           </a>
-
-          {/* 🍔 Burger menu */}
           <button
             onClick={() => setMenuOpen(true)}
             className="p-2 rounded-full bg-white shadow-md text-black"
@@ -141,7 +142,7 @@ export default function FloatingHeader({ site }) {
 
           {navLinks.map((link) => {
             const isActive = pathname === link.href;
-            return (
+            return link.href ? (
               <a
                 key={link.label}
                 href={link.href}
@@ -152,6 +153,17 @@ export default function FloatingHeader({ site }) {
               >
                 {link.label}
               </a>
+            ) : (
+              <button
+                key={link.label}
+                onClick={() => {
+                  setMenuOpen(false);
+                  link.action?.();
+                }}
+                className="text-lg transition hover:text-red-600 text-gray-800 font-medium"
+              >
+                {link.label}
+              </button>
             );
           })}
 
