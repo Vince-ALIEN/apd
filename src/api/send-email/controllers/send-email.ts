@@ -1,49 +1,33 @@
-export default {
-  async send(ctx: any) {
+"use strict";
+
+const { Resend } = require("resend");
+const resend = new Resend(process.env.RESEND_API_KEY);
+
+module.exports = {
+  async send(ctx) {
     const { name, email, phone, subject, message } = ctx.request.body;
 
-    // Validation des champs requis
-    if (!name || !email || !message) {
-      return ctx.badRequest("Nom, email et message sont requis.");
+    if (!email || !message || !name) {
+      return ctx.badRequest("Champs requis manquants.");
     }
 
-    const payload = {
-      to: "eglise.aules@gmail.com",
-      from: email,
-      replyTo: email,
-      subject: subject || "Message de contact",
-      text: `
-Nom : ${name}
-Email : ${email}
-Téléphone : ${phone || "non fourni"}
-Message :
-${message}
-      `,
-    };
-
     try {
-      strapi.log.info("Tentative d'envoi d'email avec :", payload);
+      const result = await resend.emails.send({
+        from: process.env.SMTP_FROM || "eglise.aules@gmail.com",
+        to: process.env.CONTACT_RECEIVER || "contact@tondomaine.com",
+        subject: subject || `Message de ${name}`,
+        html: `
+          <p><strong>Nom :</strong> ${name}</p>
+          <p><strong>Email :</strong> ${email}</p>
+          <p><strong>Téléphone :</strong> ${phone || "Non renseigné"}</p>
+          <p><strong>Message :</strong><br/>${message}</p>
+        `,
+      });
 
-      await strapi.plugins["email"].services.email.send(payload);
-
-      strapi.log.info("Email envoyé avec succès");
-      ctx.send({ success: true });
-    } catch (err: any) {
-      strapi.log.error("Erreur d'envoi d'email :", err);
-
-      // Log détaillé si disponible
-      if (err?.response?.body) {
-        strapi.log.error("Réponse SMTP :", err.response.body);
-      }
-
-      ctx.send(
-        {
-          success: false,
-          error: "Échec de l'envoi de l'email.",
-          details: err.message || "Erreur inconnue",
-        },
-        500
-      );
+      ctx.send({ success: true, result });
+    } catch (err) {
+      console.error("Erreur Resend :", err);
+      ctx.internalServerError("Échec de l’envoi du message.");
     }
   },
 };
