@@ -1,4 +1,12 @@
-import { resend } from "../utils/resend";
+import nodemailer from "nodemailer";
+
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: process.env.GMAIL_USER, // ex: eglise.aules@gmail.com
+    pass: process.env.GMAIL_APP_PASSWORD, // mot de passe d'application
+  },
+});
 
 export async function send({
   to,
@@ -9,8 +17,8 @@ export async function send({
   subject: string;
   html: string;
 }) {
-  return await resend.emails.send({
-    from: process.env.SMTP_FROM || "eglise.aules@gmail.com",
+  return await transporter.sendMail({
+    from: process.env.GMAIL_USER,
     to,
     subject,
     html,

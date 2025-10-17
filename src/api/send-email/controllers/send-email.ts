@@ -1,4 +1,4 @@
-import { resend } from "../../../utils/resend";
+import { send } from "../../../services/email";
 import { Context } from "koa";
 
 export default {
@@ -10,9 +10,8 @@ export default {
     }
 
     try {
-      await resend.emails.send({
-        from: process.env.SMTP_FROM || "eglise.aules@gmail.com",
-        to: process.env.CONTACT_RECEIVER || "eglise.aules@gmail.com",
+      await send({
+        to: process.env.CONTACT_RECEIVER || process.env.GMAIL_USER,
         subject: subject || `Message de ${name}`,
         html: `
           <p><strong>Nom :</strong> ${name}</p>
@@ -24,7 +23,7 @@ export default {
 
       ctx.send({ success: true });
     } catch (err) {
-      strapi.log.error("Erreur Resend :", err);
+      strapi.log.error("Erreur Gmail :", err);
       ctx.internalServerError("Échec de l’envoi du message.");
     }
   },
