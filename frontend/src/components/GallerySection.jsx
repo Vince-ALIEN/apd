@@ -51,7 +51,7 @@ export default function GallerySection({ eglise }) {
               <button
                 key={index}
                 onClick={() => setSelectedImage(img)}
-                className="relative w-[160px] h-[120px] md:w-[220px] md:h-[160px] rounded-lg overflow-hidden shadow-md flex-shrink-0 group focus:outline-none"
+                className="relative w-[160px] h-[120px] md:w-[220px] md:h-[160px] rounded-lg overflow-hidden shadow-md flex-shrink-0 group focus:outline-none cursor-pointer"
               >
                 <Image
                   src={getImageUrl(img)}

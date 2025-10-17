@@ -12,6 +12,10 @@ export default function HomeSection({ onSkip }) {
     const tl = gsap.timeline({ defaults: { ease: "power2.out" }, delay: 1 });
 
     const words = ["Nous", "avons", "besoin", "de vous"];
+    if (wordRef.current) {
+      wordRef.current.textContent = ""; // nettoyage initial
+    }
+
     words.forEach((word) => {
       tl.to(wordRef.current, {
         opacity: 0,
@@ -19,14 +23,27 @@ export default function HomeSection({ onSkip }) {
         duration: 0.6,
         onComplete: () => {
           if (wordRef.current) {
-            wordRef.current.innerHTML = `<span class="text-red-600">${word.charAt(0)}</span>${word.slice(1)}`;
+            wordRef.current.textContent = word; // mot brut, sans HTML
           }
         },
       });
-      tl.to(wordRef.current, { opacity: 1, scale: 1, duration: 0.8 }, "+=0.1");
+      tl.to(
+        wordRef.current,
+        {
+          opacity: 1,
+          scale: 1,
+          duration: 0.8,
+        },
+        "+=0.1"
+      );
     });
 
-    tl.to(wordRef.current, { opacity: 0, scale: 0.5, duration: 1, delay: 1 });
+    tl.to(wordRef.current, {
+      opacity: 0,
+      scale: 0.5,
+      duration: 1,
+      delay: 1,
+    });
   }, []);
 
   const toggleMute = () => {

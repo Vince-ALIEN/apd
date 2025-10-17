@@ -60,7 +60,7 @@ export default function FloatingHeader({ site, onContactClick }) {
                 <button
                   key={link.label}
                   onClick={link.action}
-                  className="transition hover:text-red-600 text-gray-800 font-medium"
+                  className="transition hover:text-red-600 text-gray-800 font-medium cursor-pointer"
                 >
                   {link.label}
                 </button>

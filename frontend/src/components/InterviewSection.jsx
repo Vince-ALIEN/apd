@@ -66,13 +66,13 @@ export default function InterviewSection({ block }) {
           )}
 
           {videoUrl && (
-            <div className="w-full aspect-video rounded-xl overflow-hidden shadow-xl">
+            <div className="relative w-full aspect-video rounded-xl overflow-hidden shadow-xl group">
               <video
                 src={videoUrl}
                 controls
                 playsInline
                 preload="metadata"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover cursor-pointer"
                 onClick={(e) => {
                   const videoElement = e.currentTarget;
                   if (videoElement.requestFullscreen) {

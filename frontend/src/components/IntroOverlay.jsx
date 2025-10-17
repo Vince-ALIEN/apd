@@ -136,7 +136,7 @@ export default function IntroOverlay({
             ref={titleRef}
             className="text-2xl md:text-4xl font-extrabold text-black leading-tight opacity-0"
           >
-            <span className="text-red-600">A</span>idez-nous à préserver
+            Aidez-nous à préserver
             <br />
             ce trésor du patrimoine
           </h1>

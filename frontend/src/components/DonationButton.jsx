@@ -9,22 +9,22 @@ export default function DonationButton({
 
   return (
     <>
-      {/* 🟥 Texte par défaut (mobile + desktop sauf 768px) */}
+      {/* 🟥 Bouton texte visible sur mobile (<768px) et desktop >768px */}
       <a
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className={`flex items-center justify-center px-6 py-2 rounded-full bg-red-600 text-white font-semibold shadow-md hover:bg-red-700 transition-all duration-300 animate-pulse-cta w-fit not-768 ${className}`}
+        className={`flex items-center justify-center px-6 py-2 rounded-full bg-red-600 text-white font-semibold shadow-md hover:bg-red-700 transition-all duration-300 w-fit sm:hidden lg:flex ${className}`}
       >
         {label}
       </a>
 
-      {/* ❤️ Icône cœur uniquement à 768px */}
+      {/* ❤️ Icône cœur visible uniquement à 768px (entre sm et lg) */}
       <a
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className={`hidden items-center justify-center text-red-600 hover:text-red-700 transition p-2 rounded-full only-768 ${className}`}
+        className={`hidden sm:flex lg:hidden items-center justify-center text-red-600 hover:text-red-700 transition p-2 rounded-full ${className}`}
         aria-label="Faire un don"
       >
         <svg
