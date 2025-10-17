@@ -37,7 +37,7 @@ export default function InterviewSection({ block }) {
     tl.fromTo(
       animatedWrapper,
       { x: "200%", opacity: 0 },
-      { x: "0%", opacity: 1, duration: 0.8, ease: "expo.out" }
+      { x: "0%", opacity: 1, duration: 0.6, ease: "expo.out" }
     );
 
     return () => {
@@ -49,10 +49,10 @@ export default function InterviewSection({ block }) {
   if (!hasContent) return null;
 
   return (
-    <section ref={sectionRef} className="relative">
+    <section ref={sectionRef} className="relative pb-12">
       <div
         ref={pinWrapperRef}
-        className="sticky top-0 flex items-start justify-center px-6 py-24 relative overflow-hidden"
+        className="sticky top-0 flex items-start justify-center px-6 pt-24 relative overflow-hidden"
       >
         {/* 🟤 Bloc animé */}
         <div
@@ -94,6 +94,9 @@ export default function InterviewSection({ block }) {
           )}
         </div>
       </div>
+
+      {/* ⏳ Spacer */}
+      <div className="h-[0vh]" />
     </section>
   );
 }
