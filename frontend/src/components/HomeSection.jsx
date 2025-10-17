@@ -55,6 +55,11 @@ export default function HomeSection({ onSkip }) {
   };
 
   const skipVideo = () => {
+    const video = document.querySelector("video");
+    if (video) {
+      video.muted = true; // 🔇 coupe le son
+    }
+
     if (uiRef.current) uiRef.current.style.display = "none";
     if (onSkip) onSkip(); // déclenche la montée du rideau
   };
