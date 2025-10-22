@@ -89,7 +89,7 @@ export default function FloatingHeader({ site, onContactClick }) {
       </header>
 
       {/* 🧭 Floating header mobile */}
-      <header className="fixed top-3 left-0 right-0 z-50 flex items-center justify-between px-4 py-2 bg-white/90 backdrop-blur-md shadow-md rounded-full md:hidden">
+      <header className="fixed top-3 left-0 right-0 z-50 flex items-center justify-between px-4 py-2 bg-white/60 backdrop-blur-md shadow-md rounded-full md:hidden">
         <Image
           src={logoUrl}
           alt="Logo"
