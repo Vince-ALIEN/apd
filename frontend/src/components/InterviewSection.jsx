@@ -93,7 +93,7 @@ export default function InterviewSection({ block }) {
           ref={interviewWrapperRef}
           className="absolute inset-0 flex items-center justify-center mt-20"
         >
-          <div className="w-full max-w-6xl px-6 py-12 rounded-xl shadow-2xl text-center space-y-10 backdrop-blur-sm">
+          <div className="w-full max-w-6xl px-6 py-12 rounded-xl shadow-2xl text-center space-y-10 ">
             {videoUrl && (
               <div className="relative w-full aspect-video rounded-xl overflow-hidden shadow-xl group">
                 <video
