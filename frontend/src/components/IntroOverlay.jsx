@@ -17,16 +17,16 @@ const IntroOverlay = forwardRef((props, ref) => {
     // 🧭 Titre entre par la gauche
     tl.fromTo(
       titleRef.current,
-      { opacity: 0, x: -100 },
-      { opacity: 1, x: 0, duration: 1 },
+      { opacity: 1, xPercent: -200 },
+      { opacity: 1, xPercent: 0, duration: 1 },
       0
     );
 
     // 🧭 Sous-titre entre par la droite
     tl.fromTo(
       descRef.current,
-      { opacity: 0, x: 100 },
-      { opacity: 1, x: 0, duration: 1 },
+      { opacity: 1, xPercent: 200 },
+      { opacity: 1, xPercent: 0, duration: 1 },
       "-=0.6"
     );
   }, []);

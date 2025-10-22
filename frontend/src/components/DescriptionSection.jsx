@@ -46,16 +46,16 @@ const DescriptionSection = forwardRef(({ eglise }, ref) => {
       // ✨ Texte à gauche
       tl.fromTo(
         textRef.current,
-        { x: -100, opacity: 0 },
-        { x: 0, opacity: 1, duration: 1 },
+        { xPercent: -200, opacity: 1 },
+        { xPercent: 0, opacity: 1, duration: 1 },
         "+=0.2"
       );
 
       // 🖼️ Image à droite
       tl.fromTo(
         imageRef.current,
-        { x: 100, opacity: 0 },
-        { x: 0, opacity: 1, duration: 1 },
+        { xPercent: 200, opacity: 1 },
+        { xPercent: 0, opacity: 1, duration: 1 },
         "-=0.8"
       );
 
@@ -64,15 +64,15 @@ const DescriptionSection = forwardRef(({ eglise }, ref) => {
         .timeline({
           scrollTrigger: {
             trigger: galleryRef.current,
-            start: "top 80%",
+            start: "top top",
             end: "bottom top",
             scrub: true,
           },
         })
         .fromTo(
           galleryRef.current,
-          { y: 60, opacity: 0 },
-          { y: 0, opacity: 1, duration: 1, ease: "power2.out" },
+          { xPercent: 100, opacity: 1 },
+          { xPercent: 0, opacity: 1, duration: 1, ease: "power2.out" },
           "+=0.5" // ⏱️ décale le début de l'animation dans le scroll
         );
     }, sectionRef);
@@ -99,7 +99,7 @@ const DescriptionSection = forwardRef(({ eglise }, ref) => {
       />
 
       {/* 🎬 Contenu principal */}
-      <div className="relative z-10 max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-center gap-10 pt-30">
+      <div className="relative z-10 max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-center gap-10 pt-35">
         {/* Texte à gauche */}
         <div ref={textRef} className="md:w-1/2 w-full">
           <div className="text-gray-800 space-y-4">
