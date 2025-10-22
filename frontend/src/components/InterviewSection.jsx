@@ -102,16 +102,6 @@ export default function InterviewSection({ block }) {
                   playsInline
                   preload="metadata"
                   className="w-full h-full object-cover cursor-pointer"
-                  onClick={(e) => {
-                    const videoElement = e.currentTarget;
-                    if (videoElement.requestFullscreen) {
-                      videoElement.requestFullscreen();
-                    } else if (videoElement.webkitRequestFullscreen) {
-                      videoElement.webkitRequestFullscreen();
-                    } else if (videoElement.msRequestFullscreen) {
-                      videoElement.msRequestFullscreen();
-                    }
-                  }}
                 />
               </div>
             )}
