@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useSiteData } from "@hooks/useSiteData";
@@ -15,8 +15,6 @@ import PartnerSection from "@components/PartnerSection";
 import ContactModal from "@components/ContactModal";
 import Footer from "@components/Footer";
 import BlogSection from "@components/BlogSection";
-import AddressSection from "@components/AddressSection";
-import GallerySection from "@components/GallerySection";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -28,40 +26,42 @@ export default function Home() {
   const videoUrl = accueil?.video?.url ?? null;
   const interviewBlock = interviews?.[0];
 
-  const [showHomeSection, setShowHomeSection] = useState(true);
-  const [startIntro, setStartIntro] = useState(false);
-  const [showIntroExit, setShowIntroExit] = useState(false);
-  const [showContent, setShowContent] = useState(false);
   const [showHeader, setShowHeader] = useState(false);
   const [showContactModal, setShowContactModal] = useState(false);
   const [showFond, setShowFond] = useState(false);
+  const [showContent, setShowContent] = useState(false);
 
-  // ✅ Déclenche la sortie de l’intro au premier scroll
-  useEffect(() => {
-    if (!startIntro) return;
+  const introRef = useRef(null);
+  const descriptionRef = useRef(null);
 
-    const handleScroll = () => {
-      setShowIntroExit(true);
-      window.removeEventListener("wheel", handleScroll);
-      window.removeEventListener("touchstart", handleScroll);
-    };
-
-    window.addEventListener("wheel", handleScroll);
-    window.addEventListener("touchstart", handleScroll);
-
-    return () => {
-      window.removeEventListener("wheel", handleScroll);
-      window.removeEventListener("touchstart", handleScroll);
-    };
-  }, [startIntro]);
-
-  // ✅ Rafraîchit ScrollTrigger après apparition du contenu
+  // ✅ Rafraîchit ScrollTrigger après le rendu du contenu
   useEffect(() => {
     if (showContent) {
       setTimeout(() => {
         ScrollTrigger.refresh();
       }, 100);
     }
+  }, [showContent]);
+
+  // ✅ Déclenche le fond après la fin du pin de DescriptionSection
+  useEffect(() => {
+    if (!descriptionRef.current) return;
+
+    const trigger = ScrollTrigger.create({
+      trigger: descriptionRef.current,
+      start: "top top",
+      end: "bottom top",
+      onLeave: () => {
+        console.log("🎯 Fond déclenché après DescriptionSection");
+        setShowFond(true);
+      },
+      onEnterBack: () => {
+        console.log("🔙 Fond retiré en scroll inverse");
+        setShowFond(false);
+      },
+    });
+
+    return () => trigger.kill();
   }, [showContent]);
 
   return (
@@ -77,12 +77,12 @@ export default function Home() {
         />
       )}
 
-      {/* 🟥 Fond fixe après skip */}
+      {/* 🟥 Fond fixe déclenché après DescriptionSection */}
       {showFond && (
         <div
           className="fixed inset-0 z-0 pointer-events-none"
           style={{
-            backgroundImage: "url('/fond_bleu.jpg')",
+            backgroundImage: "url('/fond_vitrail.jpg')",
             backgroundSize: "cover",
             backgroundPosition: "top",
             backgroundRepeat: "no-repeat",
@@ -91,31 +91,14 @@ export default function Home() {
         />
       )}
 
-      {/* 🎬 Section d’intro */}
-      {showHomeSection && (
+      {/* 🎬 Intro vidéo avec bouton "Passer" */}
+      {!showContent && (
         <HomeSection
           videoUrl={videoUrl}
           onSkip={() => {
-            setStartIntro(true);
-            setShowHomeSection(false);
-          }}
-        />
-      )}
-
-      {/* 🎭 Overlay animé */}
-      {startIntro && !showContent && (
-        <IntroOverlay
-          urlDon={parametres_site?.url_don}
-          videoUrl={videoUrl}
-          start={startIntro}
-          exit={showIntroExit}
-          onHeaderReady={() => {
+            introRef.current?.scrollIntoView({ behavior: "smooth" });
             setShowHeader(true);
-            setShowFond(true);
-          }}
-          onComplete={() => {
             setShowContent(true);
-            setStartIntro(false);
           }}
         />
       )}
@@ -123,20 +106,20 @@ export default function Home() {
       {/* 📦 Contenu principal */}
       {showContent && (
         <div className="relative z-10">
+          <IntroOverlay ref={introRef} />
+
           {eglise && (
             <>
-              <GallerySection eglise={eglise} />
-              <DescriptionSection eglise={eglise} />
+              <DescriptionSection ref={descriptionRef} eglise={eglise} />
               {interviewBlock && <InterviewSection block={interviewBlock} />}
-              <AddressSection eglise={eglise} />
             </>
           )}
-
-          {partenaires?.length > 0 && <PartnerSection partners={partenaires} />}
 
           <div className="flex-grow">
             <BlogSection API_URL={API_URL} limit={4} />
           </div>
+
+          {partenaires?.length > 0 && <PartnerSection partners={partenaires} />}
 
           <Footer site={parametres_site} />
         </div>

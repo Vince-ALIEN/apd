@@ -9,38 +9,27 @@ export default function HomeSection({ onSkip }) {
   const [isMuted, setIsMuted] = useState(true);
 
   useEffect(() => {
-    const tl = gsap.timeline({ defaults: { ease: "power2.out" }, delay: 1 });
+    const tl = gsap.timeline({
+      defaults: { ease: "power2.out" },
+      delay: 3,
+    }); // ⏱️ délai de 3s
 
-    const words = ["Nous", "avons", "besoin", "de vous"];
-    if (wordRef.current) {
-      wordRef.current.textContent = ""; // nettoyage initial
-    }
+    const words = wordRef.current?.querySelectorAll("span");
+    if (!words) return;
 
-    words.forEach((word) => {
-      tl.to(wordRef.current, {
-        opacity: 0,
-        scale: 0.5,
-        duration: 0.6,
-        onComplete: () => {
-          if (wordRef.current) {
-            wordRef.current.textContent = word; // mot brut, sans HTML
-          }
-        },
-      });
-      tl.to(
-        wordRef.current,
-        {
-          opacity: 1,
-          scale: 1,
-          duration: 0.8,
-        },
-        "+=0.1"
-      );
+    gsap.set(words, { y: 80, opacity: 0 });
+
+    tl.to(words, {
+      y: 0,
+      opacity: 1,
+      stagger: 0.2,
+      duration: 1,
     });
 
-    tl.to(wordRef.current, {
+    tl.to(words, {
+      y: -40,
       opacity: 0,
-      scale: 0.5,
+      stagger: 0.2,
       duration: 1,
       delay: 1,
     });
@@ -57,11 +46,11 @@ export default function HomeSection({ onSkip }) {
   const skipVideo = () => {
     const video = document.querySelector("video");
     if (video) {
-      video.muted = true; // 🔇 coupe le son
+      video.muted = true;
     }
 
     if (uiRef.current) uiRef.current.style.display = "none";
-    if (onSkip) onSkip(); // déclenche la montée du rideau
+    if (onSkip) onSkip();
   };
 
   return (
@@ -69,15 +58,21 @@ export default function HomeSection({ onSkip }) {
       ref={uiRef}
       className="fixed inset-0 z-40 flex flex-col items-center justify-center text-center px-6"
     >
+      {/* Texte animé */}
       <div className="pointer-events-none flex items-center justify-center">
-        <div
+        <h1
           ref={wordRef}
-          className="text-white text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-extrabold opacity-0 scale-50 leading-tight text-center w-full max-w-[90vw] px-4"
+          className=" text-white text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight text-center w-full max-w-[90vw] px-4"
         >
-          <span className="text-red-600">N</span>ous
-        </div>
+          {["Nous", "avons", "besoin", "de", "vous"].map((word, i) => (
+            <span key={i} className="inline-block mx-2 opacity-0">
+              {word}
+            </span>
+          ))}
+        </h1>
       </div>
 
+      {/* Contrôles audio + skip */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-4 z-50">
         <button
           onClick={toggleMute}

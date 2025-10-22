@@ -1,14 +1,16 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import DonationButton from "@components/DonationButton";
+import gsap from "gsap";
 
 export default function FloatingHeader({ site, onContactClick }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
+  const headerRef = useRef(null);
 
   const logoUrl =
     site?.logo?.url ??
@@ -23,6 +25,18 @@ export default function FloatingHeader({ site, onContactClick }) {
     { label: "Contact", action: onContactClick },
   ];
 
+  // ✨ Animation d’apparition du header
+  useEffect(() => {
+    if (headerRef.current) {
+      gsap.fromTo(
+        headerRef.current,
+        { opacity: 0, y: -20 },
+        { opacity: 1, y: 0, duration: 1, ease: "power2.out" }
+      );
+    }
+  }, []);
+
+  // 🔒 Empêche le scroll quand le menu mobile est ouvert
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "auto";
     return () => {
@@ -33,8 +47,11 @@ export default function FloatingHeader({ site, onContactClick }) {
   return (
     <>
       {/* 🧭 Header desktop */}
-      <header className="fixed top-3 left-0 right-0 z-50 flex justify-center pointer-events-none">
-        <div className="pointer-events-auto bg-white/90 backdrop-blur-md shadow-xl rounded-full px-4 sm:px-6 lg:px-8 py-1 flex items-center justify-between w-full max-w-screen-lg mx-4 overflow-hidden min-h-[64px] hidden md:flex">
+      <header
+        ref={headerRef}
+        className="fixed top-3 left-0 right-0 z-50 flex justify-center pointer-events-none"
+      >
+        <div className="pointer-events-auto bg-white/60 backdrop-blur-md shadow-xl rounded-full px-4 sm:px-6 lg:px-8 py-1 flex items-center justify-between w-full max-w-screen-lg mx-4 overflow-hidden min-h-[64px] hidden md:flex">
           <Image
             src={logoUrl}
             alt="Logo"

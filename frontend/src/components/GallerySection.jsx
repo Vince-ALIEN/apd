@@ -40,7 +40,7 @@ export default function GallerySection({ eglise }) {
   if (images.length === 0) return null;
 
   return (
-    <section className="relative px-6 pt-30 pb-0">
+    <section className="relative px-6 pt-10 pb-20">
       <div className="max-w-6xl mx-auto">
         <div
           ref={galleryRef}

@@ -1,16 +1,58 @@
 "use client";
 
+import { useLayoutEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useSiteData } from "../hooks/useSiteData";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function BlogSection({ API_URL, limit = null }) {
   const { articles, isLoading, error } = useSiteData(API_URL);
+  const wrapperRef = useRef(null);
+
+  useLayoutEffect(() => {
+    const wrapper = wrapperRef.current;
+    if (!wrapper) return;
+
+    const cards = wrapper.querySelectorAll(".blog-card");
+    if (cards.length === 0) return;
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: wrapper,
+        start: "top 80%",
+        end: "bottom 20%",
+        toggleActions: "play reverse play reverse",
+      },
+    });
+
+    tl.fromTo(
+      wrapper,
+      { opacity: 0, y: 50 },
+      { opacity: 1, y: 0, duration: 1, ease: "power2.out" }
+    );
+
+    tl.fromTo(
+      cards,
+      { opacity: 0, y: 30 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        ease: "power2.out",
+        stagger: 0.2,
+      },
+      "-=0.8"
+    );
+  }, [articles]);
 
   if (isLoading) {
     return (
       <section className="py-20 px-6 md:px-32 text-center">
-        <p className="text-sm md:text-base font-normal drop-shadow-sm leading-relaxed text-gray-500">
+        <p className="text-sm md:text-base text-gray-500">
           Chargement des articles...
         </p>
       </section>
@@ -20,9 +62,7 @@ export default function BlogSection({ API_URL, limit = null }) {
   if (error) {
     return (
       <section className="py-20 px-6 md:px-32 text-center">
-        <p className="text-sm md:text-base font-normal drop-shadow-sm leading-relaxed text-red-500">
-          Erreur : {error}
-        </p>
+        <p className="text-sm md:text-base text-red-500">Erreur : {error}</p>
       </section>
     );
   }
@@ -36,7 +76,7 @@ export default function BlogSection({ API_URL, limit = null }) {
   if (displayed.length === 0) {
     return (
       <section className="py-20 px-6 md:px-32 text-center">
-        <p className="text-sm md:text-base font-normal drop-shadow-sm leading-relaxed text-gray-500">
+        <p className="text-sm md:text-base text-gray-500">
           Aucun article disponible pour le moment.
         </p>
       </section>
@@ -45,8 +85,8 @@ export default function BlogSection({ API_URL, limit = null }) {
 
   return (
     <section className="py-20 px-6 md:px-32 bg-white">
-      <div className="max-w-6xl mx-auto">
-        <h2 className="text-2xl md:text-3xl font-bold drop-shadow-lg leading-snug text-gray-800 text-center mb-12">
+      <div ref={wrapperRef} className="max-w-6xl mx-auto blog-wrapper">
+        <h2 className="text-2xl md:text-3xl font-bold text-center mb-12 text-gray-800">
           {limit ? "Les derniers articles" : "Tous les articles"}
         </h2>
 
@@ -72,7 +112,7 @@ export default function BlogSection({ API_URL, limit = null }) {
               <Link
                 key={id}
                 href={`/blog/${slug}`}
-                className="group block bg-gray-50 rounded-lg overflow-hidden shadow hover:shadow-lg transition"
+                className="blog-card group block bg-gray-50 rounded-lg overflow-hidden shadow hover:shadow-lg transition"
               >
                 <div className="relative h-48 w-full">
                   <Image
@@ -84,14 +124,14 @@ export default function BlogSection({ API_URL, limit = null }) {
                   />
                 </div>
                 <div className="p-6">
-                  <h3 className="text-sm md:text-base font-normal drop-shadow-sm leading-relaxed text-gray-800 mb-2 group-hover:text-red-700 transition">
+                  <h3 className="text-sm md:text-base font-normal text-gray-800 mb-2 group-hover:text-red-700 transition">
                     {titre}
                   </h3>
                   <p className="text-sm text-gray-500 mb-1">
                     {new Date(date_publication).toLocaleDateString("fr-FR")} ·{" "}
                     {auteur}
                   </p>
-                  <p className="text-sm md:text-base font-normal italic drop-shadow-sm leading-relaxed text-gray-700">
+                  <p className="text-sm md:text-base italic text-gray-700">
                     {extrait}
                   </p>
                 </div>
