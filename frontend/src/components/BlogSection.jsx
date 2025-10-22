@@ -23,8 +23,8 @@ export default function BlogSection({ API_URL, limit = null }) {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: wrapper,
-        start: "top 80%",
-        end: "bottom 20%",
+        start: "top 50%",
+        end: "bottom top",
         toggleActions: "play reverse play reverse",
       },
     });

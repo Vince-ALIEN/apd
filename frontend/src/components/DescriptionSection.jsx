@@ -40,7 +40,7 @@ const DescriptionSection = forwardRef(({ eglise }, ref) => {
         curtainRef.current,
         { xPercent: -100 },
         { xPercent: 0, duration: 0.6, ease: "power2.out" },
-        0
+        "-=0.6"
       );
 
       // ✨ Texte à gauche
@@ -48,7 +48,7 @@ const DescriptionSection = forwardRef(({ eglise }, ref) => {
         textRef.current,
         { xPercent: -200, opacity: 1 },
         { xPercent: 0, opacity: 1, duration: 1 },
-        "+=0.2"
+        "-=0.6"
       );
 
       // 🖼️ Image à droite

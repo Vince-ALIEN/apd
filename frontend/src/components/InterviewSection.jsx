@@ -46,7 +46,7 @@ export default function InterviewSection({ block }) {
       addressWrapper,
       { xPercent: 100, opacity: 0 },
       { xPercent: 0, opacity: 1, duration: 0.6, ease: "power2.out" },
-      0
+      "-=0.6"
     );
 
     // 🏛️ AddressSection sort
@@ -61,7 +61,7 @@ export default function InterviewSection({ block }) {
       interviewWrapper,
       { xPercent: 100, opacity: 0 },
       { xPercent: 0, opacity: 1, duration: 0.6, ease: "power2.out" },
-      "-=0.3"
+      "+=0.2"
     );
 
     return () => {

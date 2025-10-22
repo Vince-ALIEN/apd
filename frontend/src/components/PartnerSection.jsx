@@ -31,7 +31,7 @@ export default function PartnerSection({
           delay: i * 0.15,
           scrollTrigger: {
             trigger: el,
-            start: "top 90%",
+            start: "top 20%",
             toggleActions: "play none none reverse",
           },
         });
