@@ -82,9 +82,9 @@ export default function GallerySection({ eglise }) {
   return (
     <section
       ref={sectionRef}
-      className="relative w-screen pt-5 pb-5  overflow-hidden"
+      className="relative w-screen mt-20 pt-5 pb-5 overflow-hidden"
     >
-      {/* 🧵 Rideau blanc animé par la droite */}
+      {/* 🧵 Rideau rouge animé par la droite */}
       <div
         ref={curtainRef}
         className="absolute top-0 left-0 w-full h-full bg-red-700 z-0 pointer-events-none"

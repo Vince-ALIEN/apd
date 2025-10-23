@@ -86,7 +86,7 @@ const DescriptionSection = forwardRef(({ eglise }, ref) => {
         else if (ref) ref.current = el;
         sectionRef.current = el;
       }}
-      className="relative w-screen h-screen px-6 md:px-32 overflow-hidden flex flex-col justify-center"
+      className="relative w-screen min-h-screen px-6 md:px-32 overflow-hidden flex flex-col justify-center pt-[120px] md:pt-0"
     >
       {/* 🧵 Rideau blanc en arrière-plan */}
       <div
@@ -95,7 +95,7 @@ const DescriptionSection = forwardRef(({ eglise }, ref) => {
       />
 
       {/* 🎬 Contenu principal */}
-      <div className="relative z-10 max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-center gap-10 py-20">
+      <div className="relative z-10 max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-center gap-10 ">
         {/* Texte à gauche */}
         <div ref={textRef} className="md:w-1/2 w-full text-gray-800">
           <div className="space-y-4">
