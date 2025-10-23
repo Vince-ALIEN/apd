@@ -95,7 +95,7 @@ const DescriptionSection = forwardRef(({ eglise }, ref) => {
       />
 
       {/* 🎬 Contenu principal */}
-      <div className="relative z-10 max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-center gap-10 ">
+      <div className="relative z-10 max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-center gap-10 py-20">
         {/* Texte à gauche */}
         <div ref={textRef} className="md:w-1/2 w-full text-gray-800">
           <div className="space-y-4">
