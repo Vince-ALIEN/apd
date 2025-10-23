@@ -15,6 +15,7 @@ import PartnerSection from "@components/PartnerSection";
 import ContactModal from "@components/ContactModal";
 import Footer from "@components/Footer";
 import BlogSection from "@components/BlogSection";
+import GallerySection from "@components/GallerySection";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -33,6 +34,7 @@ export default function Home() {
 
   const introRef = useRef(null);
   const descriptionRef = useRef(null);
+  const galleryRef = useRef(null);
 
   // ✅ Rafraîchit ScrollTrigger après le rendu du contenu
   useEffect(() => {
@@ -47,21 +49,23 @@ export default function Home() {
   useEffect(() => {
     if (!descriptionRef.current) return;
 
-    const trigger = ScrollTrigger.create({
-      trigger: descriptionRef.current,
-      start: "top top",
-      end: "bottom top",
-      onLeave: () => {
-        console.log("🎯 Fond déclenché après DescriptionSection");
-        setShowFond(true);
-      },
-      onEnterBack: () => {
-        console.log("🔙 Fond retiré en scroll inverse");
-        setShowFond(false);
-      },
-    });
+    const ctx = gsap.context(() => {
+      ScrollTrigger.create({
+        trigger: descriptionRef.current,
+        start: "top top",
+        end: "bottom 80%",
+        onLeave: () => {
+          console.log("🎯 Fond déclenché après DescriptionSection");
+          setShowFond(true);
+        },
+        onEnterBack: () => {
+          console.log("🔙 Fond retiré en scroll inverse");
+          setShowFond(false);
+        },
+      });
+    }, descriptionRef);
 
-    return () => trigger.kill();
+    return () => ctx.revert();
   }, [showContent]);
 
   return (
@@ -82,9 +86,9 @@ export default function Home() {
         <div
           className="fixed inset-0 z-0 pointer-events-none"
           style={{
-            backgroundImage: "url('/fond_vitrail.jpg')",
+            backgroundImage: "url('/fond_eglise.png')",
             backgroundSize: "cover",
-            backgroundPosition: "top",
+            backgroundPosition: "bottom",
             backgroundRepeat: "no-repeat",
             backgroundColor: "#fff",
           }}
@@ -111,6 +115,7 @@ export default function Home() {
           {eglise && (
             <>
               <DescriptionSection ref={descriptionRef} eglise={eglise} />
+              <GallerySection ref={galleryRef} eglise={eglise} />
               {interviewBlock && <InterviewSection block={interviewBlock} />}
             </>
           )}

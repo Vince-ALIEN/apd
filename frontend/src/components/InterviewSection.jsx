@@ -33,8 +33,8 @@ export default function InterviewSection({ block }) {
       scrollTrigger: {
         trigger: section,
         start: "top top",
-        end: "+=150%",
-        scrub: true,
+        end: "bottom+=100% top",
+        scrub: 0.5,
         pin: section,
         anticipatePin: 1,
         markers: false,
@@ -44,23 +44,23 @@ export default function InterviewSection({ block }) {
     // 🏛️ AddressSection entre
     tl.fromTo(
       addressWrapper,
-      { xPercent: 100, opacity: 0 },
-      { xPercent: 0, opacity: 1, duration: 0.6, ease: "power2.out" },
+      { xPercent: 100, opacity: 1 },
+      { xPercent: 0, opacity: 1, duration: 1.5, ease: "power3.out" },
       "-=0.6"
     );
 
     // 🏛️ AddressSection sort
     tl.to(
       addressWrapper,
-      { xPercent: -100, opacity: 0, duration: 0.6, ease: "power2.in" },
+      { xPercent: -100, opacity: 1, duration: 1.5, ease: "power3.in" },
       "+=0.6"
     );
 
     // 🎤 InterviewSection entre
     tl.fromTo(
       interviewWrapper,
-      { xPercent: 100, opacity: 0 },
-      { xPercent: 0, opacity: 1, duration: 0.6, ease: "power2.out" },
+      { xPercent: 100, opacity: 1 },
+      { xPercent: 0, opacity: 1, duration: 1.5, ease: "power3.out" },
       "+=0.2"
     );
 

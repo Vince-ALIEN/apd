@@ -1,10 +1,16 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import Image from "next/image";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function GallerySection({ eglise }) {
   const images = eglise?.images ?? [];
+  const sectionRef = useRef(null);
+  const curtainRef = useRef(null);
   const galleryRef = useRef(null);
   const [selectedImage, setSelectedImage] = useState(null);
 
@@ -37,16 +43,59 @@ export default function GallerySection({ eglise }) {
     return () => window.removeEventListener("keydown", handleKey);
   }, []);
 
+  // ✅ Animation de rideau réversible
+  useLayoutEffect(() => {
+    const ctx = gsap.context(() => {
+      const curtain = curtainRef.current;
+      const gallery = galleryRef.current;
+
+      gsap.set(gallery, { opacity: 0 });
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 70%",
+          end: "bottom top",
+          toggleActions: "play none none reverse",
+        },
+      });
+
+      tl.fromTo(
+        curtain,
+        { xPercent: 100 },
+        { xPercent: 0, duration: 0.5, ease: "power3.out" },
+        0.4
+      );
+
+      tl.fromTo(
+        gallery,
+        { xPercent: -200, opacity: 1 },
+        { xPercent: 0, opacity: 1, duration: 0.5, ease: "power3.out" }
+      );
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
   if (images.length === 0) return null;
 
   return (
-    <section className="relative px-6 pt-10 pb-20">
-      <div className="max-w-6xl mx-auto">
+    <section
+      ref={sectionRef}
+      className="relative w-screen pt-5 pb-5  overflow-hidden"
+    >
+      {/* 🧵 Rideau blanc animé par la droite */}
+      <div
+        ref={curtainRef}
+        className="absolute top-0 left-0 w-full h-full bg-red-700 z-0 pointer-events-none"
+      />
+
+      <div className=" relative z-10">
         <div
           ref={galleryRef}
-          className="overflow-x-auto whitespace-nowrap no-scrollbar"
+          className="overflow-x-auto whitespace-nowrap no-scrollbar transition-opacity duration-500"
         >
-          <div className="inline-flex gap-4 px-2 ">
+          <div className="inline-flex gap-4 px-2">
             {images.map((img, index) => (
               <button
                 key={index}
@@ -69,7 +118,7 @@ export default function GallerySection({ eglise }) {
       {/* 🖼️ Lightbox modale */}
       {selectedImage && (
         <div
-          className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 cursor-pointer"
+          className="fixed inset-0 bg-black/80 z-[1999] flex items-center justify-center p-4 cursor-pointer"
           onClick={() => setSelectedImage(null)}
         >
           <div className="relative w-full max-w-4xl aspect-[4/3]">

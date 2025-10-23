@@ -11,18 +11,22 @@ export default function AddressSection({ eglise }) {
   const mapUrl = `https://www.google.com/maps?q=${encodeURIComponent(adresse)}&output=embed`;
 
   return (
-    <section className="py-12 px-6 md:px-32 bg-white">
-      <div className="max-w-4xl mx-auto text-center">
-        <h2 className="text-2xl font-bold text-gray-800 mb-4">Localisation</h2>
-        <p className="text-lg text-gray-600 mb-6">{adresse}</p>
-        <div className="w-full h-[400px] rounded-lg overflow-hidden shadow-md">
-          <iframe
-            title="Carte Google"
-            src={mapUrl}
-            style={{ border: "none", width: "100%", height: "100%" }}
-            allowFullScreen
-            loading="lazy"
-          />
+    <section className="w-full py-16 px-6 md:px-0 ">
+      <div className="w-full flex flex-col items-center justify-center text-center">
+        <h2 className="text-3xl font-bold text-white mb-4 drop-shadow-lg">
+          Localisation
+        </h2>
+        <p className="text-lg text-white mb-8 drop-shadow-sm">{adresse}</p>
+        <div className="w-full max-w-[1600px] px-6 md:px-0">
+          <div className="w-full h-[500px] rounded-xl overflow-hidden shadow-2xl">
+            <iframe
+              title="Carte Google"
+              src={mapUrl}
+              style={{ border: "none", width: "100%", height: "100%" }}
+              allowFullScreen
+              loading="lazy"
+            />
+          </div>
         </div>
       </div>
     </section>

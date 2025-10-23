@@ -4,16 +4,14 @@ import { forwardRef, useLayoutEffect, useRef, useState } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import GallerySection from "./GallerySection";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const DescriptionSection = forwardRef(({ eglise }, ref) => {
-  const sectionRef = useRef(null); // local ref pour animation
+  const sectionRef = useRef(null);
   const curtainRef = useRef(null);
   const textRef = useRef(null);
   const imageRef = useRef(null);
-  const galleryRef = useRef(null);
 
   const [selectedImage, setSelectedImage] = useState(
     eglise?.image_principale ?? null
@@ -24,57 +22,55 @@ const DescriptionSection = forwardRef(({ eglise }, ref) => {
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
+      const curtain = curtainRef.current;
+      const text = textRef.current;
+      const image = imageRef.current;
+
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top top",
-          end: "bottom top",
-          scrub: true,
+          end: "+=150%",
           pin: true,
-          anticipatePin: 1,
+          scrub: 0.5,
         },
       });
 
-      // 🧵 Rideau blanc qui entre par la gauche
+      // 🧵 Rideau en arrière-plan
       tl.fromTo(
-        curtainRef.current,
+        curtain,
         { xPercent: -100 },
-        { xPercent: 0, duration: 0.6, ease: "power2.out" },
+        { xPercent: 0, ease: "power3.out", duration: 0.6 }
+      );
+
+      // ✨ Contenu glisse et apparaît
+      tl.fromTo(
+        text,
+        { xPercent: -200, opacity: 0 },
+        { xPercent: 0, opacity: 1, ease: "power3.out", duration: 0.6 },
+        "+=0.2"
+      );
+
+      tl.fromTo(
+        image,
+        { xPercent: 200, opacity: 0 },
+        { xPercent: 0, opacity: 1, ease: "power3.out", duration: 0.6 },
         "-=0.6"
       );
 
-      // ✨ Texte à gauche
-      tl.fromTo(
-        textRef.current,
-        { xPercent: -200, opacity: 1 },
-        { xPercent: 0, opacity: 1, duration: 1 },
-        "-=0.6"
+      // 🧵 Rideau sort
+      tl.to(
+        curtain,
+        { xPercent: -100, ease: "power3.inOut", duration: 0.6 },
+        "+=0.3"
       );
 
-      // 🖼️ Image à droite
-      tl.fromTo(
-        imageRef.current,
-        { xPercent: 200, opacity: 1 },
-        { xPercent: 0, opacity: 1, duration: 1 },
-        "-=0.8"
+      // 🎨 Texte devient blanc
+      tl.to(
+        text,
+        { color: "#ffffff", ease: "power2.out", duration: 0.4 },
+        "-=0.4"
       );
-
-      // 🎞️ Galerie animée en bas
-      gsap
-        .timeline({
-          scrollTrigger: {
-            trigger: galleryRef.current,
-            start: "top top",
-            end: "bottom top",
-            scrub: true,
-          },
-        })
-        .fromTo(
-          galleryRef.current,
-          { xPercent: 100, opacity: 1 },
-          { xPercent: 0, opacity: 1, duration: 1, ease: "power2.out" },
-          "+=0.5" // ⏱️ décale le début de l'animation dans le scroll
-        );
     }, sectionRef);
 
     return () => ctx.revert();
@@ -86,23 +82,23 @@ const DescriptionSection = forwardRef(({ eglise }, ref) => {
   return (
     <section
       ref={(el) => {
-        sectionRef.current = el;
         if (typeof ref === "function") ref(el);
         else if (ref) ref.current = el;
+        sectionRef.current = el;
       }}
-      className="relative w-full min-h-screen bg-black/40 px-6 md:px-32 overflow-hidden flex flex-col justify-center"
+      className="relative w-screen h-screen px-6 md:px-32 overflow-hidden flex flex-col justify-center"
     >
-      {/* 🧵 Rideau blanc */}
+      {/* 🧵 Rideau blanc en arrière-plan */}
       <div
         ref={curtainRef}
-        className="absolute top-0 left-0 w-full h-full bg-white z-0 pointer-events-none"
+        className="absolute top-0 left-0 w-full h-full bg-white z-[-1] pointer-events-none"
       />
 
       {/* 🎬 Contenu principal */}
-      <div className="relative z-10 max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-center gap-10 pt-35">
+      <div className="relative z-10 max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-center gap-10 ">
         {/* Texte à gauche */}
-        <div ref={textRef} className="md:w-1/2 w-full">
-          <div className="text-gray-800 space-y-4">
+        <div ref={textRef} className="md:w-1/2 w-full text-gray-800">
+          <div className="space-y-4">
             {eglise?.nom && (
               <h2 className="text-2xl md:text-3xl font-bold drop-shadow-lg leading-snug">
                 {eglise.nom}
@@ -133,11 +129,6 @@ const DescriptionSection = forwardRef(({ eglise }, ref) => {
             </div>
           </div>
         )}
-      </div>
-
-      {/* 🎨 Galerie animée en bas */}
-      <div ref={galleryRef}>
-        <GallerySection eglise={eglise} />
       </div>
     </section>
   );

@@ -12,22 +12,20 @@ const IntroOverlay = forwardRef((props, ref) => {
 
   // ✨ Animation d’entrée au montage
   useEffect(() => {
-    const tl = gsap.timeline({ defaults: { ease: "power2.out" } });
+    const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
-    // 🧭 Titre entre par la gauche
     tl.fromTo(
       titleRef.current,
       { opacity: 1, xPercent: -200 },
-      { opacity: 1, xPercent: 0, duration: 1 },
+      { opacity: 1, xPercent: 0, duration: 1.2 },
       0
     );
 
-    // 🧭 Sous-titre entre par la droite
     tl.fromTo(
       descRef.current,
       { opacity: 1, xPercent: 200 },
-      { opacity: 1, xPercent: 0, duration: 1 },
-      "-=0.6"
+      { opacity: 1, xPercent: 0, duration: 1.2 },
+      "-=0.8"
     );
   }, []);
 
@@ -49,16 +47,20 @@ const IntroOverlay = forwardRef((props, ref) => {
   return (
     <section
       ref={ref}
-      className="intro-overlay relative min-h-screen flex items-center justify-center text-white"
+      className="intro-overlay relative min-h-screen flex items-center justify-center text-white px-4 sm:px-6"
     >
       {/* 🧊 Fond semi-transparent derrière le texte */}
-      <div className="absolute inset-0 bg-black/40 z-0 pointer-events-none" />
+      <div className="absolute inset-0  z-0 pointer-events-none" />
 
       {/* 📝 Contenu centré */}
-      <div className="intro-content relative z-10 text-center px-6 max-w-4xl w-full">
+      <div className="intro-content relative z-10  text-center w-full max-w-4xl mx-auto">
         <h1
           ref={titleRef}
-          className="text-3xl md:text-6xl font-extrabold leading-tight opacity-0 drop-shadow-xl"
+          className="font-extrabold leading-tight drop-shadow-xl opacity-0"
+          style={{
+            fontSize: "clamp(2rem, 6vw, 4rem)",
+            lineHeight: "1.2",
+          }}
         >
           Aidez-nous à préserver
           <br />
@@ -66,7 +68,11 @@ const IntroOverlay = forwardRef((props, ref) => {
         </h1>
         <p
           ref={descRef}
-          className="mt-8 text-lg md:text-2xl font-medium opacity-0 drop-shadow-lg"
+          className="mt-6 font-medium drop-shadow-lg opacity-0"
+          style={{
+            fontSize: "clamp(1rem, 3vw, 1.5rem)",
+            lineHeight: "1.6",
+          }}
         >
           Chaque don contribue à restaurer l’église
           <br />
@@ -81,7 +87,7 @@ const IntroOverlay = forwardRef((props, ref) => {
       {/* 🧭 ScrollIndicator avec transition fluide */}
       <div
         ref={scrollIndicatorRef}
-        className={`absolute bottom-10 z-40 pointer-events-none transition-opacity duration-500 ${
+        className={`absolute bottom-6 sm:bottom-10 z-40 pointer-events-none transition-opacity duration-500 ${
           showScrollIndicator ? "opacity-100" : "opacity-0"
         }`}
       >
