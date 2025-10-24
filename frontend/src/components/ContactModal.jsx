@@ -68,14 +68,11 @@ export default function ContactModal({ isOpen, onClose }) {
     setSuccess(false);
 
     try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/send-email`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(form),
-        }
-      );
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/email`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
 
       const data = await res.json();
       console.log("Réponse Strapi :", data);

@@ -2,9 +2,10 @@ export default {
   routes: [
     {
       method: "POST",
-      path: "/send-email",
-      handler: "send-email.send",
+      path: "/email",
+      handler: "email.send",
       config: {
+        auth: false,
         policies: [],
         middlewares: [],
       },
