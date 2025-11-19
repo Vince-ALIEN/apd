@@ -21,11 +21,11 @@ export default {
       });
 
       strapi.log.info(
-        `📨 Email envoyé à ${process.env.CONTACT_RECEIVER} depuis ${name} <${email}>`
+        `Email envoyé à ${process.env.CONTACT_RECEIVER} depuis ${name} <${email}>`
       );
       ctx.send({ success: true });
     } catch (err) {
-      strapi.log.error("❌ Erreur Gmail :", err);
+      strapi.log.error("Erreur Gmail:", err);
       ctx.internalServerError("Échec de l’envoi du message.");
     }
   },

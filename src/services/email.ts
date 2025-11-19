@@ -1,9 +1,9 @@
 import nodemailer from "nodemailer";
 
 export async function send({ to, subject, html }) {
-  console.log("📨 Tentative d'envoi via Nodemailer...");
-  console.log("🔍 Destinataire :", to);
-  console.log("🔍 Expéditeur :", process.env.SMTP_USERNAME);
+  console.log("Envoi email via Nodemailer...");
+  console.log("Destinataire:", to);
+  console.log("Expéditeur:", process.env.SMTP_USERNAME);
 
   const transporter = nodemailer.createTransport({
     service: "gmail",
@@ -21,10 +21,10 @@ export async function send({ to, subject, html }) {
       html,
     });
 
-    console.log("✅ Email envoyé :", info.response);
+    console.log("Email envoyé:", info.response);
     return info;
   } catch (err) {
-    console.error("❌ Erreur SMTP Nodemailer :", err);
+    console.error("Erreur SMTP:", err);
     throw err;
   }
 }

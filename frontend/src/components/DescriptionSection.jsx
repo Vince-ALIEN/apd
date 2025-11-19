@@ -62,7 +62,7 @@ export default function DescriptionSection({
 
   if (!eglise && !hasInterviewContent) return null;
 
-  // ✅ GSAP horizontal slider
+  // Animation du slider horizontal
   useLayoutEffect(() => {
     if (!sectionRef.current || isMobile) return;
 

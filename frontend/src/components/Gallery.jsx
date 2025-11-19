@@ -110,36 +110,24 @@ export default function Gallery({ images }) {
   }, [selectedImage]);
 
   const layoutStyles = [
-    { top: "26%", left: "20%", width: "14%", height: "23%", order: 0 },
-    { top: "26%", left: "35%", width: "14%", height: "41%", order: 1 },
-    { top: "26%", left: "50%", width: "15%", height: "16%", order: 2 },
-    { top: "26%", left: "66%", width: "14%", height: "22%", order: 3 },
-    { top: "44%", left: "50%", width: "15%", height: "23%", order: 4 },
-    { top: "50%", left: "66%", width: "14%", height: "17%", order: 5 },
-    { top: "51%", left: "20%", width: "14%", height: "37%", order: 6 },
-    { top: "69%", left: "57%", width: "23%", height: "19%", order: 7 },
-    { top: "69%", left: "35%", width: "21%", height: "19%", order: 8 },
+    { top: "25%", left: "10%", width: "18%", height: "26%", order: 0 },
+    { top: "25%", left: "30%", width: "15%", height: "38%", order: 1 },
+    { top: "25%", left: "47%", width: "17%", height: "22%", order: 2 },
+    { top: "25%", left: "66%", width: "14%", height: "28%", order: 3 },
+    { top: "49%", left: "47%", width: "17%", height: "22%", order: 4 },
+    { top: "55%", left: "66%", width: "14%", height: "16%", order: 5 },
+    { top: "53%", left: "10%", width: "18%", height: "42%", order: 6 },
+    { top: "73%", left: "47%", width: "33%", height: "22%", order: 7 },
+    { top: "65%", left: "30%", width: "15%", height: "30%", order: 8 },
   ];
 
   return (
     <div
       ref={galleryRef}
-      className="relative w-full min-h-screen overflow-hidden flex items-center justify-center"
+      className="relative w-full min-h-screen overflow-hidden flex items-center justify-center py-16 md:py-24"
     >
-      {/* Cadre décoratif global */}
-      <div className="absolute inset-0 z-0 hidden md:flex items-center justify-center pt-16">
-        <div className="relative h-[65rem] w-[73rem]">
-          <Image
-            src="/grand.png"
-            alt="Cadre décoratif"
-            fill
-            className="object-contain scale-x-[0.83] scale-y-[0.98]"
-          />
-        </div>
-      </div>
-
       {/* Desktop */}
-      <div className="hidden md:block relative w-[50vw] h-[60vh]">
+      <div className="hidden md:block relative w-[90vw] max-w-7xl h-[75vh] min-h-[600px]">
         {images.slice(0, 9).map((img, index) => {
           const style = layoutStyles[index] || {
             top: "0%",
@@ -151,7 +139,7 @@ export default function Gallery({ images }) {
             <button
               key={img.id || index}
               onClick={() => setSelectedImage(img)}
-              className="gallery-item desktop absolute overflow-hidden shadow-lg transition-transform duration-500 cursor-pointer"
+              className="gallery-item desktop absolute overflow-hidden rounded-sm shadow-xl hover:shadow-2xl transition-all duration-500 cursor-pointer border-[6px] border-[#8B7355] bg-[#5a4a3a] hover:scale-105 hover:z-20"
               data-order={style.order}
               style={{
                 top: style.top,
@@ -160,21 +148,14 @@ export default function Gallery({ images }) {
                 height: style.height,
               }}
             >
-              <div className="relative w-full h-full group">
+              <div className="relative w-full h-full group overflow-hidden">
                 <Image
-                  src="/cadre_gallery.png"
-                  alt="Cadre décoratif"
+                  src={getImageUrl(img)}
+                  alt={img.name || `Image ${index + 1}`}
                   fill
-                  className="object-fill z-10 pointer-events-none"
+                  className="object-cover transition-transform duration-500 group-hover:scale-110"
                 />
-                <div className="w-full h-full transition-transform duration-300 group-hover:scale-115">
-                  <Image
-                    src={getImageUrl(img)}
-                    alt={img.name || `Image ${index + 1}`}
-                    fill
-                    className="object-cover z-0"
-                  />
-                </div>
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
               </div>
             </button>
           );
@@ -182,48 +163,44 @@ export default function Gallery({ images }) {
       </div>
 
       {/* Intermédiaire (tablettes) */}
-      <div className="hidden sm:grid md:hidden w-full px-6 py-12 grid grid-cols-2 gap-4">
-        {images.slice(0, 4).map((img, index) => (
+      <div className="hidden sm:grid md:hidden w-full max-w-4xl mx-auto px-6 py-12 grid-cols-2 gap-6">
+        {images.slice(0, 6).map((img, index) => (
           <button
             key={img.id || index}
             onClick={() => setSelectedImage(img)}
-            className="gallery-item tablet relative h-[220px] overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105"
+            className="gallery-item tablet relative h-[280px] overflow-hidden rounded-sm shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 border-[5px] border-[#8B7355] bg-[#5a4a3a]"
           >
-            <div className="relative w-full h-full">
+            <div className="relative w-full h-full group overflow-hidden">
               <Image
                 src={getImageUrl(img)}
                 alt={img.name || `Image ${index + 1}`}
                 fill
-                className="object-cover z-0"
+                className="object-cover transition-transform duration-500 group-hover:scale-110"
               />
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
             </div>
           </button>
         ))}
       </div>
 
       {/* Mobile */}
-      <div className="sm:hidden w-full min-h-screen flex items-center justify-center px-12">
-        <div className="w-full grid grid-cols-1 gap-4">
-          {images.slice(0, 4).map((img, index) => (
-            <div
+      <div className="sm:hidden w-full min-h-screen flex items-center justify-center px-6 py-8">
+        <div className="w-full max-w-md grid grid-cols-1 gap-5">
+          {images.slice(0, 6).map((img, index) => (
+            <button
               key={img.id || index}
-              className="gallery-item mobile relative h-[180px] overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105"
+              onClick={() => setSelectedImage(img)}
+              className="gallery-item mobile relative h-[240px] overflow-hidden rounded-sm shadow-xl active:scale-95 transition-all duration-300 border-[4px] border-[#8B7355] bg-[#5a4a3a]"
             >
-              <div className="relative w-full h-full">
-                <Image
-                  src="/cadre_bois.png"
-                  alt="Cadre décoratif"
-                  fill
-                  className="object-fill z-10 pointer-events-none"
-                />
+              <div className="relative w-full h-full overflow-hidden">
                 <Image
                   src={getImageUrl(img)}
                   alt={img.name || `Image ${index + 1}`}
                   fill
-                  className="object-cover z-0"
+                  className="object-cover"
                 />
               </div>
-            </div>
+            </button>
           ))}
         </div>
       </div>
@@ -235,23 +212,17 @@ export default function Gallery({ images }) {
               role="dialog"
               aria-modal="true"
               tabIndex={-1}
-              className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
+              className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-md p-4 cursor-pointer"
               onClick={() => setSelectedImage(null)}
             >
-              <div
-                className="relative w-full max-w-[80vw] max-h-[80vh] p-4"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <div className="w-full h-full flex items-center justify-center">
-                  <Image
-                    src={getImageUrl(selectedImage)}
-                    alt={selectedImage.name || "Image agrandie"}
-                    width={1000}
-                    height={700}
-                    onClick={() => setSelectedImage(null)}
-                    className="object-contain max-w-full max-h-full cursor-pointer"
-                  />
-                </div>
+              <div className="relative w-full max-w-6xl max-h-[90vh] flex items-center justify-center">
+                <Image
+                  src={getImageUrl(selectedImage)}
+                  alt={selectedImage.name || "Image agrandie"}
+                  width={1200}
+                  height={800}
+                  className="object-contain max-w-full max-h-[90vh]"
+                />
               </div>
             </div>,
             document.body

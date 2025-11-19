@@ -44,7 +44,6 @@ export default function BlogSection({ limit = 4 }) {
           </h2>
         </div>
 
-        {/* 🖋️ Liste des articles */}
         <div className="flex flex-wrap justify-center gap-8">
           {displayedArticles.map((article) => {
             const {
@@ -106,7 +105,6 @@ export default function BlogSection({ limit = 4 }) {
           })}
         </div>
 
-        {/* 🔗 Bouton vers tous les articles */}
         <div className="text-center">
           <Link
             href="/blog"

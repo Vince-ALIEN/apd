@@ -17,7 +17,6 @@ export default function PartnersPage() {
 
   return (
     <main className="min-h-screen w-full pt-[150px] pb-20 px-6 bg-pierre ">
-      {/* ✅ Section incitative */}
       <section className="max-w-4xl mx-auto text-center mb-20">
         <h1 className="text-3xl md:text-4xl drop-shadow-lg leading-snug text-black mb-6 font-garamond">
           Devenez partenaire de notre{" "}

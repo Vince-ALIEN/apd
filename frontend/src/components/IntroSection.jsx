@@ -205,7 +205,7 @@ export default function IntroSection({ eglise }) {
           <span className="reveal-text text-transparent relative z-10">
             {premierMot}
           </span>
-          <span className="reveal-box absolute top-0 left-0 h-[4.5rem] w-0 bg-[#ac1115] z-20"></span>
+          <span className="reveal-box absolute bottom-2  md:bottom-6 left-0 h-[2rem] sm:h-[2.5rem] md:h-[3.5rem] lg:h-[4.5rem] w-0 bg-[#ac1115] z-20"></span>
         </p>
 
         <p
@@ -215,7 +215,7 @@ export default function IntroSection({ eglise }) {
           <span className="reveal-text text-transparent relative z-10">
             {resteNom}
           </span>
-          <span className="reveal-box absolute top-0 left-0 h-[4.5rem] w-0 bg-[#ac1115] z-0"></span>
+          <span className="reveal-box absolute bottom-2  md:bottom-6 left-0 h-[2rem] sm:h-[2.5rem] md:h-[3.5rem] lg:h-[4.5rem] w-0 bg-[#ac1115] z-0"></span>
         </p>
 
         <div ref={buttonRef} className="mt-8">

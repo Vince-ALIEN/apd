@@ -21,7 +21,7 @@ export default function HeaderWrapper({ children }) {
   useEffect(() => {
     if (!isHomePage) {
       setHideHeader(false);
-      setShowDonationButton(true); // ✅ bouton visible par défaut hors home
+      setShowDonationButton(true);
       return;
     }
 
