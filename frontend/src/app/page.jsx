@@ -6,6 +6,7 @@ import dynamic from "next/dynamic";
 import VideoBackground from "@components/VideoBackground";
 import IntroSection from "@components/IntroSection";
 import DescriptionSection from "@components/DescriptionSection";
+import SectionNavigation from "@components/SectionNavigation";
 import ErrorMessage from "@components/ErrorMessage";
 
 // ⏳ Chargement dynamique de PartnerSection
@@ -34,20 +35,11 @@ export default function Home() {
 
   const firstInterview = Array.isArray(interviews) ? interviews[0] : null;
 
-  const isLoading =
-    !eglise && !accueil && !interviews && !partenaires && !articles && !error;
-
   const videoUrl = accueil?.video?.url?.startsWith("http")
     ? accueil.video.url
-    : `${process.env.NEXT_PUBLIC_API_URL}${accueil?.video?.url}`;
-
-  if (isLoading) {
-    return (
-      <main className="relative w-full min-h-screen flex items-center justify-center bg-black text-white">
-        <ErrorMessage type="loading" message="Chargement du site en cours..." />
-      </main>
-    );
-  }
+    : accueil?.video?.url
+      ? `${process.env.NEXT_PUBLIC_API_URL}${accueil.video.url}`
+      : null;
 
   if (error) {
     return (
@@ -59,12 +51,19 @@ export default function Home() {
 
   return (
     <main className="relative w-full min-h-screen overflow-x-hidden bg-black text-white">
-      {/* 🎥 Fond vidéo permanent */}
+      {/* Preload de la vidéo */}
+      {videoUrl && (
+        <link rel="preload" as="video" href={videoUrl} type="video/mp4" />
+      )}
+      {/* 🎥 Fond vidéo permanent - s'affiche dès que disponible */}
       {videoUrl && (
         <div className="fixed inset-0 z-0 pointer-events-none">
           <VideoBackground videoUrl={videoUrl} />
         </div>
       )}
+
+      {/* 🧭 Navigation entre sections */}
+      <SectionNavigation />
 
       {/* 🧩 Contenu principal */}
       <div className="relative z-10">

@@ -1,7 +1,6 @@
 import "./globals.css";
 import Footer from "../components/Footer";
 import HeaderWrapper from "@components/HeaderWapper";
-import { HeaderDonationProvider } from "../contexts/HeaderDonationContext";
 
 export const metadata = {
   title: "Église Saint-Jean-Baptiste d’Aulès",
@@ -12,12 +11,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="fr" className="scroll-smooth">
       <body className="overflow-x-hidden antialiased bg-white text-gray-900">
-        <HeaderDonationProvider>
-          <HeaderWrapper>
-            <main className="relative z-10">{children}</main>
-            <Footer />
-          </HeaderWrapper>
-        </HeaderDonationProvider>
+        <HeaderWrapper>
+          <main className="relative z-10">{children}</main>
+          <Footer />
+        </HeaderWrapper>
       </body>
     </html>
   );

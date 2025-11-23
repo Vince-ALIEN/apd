@@ -33,9 +33,21 @@ export function useSiteData() {
 
     const fetchData = async () => {
       try {
+        // Charger en priorité accueil pour avoir la vidéo rapidement
+        const accueilJson = await fetchJson(
+          `${API_URL}/api/accueil?populate=*`,
+          "accueil"
+        );
+
+        // Mettre à jour avec accueil immédiatement
+        setData((prev) => ({
+          ...prev,
+          accueil: accueilJson?.data ?? null,
+        }));
+
+        // Charger le reste en parallèle
         const endpoints = [
           ["eglise", "/api/eglise?populate=*"],
-          ["accueil", "/api/accueil?populate=*"],
           ["parametres_site", "/api/parametres-site?populate=*"],
           ["articles", "/api/articles?populate=image"],
           ["interviews", "/api/interviews?populate=*"],
@@ -50,7 +62,6 @@ export function useSiteData() {
 
         const [
           egliseJson,
-          accueilJson,
           siteJson,
           articlesJson,
           interviewsJson,

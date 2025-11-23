@@ -5,7 +5,6 @@ import { usePathname } from "next/navigation";
 import Header from "./Header";
 import ContactModal from "./ContactModal";
 import { useSiteData } from "@hooks/useSiteData";
-import { useHeaderDonation } from "@contexts/HeaderDonationContext";
 
 export default function HeaderWrapper({ children }) {
   const pathname = usePathname();
@@ -16,12 +15,10 @@ export default function HeaderWrapper({ children }) {
 
   const [hideHeader, setHideHeader] = useState(isHomePage);
   const [showContactModal, setShowContactModal] = useState(false);
-  const { showDonationButton, setShowDonationButton } = useHeaderDonation();
 
   useEffect(() => {
     if (!isHomePage) {
       setHideHeader(false);
-      setShowDonationButton(true);
       return;
     }
 
@@ -33,7 +30,7 @@ export default function HeaderWrapper({ children }) {
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [isHomePage, setShowDonationButton]);
+  }, [isHomePage]);
 
   const fallbackSite = parametres_site ?? {
     bouton_don: { url: "/don", label: "Faire un don" },
@@ -47,7 +44,7 @@ export default function HeaderWrapper({ children }) {
       <Header
         site={fallbackSite}
         isVisible={!hideHeader}
-        showDonationButton={showDonationButton}
+        showDonationButton={true}
         onContactClick={() => setShowContactModal(true)}
       />
 

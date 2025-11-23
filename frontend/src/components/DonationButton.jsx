@@ -17,7 +17,7 @@ export default function DonationButton({
   const label = parametres_site?.bouton_don?.label ?? "Soutenez-nous !";
 
   const baseClasses =
-    "pulse-button flex items-center justify-center rounded-sm bg-[#ac1115] text-white shadow-md hover:brightness-120 transition-all duration-300 w-fit ";
+    " flex items-center justify-center rounded-sm bg-[#ac1115] text-white shadow-md hover:brightness-120 transition-all duration-300 w-fit ";
 
   return (
     <>
