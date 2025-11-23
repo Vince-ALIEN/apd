@@ -167,7 +167,7 @@ export default function IntroSection({ eglise }) {
     >
       <div
         ref={welcomeRef}
-        className="absolute top-[17vh] left-0 right-0 flex flex-col items-center px-4 z-30"
+        className="absolute top-[17vh] sm:top-[30vh] md:top-[12vh] lg:top-[15vh] left-0 right-0 flex flex-col items-center px-4 z-30"
       >
         <h1 className="text-3xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold leading-relaxed tracking-tight drop-shadow-xl text-white text-center">
           Aidez-nous à préserver
@@ -184,7 +184,7 @@ export default function IntroSection({ eglise }) {
           <span className="reveal-text text-transparent relative z-10">
             {premierMot}
           </span>
-          <span className="reveal-box absolute bottom-[0.7rem]  h-[2rem] sm:h-[2.5rem] md:h-[3.5rem] lg:h-[4.5rem] bg-[#ac1115] z-20"></span>
+          <span className="reveal-box absolute bottom-[0.7rem] h-[2rem] sm:h-[2.5rem] md:h-[3.5rem] lg:h-[4.5rem] bg-[#ac1115] z-20"></span>
         </p>
 
         <div className="flex items-center gap-2 sm:gap-3 md:gap-4">
@@ -195,7 +195,7 @@ export default function IntroSection({ eglise }) {
             <span className="reveal-text text-transparent relative z-10">
               {resteNom}
             </span>
-            <span className="reveal-box absolute bottom-[0.7rem] md:bottom-6 h-[2rem] sm:h-[2.5rem] md:h-[3.5rem] lg:h-[4.5rem] bg-[#ac1115] z-20"></span>
+            <span className="reveal-box absolute bottom-[0.7rem] h-[2rem] sm:h-[2.5rem] md:h-[3.5rem] lg:h-[4.5rem] bg-[#ac1115] z-20"></span>
           </p>
 
           <p
@@ -205,7 +205,7 @@ export default function IntroSection({ eglise }) {
             <span className="reveal-text text-transparent relative z-10">
               &nbsp;&nbsp;{dernierMot}
             </span>
-            <span className="reveal-box absolute bottom-[0.7rem] md:bottom-6 h-[2rem] sm:h-[2.5rem] md:h-[3.5rem] lg:h-[4.5rem] bg-[#ac1115] z-20"></span>
+            <span className="reveal-box absolute bottom-[0.7rem] h-[2rem] sm:h-[2.5rem] md:h-[3.5rem] lg:h-[4.5rem] bg-[#ac1115] z-20"></span>
           </p>
         </div>
       </div>
