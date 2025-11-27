@@ -1,0 +1,752 @@
+(DP)
+D P
+OSSIER ROFESSIONNEL
+◢
+Nomdenaissance ARROUES
+►
+Nomd’usage
+►
+Prénom Bernard
+►
+Adresse
+►
+Titre professionnel visé
+Développeur Web et Web Mobile
+M ’ :
+ODALITÉ D ACCÈS
+☑ Parcours de formation
+☐ Validation des Acquis de l’Expérience (VAE)
+DOSSIERPROFESSIONNEL-Versiondu11/09/2017 Page1
+
+Présentation du dossier
+Ledossierprofessionnel(DP)constitueunélémentdusystèmedevalidationdutitreprofessionnel.
+CetitreestdélivréparleMinistèrechargédel’emploi.
+LeDPappartientaucandidat.Illeconserve,l’actualisedurantsonparcoursetleprésente
+obligatoirementàchaquesessiond’examen.
+PourrédigerleDP,lecandidatpeutêtreaidéparunformateurouparunaccompagnateurVAE.
+Ilestconsultéparlejuryaumomentdelasessiond’examen.
+Pour prendre sa décision, le jury dispose :
+1. des résultats de la mise en situation professionnelle complétés, éventuellement, du questionnaire
+professionnel ou de l’entretien professionnel ou de l’entretien technique ou duquestionnementàpartirde
+productions.
+2. duDossierProfessionnel(DP)danslequellecandidataconsignélespreuvesdesapratiqueprofessionnelle.
+3. desrésultatsdesévaluationspasséesencoursdeformationlorsquelecandidatévaluéestissud’unparcours
+deformation
+4. del’entretienfinal(danslecadredelasessiontitre).
+[Arrêtédu22décembre2015,relatifauxconditionsdedélivrancedestitresprofessionnels
+duministèrechargédel’Emploi]
+Ce dossier comporte :
+► pourchaqueactivité-typedutitrevisé,unàtroisexemplesdepratiqueprofessionnelle ;
+► un tableau à renseigner si le candidat souhaite porteràlaconnaissancedujuryladétentiond’untitre,d’un
+diplôme,d’uncertificatdequalificationprofessionnelle(CQP)oudesattestationsdeformation ;
+► unedéclarationsurl’honneuràcompléteretàsigner ;
+► desdocumentsillustrantlapratiqueprofessionnelleducandidat(facultatif)
+desannexes,sinécessaire.
+►
+Pourcomplétercedossier,lecandidatdisposed’unsitewebenaccèslibresurlesite.
+◢
+http://travail-emploi.gouv.fr/titres-professionnels
+Page2 DOSSIERPROFESSIONNEL-Versiondu11/09/2017
+
+(DP)
+D P
+OSSIER ROFESSIONNEL
+◢
+Sommaire
+Exemples de pratique professionnelle
+Activité-type1:Développerlapartiefront-endd’uneapplicationwebouwebmobile
+p. 5
+enintégrantlesrecommandationsdesécurité.
+CP1Maquetteruneapplication. p. 5
+►
+CP2Réaliseruneinterfacestatiqueetadaptable. p. 12
+►
+CP3Développeruneinterfaceutilisateurwebdynamique. p. 19
+►
+CP4Réaliseruneinterfaceutilisateuravecunesolutiondegestiondecontenuou
+►
+p. 24
+e-commerce.
+Intitulédel’activité-typen°2:Développerlapartieback-endd’uneapplicationweb
+p.
+ouwebmobileenintégrantlesrecommandationsdesécurité.
+CP5Créerunebasededonnées. p. 25
+►
+CP6Développerlescomposantsd’accèsauxdonnées. p. 31
+►
+CP7Développerlapartieback-endd’uneapplicationwebouwebmobile. p. 36
+►
+CP8Élaboreretmettreenœuvredescomposantsdansuneapplicationdegestionde
+►
+p. 44
+contenuoue-commerce .
+Titres,diplômes,CQP,attestationsdeformation(facultatif) p. 45
+Déclarationsurl’honneur p. 46
+Documentsillustrantlapratiqueprofessionnelle(facultatif) p. 47
+Annexes(SileRCleprévoit) p. 48
+DOSSIERPROFESSIONNEL-Versiondu11/09/2017 Page3
+
+E
+XEMPLES DE PRATIQUE
+PROFESSIONNELLE
+Page4 DOSSIERPROFESSIONNEL-Versiondu11/09/2017
+
+(DP)
+D P
+OSSIER ROFESSIONNEL
+◢
+Développerlapartiefront-endd’uneapplicationwebouwebmobileen
+Activité-type 1
+intégrantlesrecommandationsdesécurité.
+CP1 Maquetteruneapplication.
+►
+1.Décrivezlestâchesouopérationsquevousavezeffectuées,etdansquellesconditions :
+Dans le cadre de ce projet, Sergei Brin, le cofondateur de Google m’a contacté pour réaliser son
+portfolio. N’ayant plus le temps de coder avec ses activités de philanthropes, et voulant tout de
+mêmeréduiresescoûtsaumaximum,ilachoisidejetersondévolusurundéveloppeurjunior.
+Après avoireuunrapideéchangedemailsavecSergei(quenousappelleronsmaintenant“leclient”),
+ilasouhaitéapporterquelquesprécisionsàsonprojet.
+Le client souhaite que son portfolio présente les caractéristiques communes des portfolios. Il
+souhaite pouvoir montrer ses projets, afficher son CV et également un formulaire de contact. Il
+précise également que le site devra être en anglais, reprendre les couleurs de Google, et avoir une
+bonne accessibilité et de bonnes performances de SEO. Le client souhaite également que son site
+soitaccessiblesurlesformatsmobiles,tabletteetdesktop.
+1. Usersstories
+Suite à celà, pour valider les demandes du client, j’ai rédigé les users storiespourvaliderlesactions
+que va pouvoirréaliserunvisiteursurlesite.Lesusersstoriespermettentdecomprendreclairement
+les besoins des utilisateurs de manière concrète, et des’assurerquelesfonctionnalitésdéveloppées
+répondentauxattentesdesutilisateurs.
+DOSSIERPROFESSIONNEL-Versiondu11/09/2017 Page5
+
+Usersstories
+Entantque Jesouhaite Afin
+Utilisateur Consulterunepaged'accueil d'avoirunaperçuduportfolio
+simpleetélégante
+Utilisateur Naviguerfacilementàtravers detrouverdesinformations
+leportfolio surlesprojetsetlesles
+compétences
+Utilisateur Voirdesimagesdesprojets d'ensavoirplussurchaque
+réalisésetcliquerdessuspour projet
+obtenirplusd'informations
+Utilisateur Lireunedescriptiondétaillée afindeconnaîtreleprojet,son
+dechaqueprojet résuméduprojet,les
+technologiesutilisées
+Utilisateur ConsulterleCV devoirl'expérience
+professionnelleetles
+formations
+Utilisateur Envoyerunmessageouune deposerdesquestionsou
+demandedecontactàtravers engagerunecollaboration
+unformulaire
+Après un rapide échange de mails avec le client pour vérifier que les users stories étaient bien
+conformesàsesattentes,j’aitravaillésurleswireframesduprojet.
+2. Wireframes
+On peut dire que les wireframes sont des schémas simplifiés de la structuration d’un site
+web, qui permettent de valider visuellement l’idée que sefaitleclientdesonprojet.Leswireframes
+permettent également d’apporter des précisions sur certains éléments de la structuration d’une
+page,parexemplelesboutonscliquables,lesimages,etc…
+Le wireframe se doit d’être simple, généralement en nuance de gris, car il permet simplement de
+définirlastructurationdespagesetnonpasl’aspectvisueldespages.
+Pour ceprojetj’aidoncréalisépourchaquepagesdusiteleswireframesauxformatsmobile,tablette
+et desktop.Pourcolleraumaximumàl’idéededesignmobile-first,j’aichoisidetoujourscommencer
+parlewireframedelapagemobile,puisdecontinuersurleformattabletteetdesktop.
+Page6 DOSSIERPROFESSIONNEL-Versiondu11/09/2017
+
+(DP)
+D P
+OSSIER ROFESSIONNEL
+◢
+Wireframegénéraldelapage“Home”
+On remarque sur cet exemple la représentation des trois formats spécifiés par le client. Je me suis
+basé sur le format mobile, puis j’ai décliné la structure de la page mobile aux formats tablette et
+desktop.
+Onremarquequelesélémentsnechangentpas,ilssontsimplementréorganisés.
+DOSSIERPROFESSIONNEL-Versiondu11/09/2017 Page7
+
+Wireframedelapage“Home”-formatmobile
+Onpeutremarquerplusieurschosessurcewireframe:
+- L’utilisation d’un séparateur horizontal en pointillés en milieu depage:ilreprésentelafinde
+la page au format mobile. Pour afficher le contenu situé en dessous de ce séparateur,
+l’utilisateurdevrascroller.
+- L’utilisation de “tooltip”: ces informations permettent de préciser des éléments qui
+pourraient ne pas être clairs lors de la lecture de ce wireframe,notammentlesévènements
+quipeuventêtrerattachésàunélément.
+- L’affichage du menu mobile: j’ai choisi d’afficher sur la première page la représentation du
+menu mobile, ainsi que les évènements qui permettent de l’afficher ou de le cacher. Cette
+représentationdumenumobilen'apparaîtpassurleswireframes.
+Page8 DOSSIERPROFESSIONNEL-Versiondu11/09/2017
+
+(DP)
+D P
+OSSIER ROFESSIONNEL
+◢
+Wireframedelapage“Home”-formattablette
+DOSSIERPROFESSIONNEL-Versiondu11/09/2017 Page9
+
+Wireframedelapage“Home”-formatdesktop
+Autresexemplesdewireframes
+Page10 DOSSIERPROFESSIONNEL-Versiondu11/09/2017
+
+(DP)
+D P
+OSSIER ROFESSIONNEL
+◢
+2.Précisezlesmoyensutilisés :
+Danslecadredeceprojet,j’aiutiliséWhimsical.
+3.Avecquiavez-voustravaillé ?
+J’aitravailléseulpourceprojet.
+4.Contexte
+Nomdel’entreprise,organismeouassociation ÉcoleO’clock
+►
+Chantier,atelier,service Projetpersonnelréaliséencoursdeformation.
+►
+Périoded’exercice Du : 01/12/2022 au : 09/02/2023
+►
+5.Informationscomplémentaires(facultatif)
+Lerepodeceprojetestaccessibleàl’adressesuivante:https://github.com/elbernie/brin-portfolio.
+Lesdocumentsdeconception(usersstoriesetwireframes)sontdisponiblesdansledossier“docs”de
+cerepo.
+L’espacedetravailWhimsicalestdisponibleàcetteadresse:
+https://whimsical.com/portfolio-6TesnN5msqqUAa6T96NcdU
+DOSSIERPROFESSIONNEL-Versiondu11/09/2017 Page11
+
+Développerlapartiefront-endd’uneapplicationwebouwebmobileen
+Activité-type 1
+intégrantlesrecommandationsdesécurité.
+CP2 Réaliseruneinterfacewebstatiqueetadaptable.
+►
+1.Décrivezlestâchesouopérationsquevousavezeffectuées,etdansquellesconditions :
+En reprenant les spécifications du projet (CP1), définies par les demandes du client, l’établissement
+desusersstoriesetdeswireframes,jesuispasséàlaréalisationduprojet.
+Ce projet définissait plusieurs objectifs.Lepremierd’entreeuxétaitd’êtreaccessibleetd’utiliserdes
+bonnes pratiques de SEO. Le second objectif étant de réaliser un site responsive, accessible aux
+formatsmobiles,tablettesetdesktop.
+La réalisation de ce projet se veut être la plus simple possible. J’ai choisi d’utiliser du HTML, duCSS
+sans frameworks. J’utilise cependant la librairie normalize.css. Concernant l’utilisation deJavaScript,
+j’ai faitlechoixd’enutiliserauminimum.Dansceprojet,JavaScriptestuniquementutilisépourgérer
+l’ouvertureetlafermeturedumenusurmobile.
+Pour réaliser ce projet, j’ai décidé d’adopter la stratégie du mobile-first. En effet, du fait de
+l’utilisation majoritaire et grandissante des mobiles pour naviguer sur le web, il semble judicieux
+d’adoptercetteapprochepourréaliserceprojet.
+Pour vérifier que le projet répondait bien à ces impératifs, j’ai choisi d’utiliser l’outil Lighthouse
+intégréàlaconsolededéveloppementdunavigateur.
+outildedéveloppementLighthouse
+Page12 DOSSIERPROFESSIONNEL-Versiondu11/09/2017
+
+(DP)
+D P
+OSSIER ROFESSIONNEL
+◢
+1. Structuredespages
+Pour structurer les pages du projet, pour favoriser l’accessibilité et le SEO, j’ai choisi d’utiliser une
+bonnesémantiqueHTML.
+Voiciparexemplelastructuregénéraledelapaged’accueil:
+On remarque ici que le corps de la page est divisé en deux grandes parties: la partie header et la
+partiemain.
+La partie header contient tout ce qui a attrait à la partie supérieure de la page, notamment la
+navigation.
+La partie main quant à elle, contient l’ensemble des informations principales de la page. On
+remarquequ’icicettepartiecontientdeuxsections.
+DOSSIERPROFESSIONNEL-Versiondu11/09/2017 Page13
+
+Contenudelasection“projets”
+Pour illustrer la structure HTML de la page, on remarque qu’ici la section “projets”, contient une
+baliseh2,puisplusieursarticlesetenfinunlienpourconsulterl’intégralitédesprojets.
+En précision, pour afficher ce bouton j’aurais pu choisir d’encapsuler une balise buttonauseindela
+balise a, mais celà aurait pu nuire à l’accessibilité pour les personnes en situation de handicap. La
+balise a étant interprétée par les logiciels d’aide comme un changement de page, alors que les
+boutonssontprévuspourdéclencheruneaction,parexemplesoumettreunformulaire.
+Structureducontenud’unebalisearticle
+On remarque dans la structure de l’article deux éléments importants, un header pour identifier les
+informationsprincipales,puisunedivcontenantladescriptiondesprojets.
+Le header contient notamment une image avec un texte alternatif (alt) utile notamment pour les
+logiciels de lecture d’écran à destination des personnes ensituationdehandicap,ainsiqu’unebalise
+h3pourrespecterlasémantiqueHTML(h1>h2>h3>...)
+Page14 DOSSIERPROFESSIONNEL-Versiondu11/09/2017
+
+(DP)
+D P
+OSSIER ROFESSIONNEL
+◢
+2. responsiveetmediaqueries
+Pour suivre la demande d’avoirunstyleresponsive,etensuivantlemobile-first,j’aiutilisédesmedia
+queries. Pour avoir un site qui s’adapte au dark mode ou au light mode, ainsi qu’au mode de
+contraste élevé pour les personnes ayant des difficultés de lecture, j’ai également utilisé des média
+queries.
+Icilamediaquerieutiliseunbreakpoint.Ce
+breakpoints’appliqueauxécransayantunelargeur
+minimumde1024px(desktop).
+LeCSSchangenotammentladirectiondudisplay:flex;
+enflex-direction:row;àlaplacedecolumn
+J’ai également mis en place des média queries pour permettre à l’utilisateur d’avoir un thème
+sombre en fonction de la configuration de son matériel. J’utilise également des media queries si
+l’utilisateur souhaite avoir un contraste plus élevé, notamment au niveau du texte. Et enfin je
+combine les deux media queries pour les utilisateurs qui souhaitent avoir unthèmesombreouclair
+ETuncontrasteélevé.
+DOSSIERPROFESSIONNEL-Versiondu11/09/2017 Page15
+
+Ici la media querie applique un changement de couleur
+lorsque le navigateur du visiteur demande à avoir un
+thèmesombre
+Cette média querie s’applique lorsque l’utilisateur à un
+thèmeclair,etdemandeàavoiruncontrasteélevé.
+LeCSSappliqueicidescouleursplusdéfinies,ennoir.
+Cette media querie s’applique lorsque l’utilisateur
+demandeunthèmesombreETuncontrasteélevé
+Le CSS applique ici des couleurs plus définies, en
+blanc.
+3. Menumobile-javascript
+La seule utilisation du javascript pour ce projet réside dans la gestiondel’ouvertureoulafermeture
+dumenumobile.
+Page16 DOSSIERPROFESSIONNEL-Versiondu11/09/2017
+
+(DP)
+D P
+OSSIER ROFESSIONNEL
+◢
+Dans ce script, un écouteur d'événement est appliqué sur l’élément .burger-menu-container. Si la
+variable showMenu est définie comme étant false, alors on inverse l’état de lavariableentrue.Puis
+onutiliseunopérateurternairepourdéterminersilemenudoitêtreaffichéounon.
+2.Précisezlesmoyensutilisés :
+Pourréaliserceprojet,j’aiutiliséVSCodeavecPrettierpourformaterlecode
+Pour vérifier l’accessibilité et les bonnes pratiques de SEO, j’ai utilisé l’outilLighthousedelaconsole
+de développement de mon navigateur (Brave). J’ai également utilisé la console pour simuler les
+mediaqueries.
+Je me suis référé au site MDN (Mozilla Developer Network) pour mieux utiliser les media queries
+ayantattraitauxpréférencesdethèmeetdecontrastedel’utilisateur.
+Pour déployer le site, j’ai utilisé le système des Github Pages, puis j’ai utilisé l’outil Google Search
+Consolepourpermettrel’indexationdusite.
+3.Avecquiavez-voustravaillé ?
+J’aitravailléseulsurceprojet.
+DOSSIERPROFESSIONNEL-Versiondu11/09/2017 Page17
+
+4.Contexte
+Nomdel’entreprise,organismeouassociation ÉcoleO’Clock
+►
+Chantier,atelier,service Projetpersonnelréaliséencoursdeformation.
+►
+Périoded’exercice Du : 01/12/2022 au : 09/02/2023
+►
+5.Informationscomplémentaires(facultatif)
+Lerepoduprojetestaccessibleici:https://github.com/ElBernie/brin-portfolio
+Leprojetestaccessibleàcetteadresse:https://elbernie.github.io/brin-portfolio/
+Page18 DOSSIERPROFESSIONNEL-Versiondu11/09/2017
+
+(DP)
+D P
+OSSIER ROFESSIONNEL
+◢
+Développerlapartiefront-endd’uneapplicationwebouwebmobileen
+Activité-type 1
+intégrantlesrecommandationsdesécurité.
+CP3 Développeruneinterfaceutilisateurwebdynamique.
+►
+1.Décrivezlestâchesouopérationsquevousavezeffectuées,etdansquellesconditions :
+Dans le cadre de ce titre professionnel, j’ai réalisé une application de gestion de budget simplifiée.
+Cette application permet de gérer les dépenses etlesrevenusd’unutilisateurconnecté.L'utilisateur
+peut créer différents budgets,ainsiquedifférentescatégoriesdedépenses.Ilpeutégalementajouter
+desdépensesetdesrevenusàcesbudgets.
+Pour réaliser lapartiefront-enddel'application,j'aiutilisélalibrairieReactenyajoutantlesmodules
+suivants:
+- Gestiondesroutes:ReactRouter
+- Gestiondustate:ReactRedux,ReduxToolkit
+- Gestiondesrequêtes:axios,ReactQuery
+- Gestiondelatraduction:react-i18next
+- Gestiondesformulaires:ReactHookForm
+- GestiondesheadersHTTP:ReactHelmet
+- Librairiedecomposants:MUI
+DOSSIERPROFESSIONNEL-Versiondu11/09/2017 Page19
+
+1. Lerouter
+Pour créer le routeur, j’utilise React router et sa fonction createRouterBrowser. Je définis
+dans un premier temps les routes principales de l’application qui seront rendues dans le
+composantRoot.Cesroutessontuniquementaccessiblesauxutilisateursconnectés.
+Ensuite jegèrelesroutes deconnexionetd’inscription,quisontuniquementaccessiblesaux
+utilisateursnonconnectés.
+Enfin je vérifie que l’application, et notamment le state, sont bien chargés avec la variable
+loaded. Si l’application est chargée, mon composant App retourne le routeur sinonilaffiche
+unepagedechargement.
+Page20 DOSSIERPROFESSIONNEL-Versiondu11/09/2017
+
+(DP)
+D P
+OSSIER ROFESSIONNEL
+◢
+2. Lesrequêtes
+Pour effectuer les requêtes, j’ai commencé par définir une instance d’Axios qui sera réutilisable au
+seindenotreapplication,notammentparlalibrairieReactQuery.
+Ensuite cette instance peut être utilisée au sein des requêtes effectuées dans nos composants, un
+exempleiciavecl’utilisationdeuseMutationdeReactQuerypoureffectuerunerequêtePOSTlorsde
+lacréationd’unnouveaubudget.
+DOSSIERPROFESSIONNEL-Versiondu11/09/2017 Page21
+
+Page22 DOSSIERPROFESSIONNEL-Versiondu11/09/2017
+
+(DP)
+D P
+OSSIER ROFESSIONNEL
+◢
+React Query devient très utile dans le sens où ce dernier gère le cache de nos requêtes. Ici dans le
+cadre de la création de notre nouveau budget, on indique à React Query d’invalider le cache des
+précédentes requêtesnommées“budgets”,etrafraichirlescomposantsquipourraientdépendredes
+donnéesissuesdecetterequête.
+2.Précisezlesmoyensutilisés :
+Pour réaliser ce projet j’ai utilisé Vite, ainsi que les documentations desdifférentesdépendancesde
+monprojet,notammentlesdocumentationsdeReactRedux,etdeReactQuery
+3.Avecquiavez-voustravaillé ?
+J’aitravailléseulsurceprojet.
+4.Contexte
+Nomdel’entreprise,organismeouassociation ÉcoleO’Clock
+►
+Chantier,atelier,service Projetpersonnelréaliséencoursdeformation.
+►
+Périoded’exercice Du : 01/12/2022 au : 09/02/2023
+►
+5.Informationscomplémentaires(facultatif)
+Lerepodeceprojetestaccessibleàcetteadresse:https://github.com/ElBernie/yaba-front
+Leprojetestaccessibleàcetteadresse:https://yaba.bernie.cool/(email:demo@bernie.cool/mdp:
+demoL33T)
+DOSSIERPROFESSIONNEL-Versiondu11/09/2017 Page23
+
+Développerlapartiefront-endd’uneapplicationwebouwebmobileen
+Activité-type 1
+intégrantlesrecommandationsdesécurité.
+CP4 Réaliseruneinterfaceutilisateuravecunesolutiondegestiondecontenuou
+►
+e-commerce.
+1.Décrivezlestâchesouopérationsquevousavezeffectuées,etdansquellesconditions :
+2.Précisezlesmoyensutilisés :
+3.Avecquiavez-voustravaillé ?
+4.Contexte
+Nomdel’entreprise,organismeouassociation
+►
+Chantier,atelier,service
+►
+Périoded’exercice Du : au :
+►
+5.Informationscomplémentaires(facultatif)
+Page24 DOSSIERPROFESSIONNEL-Versiondu11/09/2017
+
+(DP)
+D P
+OSSIER ROFESSIONNEL
+◢
+Développerlapartieback-endd’uneapplicationwebouwebmobileen
+Activité-type 2
+intégrantlesrecommandationsdesécurité.
+CP5 Créerunebasededonnées.
+►
+1.Décrivezlestâchesouopérationsquevousavezeffectuées,etdansquellesconditions :
+Comme présenté dans la compétence professionnelle 3, j’ai créé un petit gestionnaire de budget
+nomméYABA(YetAnotherBudgetApp).
+En premier lieu,ildevaitêtrepossiblepourunutilisateurdecréeruncompte.Puischaqueutilisateur
+devait pouvoir créer ses propres budgets, auquel il pouvait ajouter des transactions. Mais pour
+mieux comprendre les transactions au sein de ses budgets, l’utilisateur devait pouvoir créer et
+assignerdescatégoriesàcestransactions.
+Pour mieux comprendre la structure de mon projet, j’ai donc créé un MCD (Modèle Conceptuel des
+Données).
+1. LeMCD
+On peut remarquer sur ce MCD les différentes
+cardinalitésentrechaquetables,parexemple:
+● Un utilisateur peut avoir 0 ou plusieurs
+(0N)budgets,demêmepourlescatégories.
+● Un budget et une catégorie peuvent avoir
+auminimumetaumaximumun(1,1)utilisateur.
+● Un budget et une catégorie peuvent avoir
+0ouplusieurstransactions.
+On remarque que les cardinalités qui joignent la
+table budget et catégorie sont des cardinalités
+many-to-many (0N), c'est-à-dire que plusieurs
+budgets peuvent avoir plusieurs catégories et
+inversement. Dès lors, la table transactiondevient
+defactounetabledeliaison.
+DOSSIERPROFESSIONNEL-Versiondu11/09/2017 Page25
+
+Après avoir défini la représentation visuelle de ma base de données avec le MCD, j’ai créé un MLD
+(modèlelogiquedesdonnées)pourreprésenterlesrelationsentrelestables.
+2. LeMLD
+J’aiensuitecrééundictionnairedesdonnéespourreprésenterleschampsdestables.
+3. Ledictionnairedesdonnées
+Pour coller au plus près à la forme finale de ma base de données, j’ai choisi de traduire les champs
+destablesdéfinisenfrançaisdansmonMCDversl’anglaispourledictionnairedesdonnées.
+Page26 DOSSIERPROFESSIONNEL-Versiondu11/09/2017
+
+(DP)
+D P
+OSSIER ROFESSIONNEL
+◢
+Puisunefoisledictionnairedesdonnéesréalisé,jemesuisservidePgAdminpourréaliserleMPD
+(modèlephysiquedesdonnées).
+4. LeMPD
+Notabene:pourdesraisonsd’organisation,lesextraitsdecodesontséparés,mais
+représententl’intégralitéduMPD.
+DOSSIERPROFESSIONNEL-Versiondu11/09/2017 Page27
+
+Page28 DOSSIERPROFESSIONNEL-Versiondu11/09/2017
+
+(DP)
+D P
+OSSIER ROFESSIONNEL
+◢
+2.Précisezlesmoyensutilisés :
+PourréaliserleMCD,j’aiutiliséMocodo,puisj’aiutiliséPgAdminpourm’assisterdanslaréalisation
+duMPD.
+3.Avecquiavez-voustravaillé ?
+J’aitravailléseulsurceprojet.
+DOSSIERPROFESSIONNEL-Versiondu11/09/2017 Page29
+
+4.Contexte
+Nomdel’entreprise,organismeouassociation ÉcoleO’Clock
+►
+Chantier,atelier,service Projetpersonnelréaliséencoursdeformation.
+►
+Périoded’exercice Du : 01/12/2022 au : 09/02/2023
+►
+5.Informationscomplémentaires(facultatif)
+Documentsdeconception:https://github.com/ElBernie/yaba-back/tree/main/docs
+Leprojetestaccessibleàcetteadresse:https://yaba.bernie.cool/(email:demo@bernie.cool/mdp:
+demoL33T)
+Page30 DOSSIERPROFESSIONNEL-Versiondu11/09/2017
+
+(DP)
+D P
+OSSIER ROFESSIONNEL
+◢
+Développerlapartieback-endd’uneapplicationwebouwebmobileen
+Activité-type 2
+intégrantlesrecommandationsdesécurité.
+CP6 Développerlescomposantsd’accèsauxdonnées.
+►
+1.Décrivezlestâchesouopérationsquevousavezeffectuées,etdansquellesconditions :
+ToujoursdanslecadreduprojetYABA(CP3etCP5),j’aiimplémentél’architectureavecNodeJSet
+Express.J’aichoisidenepasutiliserd’ORMetd’effectuerdesrequêtesSQLdirectementauserveur
+Postgresaveclemodulenode-postgres,enutilisantégalementlepaquetnode-pg-format.
+1. Initialisationdelaconnexion
+PourinitialiserlaconnexionauserveurPostgres,j’aicrééunfichierdb.jsgérantlepooldeconnexion.
+2. Utilitairedeconstructionetd'exécutionderequêtes.
+PouraméliorermonAPI,jesouhaitaispouvoirinterpréterlesparamètresdelaquerystringdes
+requêtespourlatransformerenrequêteSQL.J’aidonccrééunutilitaire(query.service.js)quipermet
+d’analyserlaquerystring,puisd’exécuterlarequête,etcedefaçonsécuriséepouréviterles
+injectionsSQL.
+J’aidonccrééunepremièrefonctionclauseBuilder,quipermetdetraiterlesparamètressort,limit,
+orderetwhere.
+DOSSIERPROFESSIONNEL-Versiondu11/09/2017 Page31
+
+Page32 DOSSIERPROFESSIONNEL-Versiondu11/09/2017
+
+(DP)
+D P
+OSSIER ROFESSIONNEL
+◢
+LafonctionclauseBuilderestutiliséeauniveauducontrollerderequête.Lafonctionprenden
+paramètrelaquerystringdelarequête,puisobtientunobjetensortie.
+Leparamètrequerydecetobjetpeutensuiteêtrepassédansleparamètreclausesdelafonction
+execute.
+Lafonctionexecute,vaconcaténerlarequêteSQLdelacouched’accèsaveclesclausesderequête,
+enajoutantlesparamètresdelarequête(values)puisexécutelarequêtedemanièresécurisée.
+3. Lacouched’accès
+Pourcréerlacouched’accèsauxdonnées,j’aicrééunobjetpourchaqueentitédemabasede
+données,parexemple:
+DOSSIERPROFESSIONNEL-Versiondu11/09/2017 Page33
+
+Etchaqueobjetd’entitécontientdesméthodespourmodifierlesdonnéesenbasededonnées,
+exécutéesaveclafonctionexecutedéfinieprécédemment.
+exempledelafonctionexecute,avecdesclauses
+exempledelafonctionexecute,sansclauses,maisavecdesparamètres
+2.Précisezlesmoyensutilisés :
+Danslecadredeceprojet,etpourl’accèsauxdonnéesj’aiutilisélesmodulesnode-postgres,
+node-postgres-format,etqspourparserlaquerystring.
+3.Avecquiavez-voustravaillé ?
+J’aitravailléseulsurceprojet.
+4.Contexte
+Nomdel’entreprise,organismeouassociation ÉcoleO’Clock
+►
+Chantier,atelier,service Projetpersonnelréaliséencoursdeformation.
+►
+Page34 DOSSIERPROFESSIONNEL-Versiondu11/09/2017
+
+(DP)
+D P
+OSSIER ROFESSIONNEL
+◢
+Périoded’exercice Du : 01/12/2022 au : 09/02/2023
+►
+5.Informationscomplémentaires(facultatif)
+Lerepoduprojetestaccessibleàcetteadresse:https://github.com/elbernie/yaba-back
+Leprojetestaccessibleàcetteadresse:https://yaba.bernie.cool/(email:demo@bernie.cool/mdp:
+demoL33T)
+DOSSIERPROFESSIONNEL-Versiondu11/09/2017 Page35
+
+Développerlapartieback-endd’uneapplicationwebouwebmobileen
+Activité-type 2
+intégrantlesrecommandationsdesécurité.
+CP7 Développerlapartieback-endd’uneapplicationwebouwebmobile.
+►
+1.Décrivezlestâchesouopérationsquevousavezeffectuées,etdansquellesconditions :
+Pourm’exercer,j’aisouhaitéréaliserunprojetassezsimple:unraccourcisseurd’URL.J’ainomméce
+projetYAUS(YetAnotherURLShortener).
+Auniveauduback-enddecetteapplication,j’aiégalementutiliséExpress.Pourréaliserl’APIdemon
+service,j’aicommencéparcréerunrouteur.
+Lechemindelarequêteauniveaudesroutesestlesuivant:requête→routeurprincipal→ router
+d’entité→middlewares→controller.
+1. Initialisationduserveur
+Iciondéclarenotreserveur.
+On remarque l’utilisation d’un rate-limiter
+pourlimiterlesrequêtessurnotreserveur.
+On remarque également l’utilisation de
+notre router principal en tant que
+middleware. Ce routeur va se charger de
+gérerlesrequêteseffectuées.
+2. Routeurprincipal
+Je déclare dans le fichier src/routes/router.js le
+routeur de notre API, puis au sein de cefichier,je
+viens utiliser d’autres routeurs, liés aux entités,
+quejeviensappliquersurlesendpoints.
+Page36 DOSSIERPROFESSIONNEL-Versiondu11/09/2017
+
+(DP)
+D P
+OSSIER ROFESSIONNEL
+◢
+3. Routerd’entité
+Danscefichiersrc/routes/links.route.jsjevaisdéclarerlesendpointsdelaressourceLinks,avecles
+méthodesassociées(get,post,patch,delete,etc).Onremarquel’utilisationdemiddlewares,que
+j’expliqueraisplustard.
+Avecl’organisationdenotrerouteur,parexemplepourrécupérerunlien,onvafaireunerequête
+GETàl’adressesuivante:https://mon-domaine.fr/links/[alias-du-lien]
+DOSSIERPROFESSIONNEL-Versiondu11/09/2017 Page37
+
+4. Controller
+Unefoislarequêteeffectuée,c’estlecontrollerquivaprendrelerelaisettraiterlapartie“logique”
+denotreAPI,ilvatraiterlesdonnéesdelarequêtepuisinteragiraveclacouchedesdonnéesde
+notreAPIetenfinrenvoyerdesdonnéesenretour.Envoiciunexempleaveclecontrollerdecréation
+delien,contenudanslefichiersrc/controllers/userlinks.controller.js
+Pourinformation,lesliensetlesaliasdeslienssontstockésdansdeuxtablesdifférentesdelabase
+dedonnées.LatableLinkcontientsimplementl’URL,tandisquelatableUserlinkcontientune
+référenceàl’enregistrementdelatableLinkainsiqu’uneréférenceàl’utilisateurayantcréélelien.
+IcilecontrollervasimplementvérifierquecelienestdéjàprésentdanslatableLink.Siilestprésent,
+lecontrollervacréeruneréférenceàceliendanslatableUserlink,sinonilvacréerleliendansla
+tableLinketcréeruneréférencedanslatableUserlink.
+Page38 DOSSIERPROFESSIONNEL-Versiondu11/09/2017
+
+(DP)
+D P
+OSSIER ROFESSIONNEL
+◢
+5. Middlewares
+Pourassurerlagestiondel’authentificationd’unutilisateuroupourvaliderlesdonnées,j’aicréédes
+middlewarequejepasseauniveaudurouter,envoiciunexemple:
+Pourgérerl’authentificationdel’utilisateur,j’aicréélemiddlewaresuivant:
+DOSSIERPROFESSIONNEL-Versiondu11/09/2017 Page39
+
+Ce middleware va vérifier si pour une route donnée l’authentification est obligatoire ou non. Si un
+token est passé dans les headers avec l’élément “Authorization”,onvérifietoutd’abordqueletoken
+suitlaforme“Bearer[jwt]”.
+On vérifie ensuite que le JWT estbienvalide,aveclalibrairiejsonwebtoken.Siletokenestvalide,on
+attachesimplementàl’objetderequête l’iddel’utilisateur.
+Poursécuriserlesdonnéesenvoyéesparl’utilisateuràl’API,j’aichoisid’utiliserlalibrairieJoi.
+J’ai créé un middleware, qui, tout commelemiddlewared'authentification,acceptedesparamètres.
+Lemiddlewaredevalidationadeuxparamètres:unschémaetuneclé.
+Le schéma est défini dans un autre fichier est permetdedécrireetdevaliderlesdonnéesenvoyées,
+tandis que la clé nous permet de définir quel élément de la requête nous souhaitons valider. Par
+exemple,sijesouhaitevaliderlesdonnéescontenuesdansreq.body,jevaispasserlaclé“body”.
+Jedéfinisensuitelesschémasauseindudossiervalidations,voiciunexempleduschémade
+validationdelacréationd’unlien
+Page40 DOSSIERPROFESSIONNEL-Versiondu11/09/2017
+
+(DP)
+D P
+OSSIER ROFESSIONNEL
+◢
+Ensuite pour gérer de façon “propre” les erreurs de mon API, j’ai créé un middleware de gestion
+d’erreur
+Ce type de middleware est un peuparticuliercarilaccepte4paramètres. Lorsdelaprésentationde
+l’exemple de controller précédemment, on pouvait voir que dans ma gestion d’erreur je passais
+l’erreur au middleware suivant via la fonction next(). Express va alors détecter automatiquement le
+passagedel’erreuretvagérerl’erreurviamonmiddleware.
+DOSSIERPROFESSIONNEL-Versiondu11/09/2017 Page41
+
+6. Ratelimiting
+Enfin, pour rajouter une couche supplémentaire de sécurité, j’ai décidé d’ajouter un rate limiter. Le
+rate limiter permet de limiter le nombre derequêtesàl’API.J’aidonccréédifférentstypesdelimiter
+enfonctiondescasd’utilisation.
+J’aicrééunlimitergénéralistequej’utilisegénéralementsurtouteslesrequêtesfaitesàmonserveur
+(cf:premierexempledecettecompétence-initialisationduserveur).Puisj’aicréédeuxautres
+limitersquej’appliqueauniveaudesroutes/auth/registeret/auth/login.
+Lepremierlimiterconcernelalimitationdecréationdecomptesàuneseulecréationdecomptepar
+minute,parIP.Lesecondpermetdelimiterlestentativesdeconnexiond’unutilisateurà5par
+minuteetparIP,defaçonàéviterlesattaquesparbruteforce.
+Page42 DOSSIERPROFESSIONNEL-Versiondu11/09/2017
+
+(DP)
+D P
+OSSIER ROFESSIONNEL
+◢
+2.Précisezlesmoyensutilisés :
+Pourconstruireceprojetj’aiutiliséleslibrairiessuivantes:
+- Expressetsadocumentation
+- express-rate-limit:pourgérerleratelimiting.
+- jsonwebtokenpourconstruireetvaliderlestokensd’authentification
+- Joipourgérerlavalidationdesdonnées
+3.Avecquiavez-voustravaillé ?
+J’aitravailléseulsurceprojet
+4.Contexte
+Nomdel’entreprise,organismeouassociation ÉcoleO’Clock
+►
+Chantier,atelier,service Projetpersonnelréaliséencoursdeformation.
+►
+Périoded’exercice Du : 01/12/2022 au : 09/03/2023
+►
+5.Informationscomplémentaires(facultatif)
+Lerepodeprojetestaccessibleàcetteadresse:https://github.com/elbernie/yaus-back
+DOSSIERPROFESSIONNEL-Versiondu11/09/2017 Page43
+
+Développerlapartieback-endd’uneapplicationwebouwebmobileen
+Activité-type 2
+intégrantlesrecommandationsdesécurité.
+CP8 Élaboreretmettreenœuvredescomposantsdansuneapplicationdegestionde
+►
+contenuoue-commerce.
+1.Décrivezlestâchesouopérationsquevousavezeffectuées,etdansquellesconditions :
+2.Précisezlesmoyensutilisés :
+3.Avecquiavez-voustravaillé ?
+4.Contexte
+Nomdel’entreprise,organismeouassociation
+►
+Chantier,atelier,service
+►
+Périoded’exercice Du : au :
+►
+5.Informationscomplémentaires(facultatif)
+Page44 DOSSIERPROFESSIONNEL-Versiondu11/09/2017
+
+(DP)
+D P
+OSSIER ROFESSIONNEL
+◢
+Titres, diplômes, CQP, attestations de formation
+(facultatif)
+Intitulé Autorité ou organisme Date
+DOSSIERPROFESSIONNEL-Versiondu11/09/2017 Page45
+
+Déclaration sur l’honneur
+Jesoussigné(e)BernardARROUES ,
+déclaresurl’honneurquelesrenseignementsfournisdanscedossiersontexactsetqueje
+suisl’auteur(e)desréalisationsjointes.
+Faità le 17/03/2023
+pourfairevaloircequededroit.
+Signature :
+Page46 DOSSIERPROFESSIONNEL-Versiondu11/09/2017
+
+(DP)
+D P
+OSSIER ROFESSIONNEL
+◢
+Documents illustrant la pratique professionnelle
+(facultatif)
+Intitulé
+DOSSIERPROFESSIONNEL-Versiondu11/09/2017 Page47
+
+A
+NNEXES
+(Si le RC le prévoit)
+Page48 DOSSIERPROFESSIONNEL-Versiondu11/09/2017
