@@ -136,3 +136,4 @@ build
 
 docs/*.md
 !docs/README.md
+apd/Docs2/
