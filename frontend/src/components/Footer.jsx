@@ -1,12 +1,11 @@
-"use client";
-
-import { useSiteData } from "@hooks/useSiteData";
 import Image from "next/image";
 import Link from "next/link";
 import { Facebook, Instagram, Youtube, Mail, MapPin } from "lucide-react";
 
-export default function Footer() {
-  const { parametres_site, eglise } = useSiteData();
+// Footer sans interactivité lourde -> Server Component acceptable
+export default function Footer({ siteData }) {
+  const parametres_site = siteData?.parametres_site;
+  const eglise = siteData?.eglise;
 
   const logoUrl =
     parametres_site?.logo_footer?.url || parametres_site?.logo?.url;

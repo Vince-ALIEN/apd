@@ -1,42 +1,13 @@
-"use client";
-
-import { useSiteData } from "@hooks/useSiteData";
 import Link from "next/link";
 import Image from "next/image";
-import ErrorMessage from "@components/ErrorMessage";
 
-export default function BlogSection({ limit = 4 }) {
-  const { articles, error } = useSiteData();
-  const isLoading = !articles && !error;
-
-  if (isLoading) {
-    return (
-      <ErrorMessage
-        type="loading"
-        message="Chargement des récits en cours..."
-      />
-    );
-  }
-
-  if (error) {
-    return (
-      <ErrorMessage
-        type="error"
-        message={`Erreur lors du chargement des articles : ${error}`}
-      />
-    );
-  }
-
-  if (!articles?.length) {
-    return <ErrorMessage type="empty" message="Chargement des articles ..." />;
-  }
-
+// Server Component: reçoit déjà les articles préfetchés côté serveur
+export default function BlogSection({ articles = [], limit = 4 }) {
   const displayedArticles = articles.slice(0, limit);
 
   return (
     <section className="relative w-full min-h-screen bg-pierre px-6 md:px-32 py-20 text-black overflow-hidden">
       <div className="relative min-h-screenz-10 max-w-6xl mx-auto space-y-12">
-        {/* 📰 Titre principal */}
         <div className="text-center">
           <h2 className="text-3xl md:text-4xl font-garamond text-black leading-snug">
             Nos derniers{" "}

@@ -1,20 +1,28 @@
 "use client";
 
 import { useRouter, usePathname } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import DonationButton from "@components/DonationButton";
+import ContactModal from "@components/ContactModal";
 import "hamburgers/dist/hamburgers.min.css";
 
-export default function Header({
-  site,
-  isVisible,
-  onContactClick,
-  showDonationButton,
-}) {
-  const [menuOpen, setMenuOpen] = useState(false);
+export default function Header({ siteData }) {
   const pathname = usePathname();
   const router = useRouter();
+  const isHomePage = pathname === "/";
+
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [hideHeader, setHideHeader] = useState(isHomePage);
+  const contactModalRef = useRef(null);
+
+  const parametres_site = siteData?.parametres_site;
+  const site = parametres_site ?? {
+    bouton_don: { url: "/don", label: "Faire un don" },
+    logo: { url: "/logo.png" },
+    url_don: "/don",
+    reseaux_sociaux: [],
+  };
 
   const logoUrl =
     site?.logo?.url ?? site?.logo?.data?.attributes?.url ?? "/logo.png";
@@ -24,9 +32,24 @@ export default function Header({
     { label: "L'association", href: "/association" },
     { label: "Devenez partenaire", href: "/partners" },
     { label: "Blog", href: "/blog" },
-    { label: "Contact", action: onContactClick },
+    { label: "Contact", action: () => contactModalRef.current?.open() },
   ];
 
+  // Gestion du scroll pour masquer/afficher le header sur la page d'accueil
+  useEffect(() => {
+    if (!isHomePage) {
+      setHideHeader(false);
+      return;
+    }
+    const handleScroll = () => {
+      setHideHeader(window.scrollY < 100);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [isHomePage]);
+
+  // Gestion du scroll du body pour le menu mobile
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "auto";
     return () => {
@@ -36,27 +59,30 @@ export default function Header({
 
   return (
     <>
+      <ContactModal ref={contactModalRef} triggerButton={false} />
+
       {/* Desktop Header */}
       <header
-        className={`fixed top-3 left-0 right-0 z-50 flex justify-center transition-opacity duration-500 ${
-          isVisible
+        className={`fixed top-3 left-0 right-0 z-50 flex justify-center transition-opacity duration-500 hidden md:flex ${
+          !hideHeader
             ? "opacity-100 pointer-events-auto"
             : "opacity-0 pointer-events-none"
         }`}
       >
-        <div className="bg-white/60 backdrop-blur-md shadow-xl rounded-sm px-4 sm:px-6 lg:px-8 py-1 flex items-center justify-between w-full max-w-screen-lg mx-4 min-h-[64px] hidden md:flex">
-          <a href="/" className="flex-shrink-0 p-1 rounded-md">
+        <div className="bg-white/60 backdrop-blur-md shadow-xl rounded-sm pl-2 sm:px-4 lg:px-5 py-0 flex items-center justify-between w-full max-w-screen-lg mx-4 min-h-[40px]">
+          <a href="/" className="flex-shrink-2 p-1 rounded-md">
             <Image
               src={logoUrl}
               alt="Logo"
               width={100}
-              height={40}
+              height={120}
+              style={{ width: "auto", height: "auto" }}
               className="rounded-md"
               priority
             />
           </a>
 
-          <nav className="flex items-center gap-4 sm:gap-6 lg:gap-8 text-black flex-wrap justify-end w-full">
+          <nav className="flex items-center gap-3 sm:gap-4 lg:gap-6 text-black flex-nowrap justify-end w-full text-xs md:text-sm lg:text-base">
             {navLinks.map((link) =>
               link.href ? (
                 <a
@@ -78,15 +104,15 @@ export default function Header({
                 </button>
               )
             )}
-            {showDonationButton && <DonationButton className="ml-2" />}
+            <DonationButton className="ml-2 px-3 py-1 text-xs md:px-4 md:py-1.5 md:text-sm" />
           </nav>
         </div>
       </header>
 
       {/* Mobile Header */}
       <header
-        className={`fixed top-3 left-0 right-0 z-50 flex items-center justify-between px-4 py-2 bg-white/60 backdrop-blur-md shadow-md rounded-sm md:hidden transition-opacity duration-500 ${
-          isVisible
+        className={`fixed top-4 left-0 right-0 z-50 flex items-center justify-between px-2 py-2 bg-white/60 backdrop-blur-md shadow-md rounded-sm md:hidden transition-opacity duration-500 ${
+          !hideHeader
             ? "opacity-100 pointer-events-auto"
             : "opacity-0 pointer-events-none"
         }`}
@@ -95,14 +121,15 @@ export default function Header({
           <Image
             src={logoUrl}
             alt="Logo"
-            width={80}
-            height={32}
+            width={60}
+            height={24}
             className="rounded-md"
+            style={{ width: "auto", height: "auto" }}
             priority
           />
         </a>
-        <div className="flex items-center gap-3">
-          {showDonationButton && <DonationButton variant="header" />}
+        <div className="flex items-center gap-4">
+          <DonationButton variant="header" />
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             className="relative w-10 h-10 flex items-center justify-center rounded-full bg-white shadow-md transition duration-300 focus:outline-none"
@@ -116,7 +143,7 @@ export default function Header({
                 position: "absolute",
                 top: "55%",
                 left: "50%",
-                transform: "translate(-50%, -50%) scale(0.5)",
+                transform: "translate(-50%, -50%) scale(0.45)",
               }}
             >
               <span className="hamburger-box">
@@ -127,7 +154,7 @@ export default function Header({
         </div>
       </header>
 
-      {/* Mobile Menu  */}
+      {/* Mobile Menu */}
       <div
         className={`fixed top-0 left-0 w-full h-screen z-40 flex items-center justify-center transform transition-transform duration-500 ${
           menuOpen ? "translate-x-0" : "translate-x-full"
@@ -158,12 +185,6 @@ export default function Header({
                 {link.label}
               </button>
             )
-          )}
-          {showDonationButton && (
-            <DonationButton
-              variant="menu"
-              className="mt-6 border-white border pulse-button "
-            />
           )}
         </div>
       </div>

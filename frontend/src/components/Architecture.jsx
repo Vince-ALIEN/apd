@@ -51,7 +51,7 @@ const Architecture = forwardRef(({ styleArchitectural, plan }, ref) => {
       ref={scopeRef}
       className="relative w-full min-h-screen flex items-center justify-center"
     >
-      <div className="max-w-6xl w-full flex flex-col md:flex-row gap-10 items-center text-black pt-15">
+      <div className="max-w-6xl w-screen flex flex-col md:flex-row gap-10 items-center text-black pt-15">
         <div className="w-full md:w-1/2 space-y-4">
           <h2 className="text-3xl md:text-4xl font-garamond leading-snug break-words">
             Le style{" "}

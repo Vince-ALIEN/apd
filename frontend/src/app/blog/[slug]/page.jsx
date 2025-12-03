@@ -1,97 +1,149 @@
-"use client";
-
-import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import { useSiteData } from "@hooks/useSiteData";
-import ErrorMessage from "@components/ErrorMessage";
+import { getArticle, getAllArticles, getImageUrl } from "../../../lib/strapi";
 
-async function getArticle(slug) {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/articles?filters[slug][$eq]=${slug}&populate=image`,
-    { next: { revalidate: 60 } }
-  );
-  const data = await res.json();
-  return data.data?.[0] ?? null;
+// ISR : Revalidation toutes les 60 secondes
+export const revalidate = 60;
+
+// SSG : Générer les pages statiques au build
+export async function generateStaticParams() {
+  try {
+    const articles = await getAllArticles();
+    return articles.map((article) => ({
+      slug: article.slug,
+    }));
+  } catch (error) {
+    console.error("Erreur generateStaticParams:", error);
+    return [];
+  }
 }
 
-export default function ArticlePage({ params }) {
+// Métadonnées SEO dynamiques
+export async function generateMetadata({ params }) {
   const { slug } = params;
-  const API_URL = process.env.NEXT_PUBLIC_API_URL;
-  const { parametres_site, isLoading, error } = useSiteData(API_URL);
 
-  const [article, setArticle] = useState(null);
-  const [loadingArticle, setLoadingArticle] = useState(true);
+  try {
+    const article = await getArticle(slug);
 
-  useEffect(() => {
-    const fetchArticle = async () => {
-      const result = await getArticle(slug);
-      setArticle(result);
-      setLoadingArticle(false);
+    if (!article) {
+      return {
+        title: "Article introuvable | APD Blog",
+        description: "Cet article n'existe pas ou a été supprimé.",
+      };
+    }
+
+    const { titre, contenu, image } = article;
+    const imageUrl = getImageUrl(image);
+    const description =
+      contenu?.[0]?.children?.[0]?.text?.substring(0, 160) ||
+      "Découvrez cet article sur Art et Patrimoine de Doazit";
+
+    return {
+      title: `${titre} | APD Blog`,
+      description,
+      openGraph: {
+        title: titre,
+        description,
+        images: imageUrl ? [imageUrl] : [],
+        type: "article",
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: titre,
+        description,
+        images: imageUrl ? [imageUrl] : [],
+      },
     };
-    fetchArticle();
-  }, [slug]);
-
-  if (isLoading || loadingArticle) {
-    return (
-      <ErrorMessage
-        type="loading"
-        message="Chargement de l’article en cours…"
-      />
-    );
+  } catch (error) {
+    console.error("Erreur generateMetadata:", error);
+    return {
+      title: "Erreur | APD Blog",
+      description: "Une erreur est survenue",
+    };
   }
+}
 
-  if (error || !article) {
-    return (
-      <ErrorMessage
-        type="error"
-        message={`Article introuvable pour le slug : ${slug}`}
-      />
-    );
-  }
+export default async function ArticlePage({ params }) {
+  const { slug } = params;
 
-  const { titre, date_publication, contenu, image, auteur } = article;
-  const imageUrl = image?.url || image?.data?.attributes?.url;
+  try {
+    const article = await getArticle(slug);
 
-  return (
-    <main className="min-h-screen pt-[150px] pb-20 px-6 bg-pierre">
-      <div className="max-w-3xl mx-auto">
-        <h1 className="text-2xl md:text-3xl font-garamond font-bold drop-shadow-lg leading-snug text-gray-900 text-center mb-6">
-          {titre}
-        </h1>
-
-        <p className="text-sm md:text-base font-normal drop-shadow-sm leading-relaxed text-gray-500 text-center mb-2">
-          {date_publication
-            ? new Date(date_publication).toLocaleDateString("fr-FR", {
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-              })
-            : "Date inconnue"}
-        </p>
-
-        <p className="text-sm md:text-base font-normal drop-shadow-sm leading-relaxed text-gray-600 text-center italic mb-8">
-          {auteur ?? "Auteur inconnu"}
-        </p>
-
-        {imageUrl && (
-          <div className="mb-8 rounded-lg overflow-hidden shadow-lg relative w-full h-80">
-            <Image
-              src={imageUrl}
-              alt={titre}
-              fill
-              className="object-cover"
-              sizes="(max-width: 768px) 100vw, 700px"
-            />
+    if (!article) {
+      return (
+        <main className="min-h-screen pt-[150px] pb-20 px-6 bg-pierre flex items-center justify-center">
+          <div className="text-center">
+            <h1 className="text-2xl font-garamond font-bold text-gray-900 mb-4">
+              Article introuvable
+            </h1>
+            <p className="text-gray-600">
+              Cet article n'existe pas ou a été supprimé.
+            </p>
           </div>
-        )}
+        </main>
+      );
+    }
 
-        <div className="space-y-4 text-sm md:text-base font-normal drop-shadow-sm leading-relaxed text-gray-800">
-          {contenu?.map((block, i) => {
-            const text = block.children?.[0]?.text?.trim();
-            return text ? <p key={i}>{text}</p> : null;
-          })}
+    const { titre, date_publication, contenu, image, auteur } = article;
+    const imageUrl = getImageUrl(image);
+
+    return (
+      <main className="min-h-screen pt-[150px] pb-20 px-6 bg-pierre">
+        <div className="max-w-3xl mx-auto">
+          <h1 className="text-2xl md:text-3xl font-garamond font-bold drop-shadow-lg leading-snug text-gray-900 text-center mb-6">
+            {titre}
+          </h1>
+
+          <p className="text-sm md:text-base font-normal drop-shadow-sm leading-relaxed text-gray-500 text-center mb-2">
+            {date_publication
+              ? new Date(date_publication).toLocaleDateString("fr-FR", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })
+              : "Date inconnue"}
+          </p>
+
+          <p className="text-sm md:text-base font-normal drop-shadow-sm leading-relaxed text-gray-600 text-center italic mb-8">
+            {auteur ?? "Auteur inconnu"}
+          </p>
+
+          {imageUrl && (
+            <div className="mb-8 rounded-lg overflow-hidden shadow-lg relative w-full h-80">
+              <Image
+                src={imageUrl}
+                alt={titre}
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 700px"
+                priority
+              />
+            </div>
+          )}
+
+          <div className="space-y-4 text-sm md:text-base font-normal drop-shadow-sm leading-relaxed text-gray-800">
+            {contenu?.map((block, i) => {
+              const text = block.children?.[0]?.text?.trim();
+              return text ? (
+                <p key={`block-${i}-${text.substring(0, 20)}`}>{text}</p>
+              ) : null;
+            })}
+          </div>
         </div>
-      </div>
-    </main>
-  );
+      </main>
+    );
+  } catch (error) {
+    console.error("Erreur lors du rendu de l'article:", error);
+    return (
+      <main className="min-h-screen pt-[150px] pb-20 px-6 bg-pierre flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-2xl font-garamond font-bold text-gray-900 mb-4">
+            Erreur
+          </h1>
+          <p className="text-gray-600">
+            Une erreur est survenue lors du chargement de l'article.
+          </p>
+        </div>
+      </main>
+    );
+  }
 }

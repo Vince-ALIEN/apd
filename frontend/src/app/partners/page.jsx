@@ -1,18 +1,34 @@
-"use client";
-
-import { useState } from "react";
-import { useSiteData } from "@hooks/useSiteData";
+import { getSiteData } from "../../lib/strapi";
 import ContactModal from "@components/ContactModal";
-import ErrorMessage from "@components/ErrorMessage";
 
-export default function PartnersPage() {
-  const API_URL = process.env.NEXT_PUBLIC_API_URL;
-  const { parametres_site, error } = useSiteData(API_URL);
+// Métadonnées SEO
+export const metadata = {
+  title: "Nos Partenaires | Art et Patrimoine de Doazit",
+  description:
+    "Découvrez les partenaires qui soutiennent l'association Art et Patrimoine de Doazit dans ses actions de restauration et de valorisation du patrimoine.",
+  openGraph: {
+    title: "Nos Partenaires - APD",
+    description: "Merci à nos partenaires pour leur soutien",
+    type: "website",
+  },
+};
 
-  const [showContactModal, setShowContactModal] = useState(false);
+export default async function PartnersPage() {
+  let error = null;
+  try {
+    await getSiteData();
+  } catch (e) {
+    error = e.message;
+  }
 
   if (error) {
-    return <ErrorMessage type="error" message={`Erreur : ${error}`} />;
+    return (
+      <main className="min-h-screen flex items-center justify-center bg-white text-red-600 font-garamond">
+        <p className="text-sm md:text-base leading-relaxed drop-shadow-sm">
+          Erreur : {error}
+        </p>
+      </main>
+    );
   }
 
   return (
@@ -28,21 +44,8 @@ export default function PartnersPage() {
           transmission d’une histoire locale forte. Votre engagement sera
           valorisé auprès du public et des institutions.
         </p>
-        <div className="mt-8">
-          <button
-            onClick={() => setShowContactModal(true)}
-            className="inline-block px-6 py-3 bg-[#ac1115] font-semibold text-white rounded-sm shadow-md hover:bg-red-700 transition"
-          >
-            Je souhaite devenir partenaire
-          </button>
-        </div>
+        <ContactModal buttonText="Devenir partenaire" />
       </section>
-
-      {/* 📩 Modale de contact */}
-      <ContactModal
-        isOpen={showContactModal}
-        onClose={() => setShowContactModal(false)}
-      />
     </main>
   );
 }

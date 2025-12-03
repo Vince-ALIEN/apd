@@ -1,17 +1,13 @@
-"use client";
-
-import { useSiteData } from "@hooks/useSiteData";
-import dynamic from "next/dynamic";
-
+import { getSiteData } from "../lib/strapi";
 import VideoBackground from "@components/VideoBackground";
+import BlogSection from "@components/BlogSection"; // server component direct import
+import dynamic from "next/dynamic";
 import IntroSection from "@components/IntroSection";
 import DescriptionSection from "@components/DescriptionSection";
 import SectionNavigation from "@components/SectionNavigation";
-import ErrorMessage from "@components/ErrorMessage";
 
-// ⏳ Chargement dynamique de PartnerSection
+// Chargement dynamique de PartnerSection (client component interne gérée par son propre fichier)
 const PartnerSection = dynamic(() => import("@components/PartnerSection"), {
-  ssr: false,
   loading: () => (
     <div className="h-[60vh] flex items-center justify-center text-white font-garamond text-xl">
       Chargement des partenaires…
@@ -19,53 +15,66 @@ const PartnerSection = dynamic(() => import("@components/PartnerSection"), {
   ),
 });
 
-// ⏳ Chargement dynamique de BlogSection
-const BlogSection = dynamic(() => import("@components/BlogSection"), {
-  ssr: false,
-  loading: () => (
-    <div className="h-[60vh] flex items-center justify-center text-white font-garamond text-xl">
-      Chargement des récits…
-    </div>
-  ),
-});
+// BlogSection désormais Server Component - suppression dynamic
 
-export default function Home() {
-  const { eglise, accueil, interviews, partenaires, articles, error } =
-    useSiteData();
+// ISR : Revalidation toutes les heures
+export const revalidate = 3600;
+
+// Métadonnées SEO
+export const metadata = {
+  title:
+    "Art et Patrimoine de Doazit | Sauvegarde de l'église Saint-Jean-Baptiste d'Aulès",
+  description:
+    "Association pour la restauration et la valorisation de l'église Saint-Jean-Baptiste d'Aulès à Doazit. Découvrez notre patrimoine roman du XIIe siècle classé aux Monuments historiques.",
+  keywords: [
+    "patrimoine",
+    "Doazit",
+    "église",
+    "Saint-Jean-Baptiste",
+    "Aulès",
+    "Chalosse",
+    "Monuments historiques",
+    "restauration",
+  ],
+  openGraph: {
+    title: "APD - Art et Patrimoine de Doazit",
+    description:
+      "Sauvegardons ensemble l'église Saint-Jean-Baptiste d'Aulès, joyau du patrimoine roman classé aux Monuments historiques.",
+    type: "website",
+    locale: "fr_FR",
+    siteName: "Art et Patrimoine de Doazit",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "APD - Art et Patrimoine de Doazit",
+    description: "Sauvegardons ensemble notre patrimoine",
+  },
+};
+
+function getVideoUrl(accueil) {
+  if (!accueil || !accueil.video?.url) return null;
+  const url = accueil.video.url;
+  return url.startsWith("http")
+    ? url
+    : `${process.env.NEXT_PUBLIC_API_URL}${url}`;
+}
+
+export default async function Home() {
+  const { eglise, accueil, interviews, partenaires, articles } =
+    await getSiteData();
 
   const firstInterview = Array.isArray(interviews) ? interviews[0] : null;
-
-  const videoUrl = accueil?.video?.url?.startsWith("http")
-    ? accueil.video.url
-    : accueil?.video?.url
-      ? `${process.env.NEXT_PUBLIC_API_URL}${accueil.video.url}`
-      : null;
-
-  if (error) {
-    return (
-      <main className="relative w-full min-h-screen flex items-center justify-center bg-black text-white">
-        <ErrorMessage type="error" message={`Erreur : ${error}`} />
-      </main>
-    );
-  }
+  const videoUrl = getVideoUrl(accueil);
 
   return (
     <main className="relative w-full min-h-screen overflow-x-hidden bg-black text-white">
-      {/* Preload de la vidéo */}
-      {videoUrl && (
-        <link rel="preload" as="video" href={videoUrl} type="video/mp4" />
-      )}
       {/* 🎥 Fond vidéo permanent - s'affiche dès que disponible */}
-      {videoUrl && (
-        <div className="fixed inset-0 z-0 pointer-events-none">
-          <VideoBackground videoUrl={videoUrl} />
-        </div>
-      )}
+      {videoUrl && <VideoBackground videoUrl={videoUrl} />}
 
-      {/* 🧭 Navigation entre sections */}
+      {/* Navigation entre sections */}
       <SectionNavigation />
 
-      {/* 🧩 Contenu principal */}
+      {/* Contenu principal */}
       <div className="relative z-10">
         <section id="intro">
           <IntroSection eglise={eglise} />
@@ -85,7 +94,7 @@ export default function Home() {
         </section>
 
         <section id="blog">
-          <BlogSection limit={3} />
+          <BlogSection articles={articles} limit={3} />
         </section>
       </div>
     </main>

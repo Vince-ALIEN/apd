@@ -24,6 +24,7 @@ export default function DescriptionSection({
   const sectionRef = useRef(null);
   const sliderRef = useRef(null);
   const descriptionRef = useRef(null);
+  const galleryRef = useRef(null);
   const architectureRef = useRef(null);
   const interviewRef = useRef(null);
   const imageContainerRef = useRef(null);
@@ -67,31 +68,37 @@ export default function DescriptionSection({
     if (!sectionRef.current || isMobile) return;
 
     const ctx = gsap.context(() => {
+      // Slides dynamiques : description, galerie, architecture, interview (si présent)
       const slides = [
         descriptionRef.current,
+        galleryRef.current,
         architectureRef.current,
-        interviewRef.current,
       ];
+      if (hasInterviewContent) slides.push(interviewRef.current);
+
+      const slideCount = slides.length;
 
       gsap.set(sliderRef.current, {
-        width: "inherit",
+        width: `${slideCount * 100}vw`,
         display: "flex",
       });
 
       gsap.set(slides, {
-        width: "100%",
+        width: "100vw",
         flexShrink: 0,
         minHeight: "100vh",
       });
 
+      // Scroll horizontal : ignorer la largeur du premier slide pour centrer le dernier
+      const scrollDistance = (slideCount - 1) * window.innerWidth;
       gsap.to(sliderRef.current, {
-        xPercent: -230,
+        x: () => `-${scrollDistance}px`,
         ease: "power3.InOut",
         scrollTrigger: {
           id: "sliderScroll",
           trigger: sectionRef.current,
           start: "top",
-          end: "=+400%",
+          end: () => `+=${scrollDistance}`,
           scrub: 0.5,
           pin: true,
         },
@@ -99,7 +106,7 @@ export default function DescriptionSection({
     }, sectionRef);
 
     return () => ctx.revert();
-  }, [isMobile, onEnter, onLeave]);
+  }, [isMobile, hasInterviewContent, onEnter, onLeave]);
 
   // Animation mobile : fade-in du conteneur
   useLayoutEffect(() => {
@@ -139,8 +146,8 @@ export default function DescriptionSection({
           start: "top 90%",
           end: "bottom center",
           toggleActions: "play none none reverse",
+          scrub: true,
         },
-        scrub: true,
       });
     }, imageRevealRef);
 
@@ -160,7 +167,7 @@ export default function DescriptionSection({
         {/* Bloc description */}
         <div
           ref={descriptionRef}
-          className="relative w-full min-h-screen px-6 pt-12 flex items-center justify-center"
+          className="relative w-screen min-h-screen px-6 pt-12 flex items-center justify-center"
         >
           <div className="max-w-4xl w-full flex flex-col md:flex-row gap-10 items-center text-black">
             <div className="md:w-1/2 space-y-4">
@@ -202,7 +209,7 @@ export default function DescriptionSection({
                     alt="Image principale"
                     fill
                     className="object-cover object-[45%_top] transition-transform duration-500 group-hover:scale-105 cursor-pointer"
-                    sizes="(max-width: 768px) 100vw, 50vw"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   />
                 </div>
 
@@ -214,6 +221,7 @@ export default function DescriptionSection({
                       alt="Cadre décoratif"
                       fill
                       className="object-contain w-full h-full scale-x-[1.3] md:scale-x-[1.3]"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     />
                   </div>
                 </div>
@@ -223,14 +231,14 @@ export default function DescriptionSection({
         </div>
 
         {/* Galerie */}
-        <div className="relative w-full min-h-screen">
+        <div ref={galleryRef} className="relative w-screen min-h-screen">
           <Gallery images={eglise?.images ?? []} />
         </div>
 
         {/* Architecture */}
         <div
-          className="relative w-full min-h-screen px-6"
           ref={architectureRef}
+          className="relative w-screen min-h-screen px-6"
         >
           <Architecture
             styleArchitectural={eglise?.style_architectural}
@@ -240,7 +248,7 @@ export default function DescriptionSection({
 
         {/* Interview */}
         {hasInterviewContent && (
-          <div ref={interviewRef} className="relative w-full min-h-screen">
+          <div ref={interviewRef} className="relative w-screen min-h-screen">
             <div className="max-w-4xl w-full">
               <Interview
                 titre={titreInterview}

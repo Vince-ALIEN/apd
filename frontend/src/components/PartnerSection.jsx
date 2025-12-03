@@ -22,23 +22,7 @@ export default function PartnerSection({ partners, error, isLoading }) {
     if (!partners || partners.length === 0) return;
 
     const ctx = gsap.context(() => {
-      gsap.fromTo(
-        logoBlockRef.current,
-        { opacity: 0, scale: 0.5 },
-        {
-          scale: 1,
-          opacity: 1,
-          duration: 0.6,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: scopeRef.current,
-            start: isMobile ? "top top" : "+370% top",
-            end: isMobile ? "bottom top" : "+=390% top",
-            toggleActions: "play none none reverse",
-            markers: false,
-          },
-        }
-      );
+      gsap.set(logoBlockRef.current, { opacity: 1 });
 
       imagesRef.current.forEach((img) => {
         if (!img) return;
@@ -73,52 +57,8 @@ export default function PartnerSection({ partners, error, isLoading }) {
   }, [partners, isMobile]);
 
   useEffect(() => {
-    if (!scrollContainerRef.current || !partners || partners.length === 0)
-      return;
-
-    const container = scrollContainerRef.current;
-    const scrollWidth = container.scrollWidth;
-    const clientWidth = container.clientWidth;
-
-    if (scrollWidth <= clientWidth) return;
-
-    let animationId;
-    let currentScroll = 0;
-    const speed = 0.5;
-
-    const animate = () => {
-      currentScroll += speed;
-
-      if (currentScroll >= scrollWidth / 2) {
-        currentScroll = 0;
-      }
-
-      container.scrollLeft = currentScroll;
-      animationId = requestAnimationFrame(animate);
-    };
-
-    const handleMouseEnter = () => {
-      if (animationId) {
-        cancelAnimationFrame(animationId);
-      }
-    };
-
-    const handleMouseLeave = () => {
-      animationId = requestAnimationFrame(animate);
-    };
-
-    container.addEventListener("mouseenter", handleMouseEnter);
-    container.addEventListener("mouseleave", handleMouseLeave);
-
-    animationId = requestAnimationFrame(animate);
-
-    return () => {
-      if (animationId) {
-        cancelAnimationFrame(animationId);
-      }
-      container.removeEventListener("mouseenter", handleMouseEnter);
-      container.removeEventListener("mouseleave", handleMouseLeave);
-    };
+    // Animation CSS utilisée à la place
+    return;
   }, [partners]);
 
   if (isLoading) {
@@ -178,9 +118,9 @@ export default function PartnerSection({ partners, error, isLoading }) {
         {/* Bloc logos avec défilement automatique */}
         <div
           ref={scrollContainerRef}
-          className="w-full max-w-3xl overflow-x-hidden relative"
+          className="w-full max-w-3xl overflow-hidden relative"
         >
-          <div ref={logoBlockRef} className="flex gap-6 px-6">
+          <div ref={logoBlockRef} className="flex gap-6 animate-scroll">
             {[...partners, ...partners].map((partner, index) => {
               const logo = partner.logo?.[0];
               const imageUrl =

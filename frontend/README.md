@@ -1,36 +1,82 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Frontend Next.js – Association Patrimoine de Doazit
 
-## Getting Started
+Application Next.js 15 (React 19, TailwindCSS) pour le site vitrine de l’association.
 
-First, run the development server:
+## Structure principale
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+```
+frontend/
+├── public/
+│   ├── fonts/           # Polices personnalisées (Garamond, AnnStone)
+│   └── ...images
+├── src/
+│   ├── app/             # Pages principales (App Router)
+│   ├── components/      # Composants React réutilisables
+│   ├── contexts/        # Contextes React (HeaderDonationContext)
+│   └── hooks/           # Hooks personnalisés
+├── ...config, package.json, etc.
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Scripts disponibles
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+```bash
+npm run dev      # Démarrage en développement (localhost:3000)
+npm run build    # Build production
+npm start        # Démarrage production
+npm run lint     # Linter ESLint
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Polices utilisées
 
-## Learn More
+- Garamond (Bold, Italic, Regular, SemiBold)
+- AnnStone
 
-To learn more about Next.js, take a look at the following resources:
+## Composants principaux
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Header (responsive, fusionné mobile/desktop)
+- Footer
+- Modal de contact
+- DonationButton
+- BlogSection, PartnerSection, Interview, Gallery, Architecture, etc.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Points clés
 
-## Deploy on Vercel
+- Responsive design (mobile, tablette, desktop)
+- Navigation et bouton de don sur une seule ligne
+- Clarté typographique (Garamond, AnnStone)
+- Animation (GSAP, Framer Motion, Lenis)
+- Carte interactive (Leaflet)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Démarrage rapide
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+cd frontend
+npm ci
+npm run dev
+```
+
+Accès : [http://localhost:3000](http://localhost:3000)
+
+## Contribution
+
+1. Fork du projet
+2. Création de branche feature (`git checkout -b feature/NouvelleFonctionnalite`)
+3. Commit (`git commit -m 'feat: Nouvelle fonctionnalité'`)
+4. Push (`git push origin feature/NouvelleFonctionnalite`)
+5. Pull Request
+
+Convention de commit : [Conventional Commits](https://www.conventionalcommits.org/)
+
+## Déploiement
+
+Déploiement recommandé sur [Vercel](https://vercel.com/) ou [Netlify](https://www.netlify.com/).
+
+## Documentation
+
+- [Next.js](https://nextjs.org/docs)
+- [React](https://react.dev/)
+- [Tailwind CSS](https://tailwindcss.com/docs)
+
+## Auteur
+
+Philippe Barbosa – [@Vince-ALIEN](https://github.com/Vince-ALIEN)

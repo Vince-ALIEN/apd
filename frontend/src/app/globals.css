@@ -22,21 +22,40 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
-
   min-height: 100vh;
   overflow-x: hidden;
   overflow-y: auto;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll {
+  animation: scroll 20s linear infinite;
+}
+
+.animate-scroll:hover {
+  animation-play-state: paused;
 }
 
 .shadow-underline {
-  box-shadow: inset 0 1.1em 0 #ac1115;
-
+  box-shadow: inset 0 1.2em 0 #ac1115;
+  padding-top: 0.1em;
   padding-left: 0.5em;
   display: inline;
 }
 .lettrine {
   font-family: Arial, Helvetica, sans-serif;
-  line-height: 1.5; /* ou ajusté selon ton texte */
+  line-height: 1.5;
 }
 
 .lettrine::first-letter {
@@ -45,12 +64,12 @@ body {
   color: #ac1115;
   float: left;
   line-height: 0.9;
-  margin-top: -0.1em; /* réduit l’espace au-dessus */
-  padding-right: 0.02em; /* espace entre la lettrine et le texte */
+  margin-top: -0.1em;
+  padding-right: 0.02em;
 }
 .lettrine_w {
   font-family: Arial, Helvetica, sans-serif;
-  line-height: 1.5; /* ou ajusté selon ton texte */
+  line-height: 1.5;
 }
 
 .lettrine_w::first-letter {
@@ -59,8 +78,8 @@ body {
   color: white;
   float: left;
   line-height: 0.9;
-  margin-top: -0.1em; /* réduit l’espace au-dessus */
-  padding-right: 0.02em; /* espace entre la lettrine et le texte */
+  margin-top: -0.1em;
+  padding-right: 0.02em;
 }
 
 @font-face {

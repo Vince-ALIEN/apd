@@ -1,154 +1,57 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import gsap from "gsap";
-import {
-  ChevronDown,
-  ChevronUp,
-  ChevronLeft,
-  ChevronRight,
-} from "lucide-react";
+import { ChevronDown, ChevronUp } from "lucide-react";
 
 export default function SectionNavigation() {
-  const [currentSection, setCurrentSection] = useState("intro");
-  const arrowRefs = useRef({});
-
-  // Configuration des sections avec leurs types de navigation
-  const sectionsConfig = {
-    intro: {
-      next: "description",
-      showArrows: ["down"],
-    },
-    description: {
-      prev: "intro",
-      next: "partners",
-      showArrows: ["up", "down"],
-    },
-    partners: {
-      prev: "description",
-      next: "blog",
-      showArrows: ["up", "down"],
-    },
-    blog: {
-      prev: "partners",
-      showArrows: ["up"],
-    },
-  };
+  const [showScrollTop, setShowScrollTop] = useState(false);
+  const arrowRef = useRef(null);
 
   useEffect(() => {
-    let observer = null;
-    let mutationObserver = null;
+    const handleScroll = () => {
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      const windowHeight = window.innerHeight;
 
-    const setupObserver = () => {
-      const sections = document.querySelectorAll("section[id]");
-
-      if (observer) {
-        observer.disconnect();
-      }
-
-      const observerOptions = {
-        threshold: [0.1, 0.5, 0.9],
-        rootMargin: "0px",
-      };
-
-      observer = new IntersectionObserver((entries) => {
-        let mostVisible = null;
-        let maxRatio = 0;
-
-        entries.forEach((entry) => {
-          if (entry.intersectionRatio > maxRatio) {
-            maxRatio = entry.intersectionRatio;
-            mostVisible = entry.target;
-          }
-        });
-
-        if (mostVisible && maxRatio > 0.1) {
-          setCurrentSection(mostVisible.id);
-        }
-      }, observerOptions);
-
-      sections.forEach((section) => observer.observe(section));
+      // Afficher le bouton "scroll to top" après 50% de scroll
+      setShowScrollTop(scrollTop > windowHeight * 0.5);
     };
 
-    // Observer initial
-    setupObserver();
+    window.addEventListener("scroll", handleScroll);
+    handleScroll();
 
-    // Observer les changements du DOM pour détecter les nouvelles sections
-    mutationObserver = new MutationObserver(() => {
-      setupObserver();
-    });
-
-    mutationObserver.observe(document.body, {
-      childList: true,
-      subtree: true,
-    });
-
-    return () => {
-      if (observer) observer.disconnect();
-      if (mutationObserver) mutationObserver.disconnect();
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
-    // Animer les flèches
-    Object.entries(arrowRefs.current).forEach(([key, ref]) => {
-      if (ref) {
-        const isUp = key === "up";
-        const isDown = key === "down";
-
-        if (isUp || isDown) {
-          gsap.to(ref, {
-            y: isUp ? -10 : 10,
-            duration: 1.5,
-            ease: "power1.inOut",
-            repeat: -1,
-            yoyo: true,
-          });
-        }
-      }
-    });
-  }, [currentSection]);
-
-  const scrollToSection = (sectionId) => {
-    const section = document.getElementById(sectionId);
-    if (section) {
-      section.scrollIntoView({ behavior: "smooth", block: "start" });
+    if (arrowRef.current && !showScrollTop) {
+      gsap.to(arrowRef.current, {
+        y: 10,
+        duration: 1.5,
+        ease: "power1.inOut",
+        repeat: -1,
+        yoyo: true,
+      });
     }
+  }, [showScrollTop]);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const config = sectionsConfig[currentSection];
-
-  if (!config) return null;
+  const scrollToNext = () => {
+    window.scrollBy({ top: window.innerHeight, behavior: "smooth" });
+  };
 
   return (
     <>
-      {/* Flèche vers le haut */}
-      {config.showArrows?.includes("up") && config.prev && (
-        <div className="fixed top-8 left-1/2 -translate-x-1/2 z-50">
-          <div
-            ref={(el) => (arrowRefs.current.up = el)}
-            className="flex flex-col items-center gap-2 cursor-pointer hover:scale-110 transition-transform"
-            onClick={() => scrollToSection(config.prev)}
-          >
-            <ChevronUp
-              className="text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]"
-              size={40}
-              strokeWidth={2}
-            />
-            <span className="text-white text-xs font-light tracking-wider uppercase drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
-              Précédent
-            </span>
-          </div>
-        </div>
-      )}
-
-      {/* Flèche vers le bas */}
-      {config.showArrows?.includes("down") && config.next && (
+      {/* Flèche DOWN - visible au début */}
+      {!showScrollTop && (
         <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50">
           <div
-            ref={(el) => (arrowRefs.current.down = el)}
+            ref={arrowRef}
             className="flex flex-col items-center gap-2 cursor-pointer hover:scale-110 transition-transform"
-            onClick={() => scrollToSection(config.next)}
+            onClick={scrollToNext}
           >
             <span className="text-white text-xs font-light tracking-wider uppercase drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
               Suivant
@@ -159,6 +62,19 @@ export default function SectionNavigation() {
               strokeWidth={2}
             />
           </div>
+        </div>
+      )}
+
+      {/* Bouton scroll to top - visible en bas de page */}
+      {showScrollTop && (
+        <div className="fixed bottom-8 right-8 z-50">
+          <button
+            onClick={scrollToTop}
+            className="flex items-center justify-center w-12 h-12 rounded-full bg-[#ac1115] text-white shadow-lg hover:bg-[#8c0e12] transition-all duration-300 hover:scale-110"
+            aria-label="Retour en haut"
+          >
+            <ChevronUp size={24} strokeWidth={2} />
+          </button>
         </div>
       )}
     </>

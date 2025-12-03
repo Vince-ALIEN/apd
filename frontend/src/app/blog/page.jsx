@@ -1,41 +1,52 @@
-"use client";
-
-import { useSiteData } from "@hooks/useSiteData";
+import { getSiteData } from "../../lib/strapi";
 import BlogSection from "@components/BlogSection";
-import ErrorMessage from "@components/ErrorMessage";
 
-export default function BlogIndexPage() {
-  const API_URL = process.env.NEXT_PUBLIC_API_URL;
-  const { parametres_site, articles, error } = useSiteData(API_URL);
+// Métadonnées SEO
+export const metadata = {
+  title: "Blog | Art et Patrimoine de Doazit",
+  description:
+    "Actualités, événements et articles sur la restauration de l'église Saint-Jean-Baptiste d'Aulès et les actions de l'association APD.",
+  keywords: [
+    "blog",
+    "actualités",
+    "patrimoine",
+    "Doazit",
+    "événements",
+    "restauration",
+  ],
+  openGraph: {
+    title: "Blog APD - Actualités et événements",
+    description: "Suivez nos actualités et découvrez nos actions",
+    type: "website",
+  },
+};
 
-  const isLoading = !parametres_site && !articles && !error;
-  const noArticles = Array.isArray(articles) && articles.length === 0;
+export default async function BlogIndexPage() {
+  try {
+    const { articles } = await getSiteData();
 
-  if (isLoading) {
+    if (!articles?.length) {
+      return (
+        <main className="min-h-screen flex items-center justify-center bg-white text-black font-garamond">
+          <p className="text-sm md:text-base leading-relaxed drop-shadow-sm">
+            Aucun article disponible.
+          </p>
+        </main>
+      );
+    }
+
     return (
-      <ErrorMessage
-        type="loading"
-        message="Chargement des articles en cours..."
-      />
+      <main className="relative z-10">
+        <BlogSection articles={articles} limit={9} />
+      </main>
+    );
+  } catch (e) {
+    return (
+      <main className="min-h-screen flex items-center justify-center bg-white text-red-600 font-garamond">
+        <p className="text-sm md:text-base leading-relaxed drop-shadow-sm">
+          Erreur : {e.message}
+        </p>
+      </main>
     );
   }
-
-  if (error) {
-    return <ErrorMessage type="error" message={`Erreur : ${error}`} />;
-  }
-
-  if (noArticles) {
-    return (
-      <ErrorMessage
-        type="empty"
-        message="Chargement des articles en cours..."
-      />
-    );
-  }
-
-  return (
-    <main className="relative z-10">
-      <BlogSection API_URL={API_URL} />
-    </main>
-  );
 }

@@ -1,8 +1,8 @@
-# ���️ Site Web - Association Patrimoine de Doazit (apd)
+# 🏛️ Site Web - Association Patrimoine de Doazit (apd)
 
 > Projet de site web vitrine avec système de gestion de contenu (CMS) développé dans le cadre du Titre Professionnel Développeur Web et Web Mobile.
 
-## ��� Table des matières
+## 📑 Table des matières
 
 - [Présentation](#-présentation)
 - [Architecture](#-architecture)
@@ -17,21 +17,21 @@
 - [Contribution](#-contribution)
 - [Licence](#-licence)
 
-## ��� Présentation
+## 📝 Présentation
 
 Site web vitrine moderne pour la valorisation du patrimoine religieux et historique, permettant :
 
-- ��� Présentation d'édifices historiques (architecture, histoire, galeries photos)
-- ��� Publication d'articles de blog et témoignages
-- ��� Intégration de vidéos et interviews
-- ��� Affichage des partenaires
-- ��� Formulaire de contact et système de dons
-- ���️ Carte interactive avec localisation
-- ��� Interface responsive (mobile, tablette, desktop)
+- 🏛️ Présentation d'édifices historiques (architecture, histoire, galeries photos)
+- 📰 Publication d'articles de blog et témoignages
+- 🎥 Intégration de vidéos et interviews
+- 🤝 Affichage des partenaires
+- 💌 Formulaire de contact et système de dons
+- 🗺️ Carte interactive avec localisation
+- 📱 Interface responsive (mobile, tablette, desktop)
 
 **Architecture :** Jamstack (JavaScript, APIs, Markup) avec découplage frontend/backend
 
-## ���️ Architecture
+## 🏗️ Architecture
 
 ```
 ┌─────────────────┐      REST API      ┌──────────────────┐
@@ -50,7 +50,7 @@ Site web vitrine moderne pour la valorisation du patrimoine religieux et histori
 └─────────────────┘                     └──────────────────┘
 ```
 
-## ���️ Technologies
+## 🛠️ Technologies
 
 ### Backend (CMS Strapi)
 
@@ -86,7 +86,7 @@ Site web vitrine moderne pour la valorisation du patrimoine religieux et histori
 - **ESLint** - Linter JavaScript/TypeScript
 - **Postman** - Tests API
 
-## ��� Prérequis
+## ⚙️ Prérequis
 
 - **Node.js** : v20.x (recommandé : 20.19.5)
 - **npm** : v10.x
@@ -115,7 +115,7 @@ nvm install 20
 nvm use 20
 ```
 
-## ��� Installation
+## 🚀 Installation
 
 ### 1. Cloner le dépôt
 
@@ -210,7 +210,7 @@ NEXT_PUBLIC_API_URL=http://localhost:1337
 NEXT_PUBLIC_SITE_URL=http://localhost:3000
 ```
 
-## ��� Utilisation
+## 🖥️ Utilisation
 
 ### Développement
 
@@ -262,7 +262,7 @@ npm run build
 npm start
 ```
 
-## ��� Structure du projet
+## 🗂️ Structure du projet
 
 ```
 apd/
@@ -365,7 +365,7 @@ apd/
 └── LIVRET_SUIVI_STAGE.md # Documentation de stage
 ```
 
-## ��� API Endpoints
+## 🔗 API Endpoints
 
 ### Endpoints principaux (auto-générés par Strapi)
 
@@ -465,7 +465,7 @@ NEXT_PUBLIC_API_URL=https://votre-api.com
 
 Consulter la [documentation Strapi](https://docs.strapi.io/dev-docs/deployment) pour plus de détails.
 
-## ��� Documentation
+## 📚 Documentation
 
 ### Documentation officielle
 
@@ -497,7 +497,7 @@ npm start        # Démarrage production
 npm run lint     # Linter ESLint
 ```
 
-## ��� Contribution
+## 🤝 Contribution
 
 Les contributions sont les bienvenues ! Voici comment contribuer :
 
@@ -521,17 +521,17 @@ test: ajout de tests
 chore: tâches de maintenance
 ```
 
-## ��� Licence
+## 📄 Licence
 
 Ce projet a été développé dans le cadre du **Titre Professionnel Développeur Web et Web Mobile**.
 
-## ��� Auteur
+## 👤 Auteur
 
 **Philippe Barbosa**
 
 - GitHub: [@Vince-ALIEN](https://github.com/Vince-ALIEN)
 
-## ��� Remerciements
+## 🙏 Remerciements
 
 - Équipe [Strapi](https://strapi.io/)
 - Équipe [Next.js](https://nextjs.org/)

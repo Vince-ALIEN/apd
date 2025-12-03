@@ -5,7 +5,7 @@ import gsap from "gsap";
 import { Volume2, VolumeX } from "lucide-react";
 import useIsMobile from "@hooks/useIsMobile";
 
-export default function IntroSection({ eglise }) {
+export default function IntroSectionClient({ eglise }) {
   const sectionRef = useRef(null);
   const welcomeRef = useRef(null);
   const premierMotRef = useRef(null);
@@ -68,9 +68,8 @@ export default function IntroSection({ eglise }) {
           duration: 1,
           ease: "power2.inOut",
         },
-        "-=0.9" // Commence légèrement avant la fin de l'animation précédente
+        "-=0.9"
       )
-        // Retour de la bande vers la gauche (effet miroir)
         .to(premierMotRef.current.querySelector(".reveal-box"), {
           xPercent: -300,
           opacity: 1,
@@ -78,7 +77,6 @@ export default function IntroSection({ eglise }) {
           duration: 1,
           ease: "power2.inOut",
         })
-        // Révélation du texte avec légère mise à l'échelle
         .to(
           premierMotRef.current.querySelector(".reveal-text"),
           {
@@ -107,14 +105,12 @@ export default function IntroSection({ eglise }) {
         },
         "-=0.6"
       )
-        // Réduction de la bande sur le dernier mot
         .to(dernierMotRef.current.querySelector(".reveal-box"), {
           xPercent: -100,
           width: "100%",
           duration: 1,
           ease: "power3.out",
         })
-        // Révélation du texte resteNom
         .to(
           resteNomRef.current.querySelector(".reveal-text"),
           {
@@ -124,8 +120,6 @@ export default function IntroSection({ eglise }) {
           },
           "-=0.8"
         )
-
-        // Révélation du texte dernierMot
         .to(
           dernierMotRef.current.querySelector(".reveal-text"),
           {
@@ -167,45 +161,45 @@ export default function IntroSection({ eglise }) {
     >
       <div
         ref={welcomeRef}
-        className="absolute top-[17vh] sm:top-[30vh] md:top-[12vh] lg:top-[15vh] left-0 right-0 flex flex-col items-center px-4 z-30"
+        className="absolute top-[27vh] sm:top-[30vh] md:top-[23vh] lg:top-[15vh] left-0 right-0 flex flex-col items-center px-4 z-30"
       >
-        <h1 className="text-3xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold leading-relaxed tracking-tight drop-shadow-xl text-white text-center">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold leading-relaxed tracking-tight drop-shadow-xl text-white text-center">
           Aidez-nous à préserver
           <br />
           ce trésor du patrimoine
         </h1>
       </div>
 
-      <div className="absolute inset-0 flex flex-col items-center justify-center  z-20">
+      <div className="absolute inset-0 flex flex-col items-center justify-center pt-6 z-20">
         <p
           ref={premierMotRef}
-          className="text-3xl sm:text-3xl md:text-5xl lg:text-6xl font-garamond leading-relaxed text-center relative overflow-visible max-w-[90vw]"
+          className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-garamond leading-relaxed text-center relative overflow-visible max-w-[90vw]"
         >
           <span className="reveal-text text-transparent relative z-10">
             {premierMot}
           </span>
-          <span className="reveal-box absolute bottom-[0.7rem] h-[2rem] sm:h-[2.5rem] md:h-[3.5rem] lg:h-[4.5rem] bg-[#ac1115] z-20"></span>
+          <span className="reveal-box absolute h-[2.2rem] sm:h-[2.5rem] md:h-[4.4rem] lg:h-[5.5rem] bg-[#ac1115] z-20"></span>
         </p>
 
         <div className="flex items-center gap-2 sm:gap-3 md:gap-4">
           <p
             ref={resteNomRef}
-            className="text-3xl sm:text-3xl md:text-5xl lg:text-6xl font-garamond leading-relaxed text-center relative overflow-visible"
+            className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-garamond leading-relaxed text-center relative overflow-visible"
           >
             <span className="reveal-text text-transparent relative z-10">
               {resteNom}
             </span>
-            <span className="reveal-box absolute bottom-[0.7rem] h-[2rem] sm:h-[2.5rem] md:h-[3.5rem] lg:h-[4.5rem] bg-[#ac1115] z-20"></span>
+            <span className="reveal-box absolute h-[2.3rem] sm:h-[2.5rem] md:h-[3.7rem] lg:h-[4.6rem] bg-[#ac1115] z-20"></span>
           </p>
 
           <p
             ref={dernierMotRef}
-            className="text-3xl sm:text-3xl md:text-5xl lg:text-6xl font-garamond leading-relaxed text-center relative overflow-visible"
+            className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-garamond leading-relaxed text-center relative overflow-visible"
           >
             <span className="reveal-text text-transparent relative z-10">
               &nbsp;&nbsp;{dernierMot}
             </span>
-            <span className="reveal-box absolute bottom-[0.7rem] h-[2rem] sm:h-[2.5rem] md:h-[3.5rem] lg:h-[4.5rem] bg-[#ac1115] z-20"></span>
+            <span className="reveal-box absolute h-[1.9rem] sm:h-[2.5rem] md:h-[3.7rem] lg:h-[4.6rem] bg-[#ac1115] z-20"></span>
           </p>
         </div>
       </div>

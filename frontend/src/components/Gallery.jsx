@@ -127,7 +127,7 @@ export default function Gallery({ images }) {
       className="relative w-full min-h-screen overflow-hidden flex items-center justify-center py-16 md:py-24"
     >
       {/* Desktop */}
-      <div className="hidden md:block relative w-[90vw] max-w-7xl h-[75vh] min-h-[600px]">
+      <div className="hidden md:block relative w-[100vw] max-w-7xl h-[75vh] min-h-[600px]">
         {images.slice(0, 9).map((img, index) => {
           const style = layoutStyles[index] || {
             top: "0%",
@@ -154,6 +154,7 @@ export default function Gallery({ images }) {
                   alt={img.name || `Image ${index + 1}`}
                   fill
                   className="object-cover transition-transform duration-500 group-hover:scale-110"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 />
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
               </div>
@@ -176,6 +177,7 @@ export default function Gallery({ images }) {
                 alt={img.name || `Image ${index + 1}`}
                 fill
                 className="object-cover transition-transform duration-500 group-hover:scale-110"
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
               />
               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
             </div>
@@ -198,6 +200,7 @@ export default function Gallery({ images }) {
                   alt={img.name || `Image ${index + 1}`}
                   fill
                   className="object-cover"
+                  sizes="(max-width: 640px) 100vw, 50vw"
                 />
               </div>
             </button>
